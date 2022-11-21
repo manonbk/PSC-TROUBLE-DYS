@@ -1,0 +1,99 @@
+from svg.path import parse_path # !pip install svg.path
+from xml.dom import minidom
+import json
+
+
+def get_point_at(path, distance, scale, offset):
+    pos = path.point(distance)
+    pos += offset
+    pos *= scale
+    return pos.real, pos.imag
+
+def points_from_path(path, stepsize, scale, offset, include_last=False):
+    length = path.length()
+    total_distance = 0
+    nspaces = int(length/stepsize) # Les points sont espacés régulièrement et comprennent le premier points (mais pas le dernier)
+    if include_last:
+        nsamples = nspaces + 1
+    else:
+        nsamples = nspaces
+    for i in range(nsamples):
+        yield get_point_at(
+            path, i/nspaces, scale, offset)
+
+def points_from_doc(doc, nsamples=10, scale=1, offset=0):
+    offset = offset[0] + offset[1] * 1j
+    points = []
+    total_length = 0
+    for element in doc.getElementsByTagName("path"):
+        for path in parse_path(element.getAttribute("d")):
+            total_length += path.length()
+    stepsize = total_length/nsamples
+    for element in doc.getElementsByTagName("path"):
+        for path in parse_path(element.getAttribute("d")):
+            #print(path)
+            points.extend(points_from_path(
+                path, stepsize, scale, offset))
+
+    return points,total_length
+
+"""
+def points_from_path(path, stepsize, scale, offset, starting_offset=0):
+    length = path.length()
+    total_distance = starting_offset
+    while total_distance < length:
+        yield get_point_at(
+            path, total_distance/length, scale, offset)
+        total_distance += stepsize
+
+def points_from_doc(doc, nsamples=10, scale=1, offset=0):
+    offset = offset[0] + offset[1] * 1j
+    points = []
+    total_length = 0
+    for element in doc.getElementsByTagName("path"):
+        for path in parse_path(element.getAttribute("d")):
+            total_length += path.length()
+    stepsize = total_length/nsamples
+    starting_offset = 0 # Restes du chemin précédent
+    for element in doc.getElementsByTagName("path"):
+        for path in parse_path(element.getAttribute("d")):
+            points.extend(points_from_path(
+                path, stepsize, scale, offset, starting_offset))
+            starting_offset = stepsize - (path.length()-starting_offset)%stepsize
+
+    return points
+"""
+
+xmlstring = """<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path fill="none" stroke="red"
+        d="M 10,30
+            A 20,20 0,0,1 50,30
+            A 20,20 0,0,1 90,30
+            Q 90,60 50,90
+            Q 10,60 10,30 z" />
+</svg>"""
+
+shapename = input("Nom de la forme (*****.svg): ")
+with open(shapename+".svg","r") as file:
+    xmlstring = file.read()
+#print(xmlstring)
+doc = minidom.parseString(xmlstring)
+vb = doc.getElementsByTagName("svg")[0].getAttribute("viewBox").split(" ")
+for i in range(4):
+    vb[i] = float(vb[i])
+dx = vb[2]-vb[0]
+dy = vb[3]-vb[1]
+
+scale = 2/max(dx,dy)
+points, total_length = points_from_doc(doc, nsamples=100, scale=scale, offset=(-dx/2, -dy/2))
+doc.unlink()
+
+
+floatpoints = []
+for pt in points:
+    floatpoints.append(pt[0])
+    floatpoints.append(-pt[1])#L'axe y est dans l'autre sens
+with open(f'{shapename}.json', 'w') as outfile:
+    json.dump({"points":floatpoints,"name":shapename,"length":total_length*scale}, outfile)
+print("Conversion réussie !")
+#print(points,len(points))
