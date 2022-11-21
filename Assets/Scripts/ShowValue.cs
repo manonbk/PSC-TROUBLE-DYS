@@ -1,0 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ShowValue : MonoBehaviour
+{
+    public string preText;
+    public string postText;
+    private string value;
+    private TextMesh TextMesh;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        TextMesh = GetComponent<TextMesh>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void setValue(string value)
+    {
+        TextMesh.text = preText + value + postText;
+    }
+}
