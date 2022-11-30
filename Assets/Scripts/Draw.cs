@@ -12,7 +12,6 @@ public class Shape
 
 public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
     private Coroutine drawing;
     private bool mouse_over = false;
     private Vector3[] points; // Points de la forme (coordonnées WorldGUI relatives à l'élément de GUI)
@@ -21,14 +20,21 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private float scale;
 
     private float distanceDrawn = 0;
-    private float[] minsqrdist;// Distances au carré minimales entre le dessin et le point de la forme
-    private float avgsqrdist = float.MaxValue;// Moyenne de minsqrdist
+    private int pointsDrawn = 0;
+
+    private float[] rappr_minsqrdist; // Distances au carré minimales entre le dessin et le point de la forme
+    private float rappr_avgsqrdist = float.MaxValue; // Moyenne de minsqrdist
+
+    private float ecart_sumsqrdist = 0;
+    private float ecart_avgsqrdist = float.MaxValue;
+
 
     private LineRenderer baseLine;
 
     public Shape shape;
 
-    public ShowValue agvsqdistText;
+    public ShowValue rapprText;
+    public ShowValue ecartText;
     
 
     // Start is called before the first frame update
@@ -65,8 +71,13 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         // Also reset variables
         distanceDrawn = 0;
-        avgsqrdist = float.MaxValue;
-        minsqrdist = new float[minsqrdist.Length];
+        pointsDrawn = 0;
+        rappr_avgsqrdist = float.MaxValue;
+        rappr_minsqrdist = new float[rappr_minsqrdist.Length];
+        for (int i = 0; i < rappr_minsqrdist.Length; i++)
+        {
+            rappr_minsqrdist[i] = float.MaxValue;
+        }
         SetVisualsFromVariables();
     }
 
@@ -83,19 +94,19 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         scale = Mathf.Min(xmax - xmin, ymax - ymin)/2;
 
         distanceDrawn = 0;
+        pointsDrawn = 0;
         points = new Vector3[nPoints];
         screenpoints = new Vector2[nPoints];
-        minsqrdist = new float[nPoints];
+        rappr_minsqrdist = new float[nPoints];
         for (int i = 0; i < nPoints; i++)
         {
             points[i].x = scale*shapePoints[2*i]; // On passe de coord Shape en WorldGUI (relatif)
             points[i].y = scale*shapePoints[2*i+1];
-            minsqrdist[i] = float.MaxValue;
+            rappr_minsqrdist[i] = float.MaxValue;
             // On doit pourvoir trouver plus simple, mais au moins ça marche (on obtient les points en coordonnées de l'écran en passant par les coordonnées World)
             screenpoints[i] = Camera.main.WorldToScreenPoint(baseLine.transform.TransformPoint(points[i]));
 
         }
-        print(scale);
         baseLine.positionCount = nPoints;
         baseLine.SetPositions(points);
         SetVisualsFromVariables();
@@ -133,24 +144,28 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     void StartLine()
     {
         if (drawing != null) StopCoroutine(drawing);
-        drawing = StartCoroutine(DrawLine());
+        if (points != null) drawing = StartCoroutine(DrawLine());
     }
 
     void FinishLine()
     {
-        StopCoroutine(drawing);
+        if (drawing != null) StopCoroutine(drawing);
     }
 
     void SetVisualsFromVariables()
     {
         Color linecol = baseLine.material.color;
-        linecol.a = Mathf.Lerp(1, 0, distanceDrawn / shape.length);
+        linecol.a = Mathf.Lerp(1, 0, distanceDrawn / (2*shape.length));
         baseLine.material.color = linecol;
 
-        // Minsqdist
-        if (agvsqdistText != null)
+        // Mise à jour des textes
+        if (rapprText != null)
         {
-            agvsqdistText.setValue(avgsqrdist.ToString());
+            rapprText.setValue(rappr_avgsqrdist.ToString());
+        }
+        if (ecartText != null)
+        {
+            ecartText.setValue(ecart_avgsqrdist.ToString());
         }
     }
 
@@ -163,35 +178,44 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         while (true)
         {
-            mousePos = Input.mousePosition; // En coordonnées de l'écran
-            //mousePos.z = 0;
-            Vector3 CameraMousePos = Camera.main.ScreenToWorldPoint(mousePos); // En coordonnées World (pour la ligne)
-            CameraMousePos.z = 0;
-
             if (mouse_over){
-                //print(line.positionCount);
-                if (newLine.positionCount > 0)
-                {
-                    distanceDrawn += (mousePos - lastPos).magnitude / scale;// Distance à l'échelle de la forme
-                    for (int i = 0; i < points.Length; i++)
-                    {
-                        float sqdist = ((mousePos - screenpoints[i])/scale).sqrMagnitude;
-                        if (minsqrdist[i] > sqdist)
-                        {
-                            minsqrdist[i] = sqdist;
-                        }
-                    }
-                    float sum = 0;
-                    for (int i = 0; i < minsqrdist.Length; i++)
-                    {
-                        sum += minsqrdist[i];
-                    }
-                    avgsqrdist = sum / minsqrdist.Length;
-                    print(avgsqrdist);
-                    SetVisualsFromVariables();
-                }
+                mousePos = Input.mousePosition; // En coordonnées de l'écran
+                Vector3 CameraMousePos = Camera.main.ScreenToWorldPoint(mousePos); // En coordonnées World (pour la ligne)
+                CameraMousePos.z = 0;
+
+                // Ajout d'un nouveau point dessiné
+                pointsDrawn++;
                 newLine.positionCount++;
                 newLine.SetPosition(newLine.positionCount - 1, CameraMousePos);
+                
+                
+                // Au moins le deuxième point de la ligne dessinée
+                if (newLine.positionCount > 1)
+                {
+                    float distToPreviousPoint = (mousePos - lastPos).magnitude / scale;
+                    distanceDrawn += distToPreviousPoint;// Distance à l'échelle de la forme
+
+                    // Mise à jour du calcul du rapprochement et d'écartement (on a une pondération par la distance entre deux points, dont on ne peut pas inclure le premier point)
+                    float ecart_minsqrdist = float.MaxValue;
+                    for (int i = 0; i < points.Length; i++)
+                    {
+                        float sqrdist = ((mousePos - screenpoints[i]) / scale).sqrMagnitude;
+                        if (rappr_minsqrdist[i] > sqrdist) rappr_minsqrdist[i] = sqrdist;
+                        if (sqrdist < ecart_minsqrdist) ecart_minsqrdist = sqrdist;
+                    }
+                    ecart_sumsqrdist += ecart_minsqrdist*distToPreviousPoint;
+                    ecart_avgsqrdist = ecart_sumsqrdist / distanceDrawn;
+
+                    float sum = 0;
+                    for (int i = 0; i < rappr_minsqrdist.Length; i++)
+                    {
+                        sum += rappr_minsqrdist[i];
+                    }
+                    rappr_avgsqrdist = sum / rappr_minsqrdist.Length;
+                    print(distanceDrawn);
+                    SetVisualsFromVariables();
+                }
+                
                 lastPos = mousePos;
             }
 
