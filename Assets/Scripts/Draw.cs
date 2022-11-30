@@ -48,6 +48,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void SetShape(string shapeName)
     {
+        EraseAll();
         // On récupère les données du fichier JSON correspondant au shapeName
         var textFile = Resources.Load<TextAsset>("Shapes/" + shapeName);
         if (textFile != null)
@@ -73,11 +74,17 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         distanceDrawn = 0;
         pointsDrawn = 0;
         rappr_avgsqrdist = float.MaxValue;
-        rappr_minsqrdist = new float[rappr_minsqrdist.Length];
-        for (int i = 0; i < rappr_minsqrdist.Length; i++)
+        if (rappr_minsqrdist != null)
         {
-            rappr_minsqrdist[i] = float.MaxValue;
+            rappr_minsqrdist = new float[rappr_minsqrdist.Length];
+            for (int i = 0; i < rappr_minsqrdist.Length; i++)
+            {
+                rappr_minsqrdist[i] = float.MaxValue;
+            }
         }
+        ecart_sumsqrdist = 0;
+        ecart_avgsqrdist = float.MaxValue;
+        
         SetVisualsFromVariables();
     }
 
@@ -154,9 +161,13 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void SetVisualsFromVariables()
     {
-        Color linecol = baseLine.material.color;
-        linecol.a = Mathf.Lerp(1, 0, distanceDrawn / (2*shape.length));
-        baseLine.material.color = linecol;
+        if (shape != null)
+        {
+            Color linecol = baseLine.material.color;
+            linecol.a = Mathf.Lerp(1, 0, distanceDrawn / (2 * shape.length));
+            baseLine.material.color = linecol;
+        }
+        
 
         // Mise à jour des textes
         if (rapprText != null)
