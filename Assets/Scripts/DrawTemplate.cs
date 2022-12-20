@@ -49,7 +49,7 @@ public class DrawTemplate : MonoBehaviour
         int totalBasePoints = 0; // Nombre de points de la figure au total
         for (int i = 0; i < shapePointsArrays.Length; i++)
         {
-            clones[i] = Instantiate(Resources.Load("baseLine") as GameObject, gameObject.transform.position, Quaternion.identity, gameObject.transform);
+            clones[i] = Instantiate(Resources.Load("templateLine") as GameObject, gameObject.transform.position, Quaternion.identity, gameObject.transform);
             if (isLoop[i]) // Le path doit être dessiné comme une boucle
             {
                 clones[i].GetComponent<LineRenderer>().loop = true;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Newtonsoft.Json;// Pour le JSON "complexe"
 
 public class Shape
@@ -38,14 +39,20 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public ShowValue rapprText;
     public ShowValue ecartText;
+    public ShowValue scoreText;
+    private GameObject hand;
+
+    public Toggle transparencyMode;
+
+    public Material baseLineMat;
     
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //SetShape(shapeName);
         clones = new GameObject[0];
+        hand = GameObject.FindGameObjectsWithTag("Player")[0];
     }
 
     public void SetShape(string shapeName)
@@ -57,6 +64,11 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             string jsonString = textFile.text;
             this.shape = JsonConvert.DeserializeObject<Shape>(jsonString);
+
+            Color color = baseLineMat.color;
+            color.a = 1;
+            baseLineMat.color = color;
+
             DrawBaseShape(this.shape.points,this.shape.isLoop);
         }
         else
@@ -189,21 +201,34 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     void StartLine()
     {
         if (drawing != null) StopCoroutine(drawing);
-        if (concat_points != null) drawing = StartCoroutine(DrawLine());
+        if (concat_points != null)
+        {
+            drawing = StartCoroutine(DrawLine());
+            hand.GetComponent<ParticleSystem>().Play();
+        }
     }
 
     void FinishLine()
     {
         if (drawing != null) StopCoroutine(drawing);
+        hand.GetComponent<ParticleSystem>().Stop();
     }
 
     void SetVisualsFromVariables()
     {
-        if (shape != null)
+
+        // Calcul du score
+        double sum = rappr_avgsqrdist + ecart_avgsqrdist;
+        double exigence = 50;
+        float alpha = 0.3F;
+        double score = System.Math.Pow(1-System.Math.Tanh(exigence*sum),alpha);
+        
+        scoreText.setValue(score.ToString("P"));
+        if (shape != null && transparencyMode.isOn)
         {
-            //Color linecol = baseLine.material.color;
-            //linecol.a = Mathf.Lerp(1, 0, distanceDrawn / (2 * shape.length));
-            //baseLine.material.color = linecol;
+            Color linecol = baseLineMat.color;
+            linecol.a = Mathf.Lerp(1, 0, distanceDrawn / (2 * shape.length));
+            baseLineMat.color = linecol;
         }
         
 
@@ -236,6 +261,8 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 pointsDrawn++;
                 newLine.positionCount++;
                 newLine.SetPosition(newLine.positionCount - 1, CameraMousePos);
+
+                hand.transform.position = CameraMousePos;
                 
                 
                 // Au moins le deuxième point de la ligne dessinée
@@ -261,7 +288,6 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                         sum += rappr_minsqrdist[i];
                     }
                     rappr_avgsqrdist = sum / totalBasePoints;
-                    print(distanceDrawn);
                     SetVisualsFromVariables();
                 }
                 
