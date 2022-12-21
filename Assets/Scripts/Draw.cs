@@ -45,6 +45,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Toggle transparencyMode;
 
     public Material baseLineMat;
+    Image imageComp;
     
 
 
@@ -53,6 +54,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         clones = new GameObject[0];
         hand = GameObject.FindGameObjectsWithTag("Player")[0];
+        imageComp = gameObject.GetComponent<Image>();
     }
 
     public void SetShape(string shapeName)
@@ -70,6 +72,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             baseLineMat.color = color;
 
             DrawBaseShape(this.shape.points,this.shape.isLoop);
+            imageComp.color = new Color(0, 0, 0, 0);
         }
         else
         {
@@ -241,6 +244,22 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             ecartText.setValue(ecart_avgsqrdist.ToString());
         }
+    }
+
+    public void ConvertToImage()
+    {
+        if (shape == null) return;
+        Sprite image = Resources.Load<Sprite>("Shapes/"+shape.name);
+        if (image == null) return;
+        
+        imageComp.color = new Color(1,1,1,1);
+        imageComp.sprite = image;
+
+        EraseDrawnLines();
+
+        Color color = baseLineMat.color;
+        color.a = 0;
+        baseLineMat.color = color;
     }
 
     IEnumerator DrawLine()
