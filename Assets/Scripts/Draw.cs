@@ -16,7 +16,8 @@ public class Shape
 public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Coroutine drawing;
-    private bool mouse_over = false;
+    private bool mouseOver = false;
+    private bool isDrawing = false;
 
     private int totalBasePoints;
     private Vector3[] concat_points; // Points de la forme (coordonnées WorldGUI relatives à l'élément de GUI) : les différents traits sont ici concaténés
@@ -33,10 +34,13 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private float ecart_sumsqrdist = 0;
     private float ecart_avgsqrdist = float.MaxValue;
 
-    private GameObject[] clones;//Necessaires pour créer plusieurs lignes
-
+    // Lien avec les donnéezs
     public Shape shape;
+    List<float> timestamps;
+    float startingTime;
 
+    private GameObject[] clones;//Necessaires pour créer plusieurs lignes
+    
     public ShowValue rapprText;
     public ShowValue ecartText;
     public ShowValue scoreText;
@@ -73,12 +77,19 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             DrawBaseShape(this.shape.points,this.shape.isLoop);
             imageComp.color = new Color(0, 0, 0, 0);
+            ResetTimer();
         }
         else
         {
             print("Erreur lors de la lecture du fichier : " + "Shapes/" + shapeName + ".json");
         }
         
+    }
+
+    void ResetTimer()
+    {
+        startingTime = Time.time;
+        timestamps = new();// Reset les timestamps
     }
 
     public void EraseDrawnLines()
@@ -101,7 +112,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
         ecart_sumsqrdist = 0;
         ecart_avgsqrdist = float.MaxValue;
-        
+        ResetTimer();
         SetVisualsFromVariables();
     }
 
@@ -179,19 +190,19 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        mouse_over = true;
+        mouseOver = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        mouse_over = false;
+        mouseOver = false;
         FinishLine();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && mouse_over)
+        if (Input.GetMouseButtonDown(0) && mouseOver)
         {
             StartLine();
         }
@@ -206,14 +217,21 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (drawing != null) StopCoroutine(drawing);
         if (concat_points != null)
         {
+            timestamps.Add(Time.time - startingTime);
             drawing = StartCoroutine(DrawLine());
+            isDrawing = true;
             hand.GetComponent<ParticleSystem>().Play();
         }
     }
 
     void FinishLine()
     {
-        if (drawing != null) StopCoroutine(drawing);
+        if (isDrawing)
+        {
+            StopCoroutine(drawing);
+            isDrawing = false;
+            timestamps.Add(Time.time - startingTime);
+        }
         hand.GetComponent<ParticleSystem>().Stop();
     }
 
@@ -271,7 +289,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         while (true)
         {
-            if (mouse_over){
+            if (mouseOver){
                 mousePos = Input.mousePosition; // En coordonnées de l'écran
                 Vector3 CameraMousePos = Camera.main.ScreenToWorldPoint(mousePos); // En coordonnées World (pour la ligne)
                 CameraMousePos.z = 0;
