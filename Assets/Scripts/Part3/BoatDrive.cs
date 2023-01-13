@@ -70,7 +70,6 @@ public class BoatDrive : MonoBehaviour
     void GyroAccelerate()
     {
         rb.AddForce(new Vector3(-accelerationCoef*Mathf.Sin(Mathf.Clamp(gyro.attitude.x,-maxAngle,maxAngle)), 0, -accelerationCoef * Mathf.Sin(Mathf.Clamp(gyro.attitude.y, -maxAngle, maxAngle))));
-        print(accelerationCoef * gyro.attitude.x);
     }
 
 
