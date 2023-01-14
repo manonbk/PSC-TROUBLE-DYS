@@ -9,6 +9,7 @@ public class BoatDrive : MonoBehaviour
     public float accelerationCoef;
     public float keyboardTurnCoef;
     public float maxAngleDeg;
+    public float rotationCoef;
     float maxAngle;
 
     private Rigidbody rb;
@@ -29,7 +30,8 @@ public class BoatDrive : MonoBehaviour
         Accelerate();
         Turn();
         GyroAccelerate();
-        rb.rotation = Quaternion.LookRotation(rb.velocity, Vector3.up); // Rotates towards velocity vector
+        print(rb.velocity);
+        //rb.rotation = Quaternion.LookRotation(rb.position+ rb.velocity, Vector3.up); // Rotates towards velocity vector
     }
 
     void Accelerate ()
@@ -69,9 +71,10 @@ public class BoatDrive : MonoBehaviour
 
     void GyroAccelerate()
     {
-        rb.AddForce(new Vector3(-accelerationCoef*Mathf.Sin(Mathf.Clamp(gyro.attitude.x,-maxAngle,maxAngle)), 0, -accelerationCoef * Mathf.Sin(Mathf.Clamp(gyro.attitude.y, -maxAngle, maxAngle))));
-        print(accelerationCoef * gyro.attitude.x);
+        Vector3 forceDirection = new Vector3(-Mathf.Sin(Mathf.Clamp(gyro.attitude.x, -maxAngle, maxAngle)), 0, -Mathf.Sin(Mathf.Clamp(gyro.attitude.y, -maxAngle, maxAngle)));
+        rb.AddForce(accelerationCoef*forceDirection);
+        rb.AddTorque(rotationCoef*Vector3.Cross(transform.forward, forceDirection)); // Gère la rotation du bateau
     }
 
-
+    
 }
