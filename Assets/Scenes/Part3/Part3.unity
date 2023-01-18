@@ -1303,7 +1303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c9a930f71c94336a4b5d1eb555df85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationCoef: 3000
+  accelerationCoef: 2000
   keyboardTurnCoef: 300
   maxAngleDeg: 20
   rotationCoef: 2000
