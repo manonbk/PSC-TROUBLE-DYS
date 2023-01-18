@@ -72,6 +72,8 @@ public class BoatDrive : MonoBehaviour
     void GyroAccelerate()
     {
         Vector3 forceDirection = new Vector3(-Mathf.Sin(Mathf.Clamp(gyro.attitude.x, -maxAngle, maxAngle)), 0, -Mathf.Sin(Mathf.Clamp(gyro.attitude.y, -maxAngle, maxAngle)));
+        forceDirection = Quaternion.AngleAxis(135,Vector3.up) * forceDirection;
+        print(forceDirection);
         rb.AddForce(accelerationCoef*(1+Vector3.Dot(forceDirection.normalized,transform.forward))*forceDirection);
         rb.AddTorque(rotationCoef*Vector3.Cross(transform.forward, forceDirection)); // Gère la rotation du bateau
     }
