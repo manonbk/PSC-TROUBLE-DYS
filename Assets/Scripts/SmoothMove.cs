@@ -6,7 +6,7 @@ public class SmoothMove : MonoBehaviour
 
     public float duration;
     public Vector3[] checkpoints;
-    private int lastCheckPoint = -1;
+    private int lastCheckPoint = 0;
     public void MoveToPosition(Vector3 targetPosition)
     {
         StartCoroutine(SmoothMovement(targetPosition));
@@ -14,7 +14,7 @@ public class SmoothMove : MonoBehaviour
 
     public void GoToCheckpoint(int i)
     {
-        MoveToPosition(checkpoints[i]);
+        MoveToPosition(checkpoints[i% checkpoints.Length]);
         lastCheckPoint = i;
     }
 
