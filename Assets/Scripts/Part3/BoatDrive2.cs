@@ -9,7 +9,7 @@ public class BoatDrive2 : MonoBehaviour
     public float rotationSpeed = 500.0f;
     public float maxRotationSpeed = 1.0f;
 
-    public Transform arrivalPoint;
+    public Transform[] checkpoints;
     public float distanceThreshold = 1.0f;
     private bool reached = false;
 
@@ -18,6 +18,8 @@ public class BoatDrive2 : MonoBehaviour
     public GameObject cameraObject;
     //public float maxAngleDeg;
     //float maxAngle;
+
+    public LevelManager levelManager;
 
     Gyroscope gyro;
 
@@ -32,7 +34,7 @@ public class BoatDrive2 : MonoBehaviour
     void FixedUpdate()
     {
         Move();
-        print(rb.velocity);
+        //print(rb.velocity);
     }
     
     void Move()
@@ -50,18 +52,33 @@ public class BoatDrive2 : MonoBehaviour
         transform.position += moveDirection * speed * Time.deltaTime;
 
         // Check distance to arrival point
-        float distance = Vector3.Distance(transform.position, arrivalPoint.position);
+        print(levelManager.GetCurrentLevel() + 1);
+        float distance = Vector3.Distance(transform.position, checkpoints[levelManager.GetCurrentLevel()+1].position);
         if (distance <= distanceThreshold && !reached)
         {
             reached = true;
+            // Normalement inutile désormais, remplacé par le compteur currentLevel
 
             //felicitations
             Debug.Log("Bravoo!");
 
-            //Move camera
-            cameraObject.SendMessage("goToNext");
+            // On envoie le message au LevelManager
+            levelManager.FinishLevel();
             
         }
+    }
+
+    public void Freeze(float t)
+    {
+        // Freezes for t seconds
+        StartCoroutine(WaitForSeconds(t));
+
+    }
+
+    IEnumerator WaitForSeconds(float t)
+    {
+        yield return new WaitForSeconds(t);
+        rb.isKinematic = false;
     }
 
 }
