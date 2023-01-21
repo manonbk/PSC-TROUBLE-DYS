@@ -42,14 +42,15 @@ public class BoatDrive2 : MonoBehaviour
         float x = Input.acceleration.x;
         float z = Input.acceleration.y;
 
-        Vector3 moveDirection = new Vector3(x, 0, z);
-        if (moveDirection != Vector3.zero)
+        Vector3 forceDirection = new Vector3(x, 0, z);
+        if (rb.velocity != Vector3.zero)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            Quaternion targetRotation = Quaternion.LookRotation(rb.velocity);
             Quaternion newRotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * Mathf.Min(rotationSpeed, maxRotationSpeed));
             transform.rotation = newRotation;
         }
-        transform.position += moveDirection * speed * Time.deltaTime;
+        //transform.position += moveDirection * speed * Time.deltaTime;
+        rb.AddForce(speed* forceDirection);
 
         // Check distance to arrival point
         print(levelManager.GetCurrentLevel() + 1);
@@ -71,6 +72,7 @@ public class BoatDrive2 : MonoBehaviour
     public void Freeze(float t)
     {
         // Freezes for t seconds
+        rb.isKinematic = true;
         StartCoroutine(WaitForSeconds(t));
 
     }
