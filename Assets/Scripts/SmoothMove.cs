@@ -3,27 +3,21 @@ using UnityEngine;
 
 public class SmoothMove : MonoBehaviour
 {
-
-    public float duration;
     public Vector3[] checkpoints;
     private int lastCheckPoint = 0;
-    public void MoveToPosition(Vector3 targetPosition)
+    public void MoveToPosition(Vector3 targetPosition, float duration)
     {
-        StartCoroutine(SmoothMovement(targetPosition));
+        StartCoroutine(SmoothMovement(targetPosition,duration));
     }
 
-    public void GoToCheckpoint(int i)
+    public void GoToCheckpoint(int i, float duration)
     {
-        MoveToPosition(checkpoints[i% checkpoints.Length]);
+        MoveToPosition(checkpoints[i% checkpoints.Length],duration);
         lastCheckPoint = i;
     }
 
-    public void goToNext()
-    {
-        GoToCheckpoint(lastCheckPoint+1);
-    }
 
-    private IEnumerator SmoothMovement(Vector3 targetPosition)
+    private IEnumerator SmoothMovement(Vector3 targetPosition,float duration)
     {
         float progress = 0;
         Vector3 startingPos = transform.position;
