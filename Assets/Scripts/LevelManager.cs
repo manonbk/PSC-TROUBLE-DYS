@@ -26,8 +26,11 @@ public class LevelManager : MonoBehaviour
     {
         currentLevel++;
 
-        cameraMovement.GoToCheckpoint(currentLevel,2);
-        boatDrive.Freeze(2);
+        // On lance EN MEME TEMPS les actions suivantes (en parallèle) :
+
+        cameraMovement.GoToCheckpoint(currentLevel,2);// Déplacement de la caméra sur 2 sec
+        whaleMovement.GoToCheckpoint(currentLevel, 4, 2);// La baleine attend 2 secondes, puis bouge en 4 secondes
+        boatDrive.Freeze(4);// Le bateau est gelé pendant 4 secondes
     }
 
     public int GetCurrentLevel()
