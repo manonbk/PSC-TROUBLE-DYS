@@ -39,8 +39,8 @@ public class BoatDrive2 : MonoBehaviour
     
     void Move()
     {
-        float x = Input.acceleration.x;
-        float z = Input.acceleration.y;
+        float x = Mathf.Clamp(Input.acceleration.x,-2,2);
+        float z = Mathf.Clamp(Input.acceleration.y, -2, 2);
 
         Vector3 forceDirection = new Vector3(x, 0, z);
         if (rb.velocity != Vector3.zero)
@@ -53,7 +53,6 @@ public class BoatDrive2 : MonoBehaviour
         rb.AddForce(speed* forceDirection);
 
         // Check distance to arrival point
-        print(levelManager.GetCurrentLevel() + 1);
         float distance = Vector3.Distance(transform.position, checkpoints[levelManager.GetCurrentLevel()+1].position);
         if (distance <= distanceThreshold && !reached)
         {

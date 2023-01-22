@@ -19,23 +19,61 @@ Material:
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShade:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaClip: 0
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _Blend: 0
+    - _BlendOp: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DstBlend: 0
+    - _Outline: 0.005
+    - _QueueOffset: 0
+    - _SampleGI: 0
     - _Speed: 1
+    - _SrcBlend: 1
+    - _Surface: 0
+    - _ZWrite: 1
     - _baseAmplitude: 0.5
-    - _density: 150
+    - _density: 200
+    - _edgevis: 0.6
+    - _foamAmount: 1
+    - _foamCutoff: 5000
+    - _foamScale: 100
+    - _foamSpeed: 0.01
+    - _mainIntensity: 0.5
     - _noiseAmplitude: 0.2
-    - _noiseScale: 100
+    - _noiseScale: 3.04
     - _noiseVisibility: 0.3
-    - _slimness: 4.37
-    - _waveHeight: 1
-    - _wavespeed: 10
+    - _slimness: 4.34
+    - _stepLevel: 0.8
+    - _waveHeight: 0.01
+    - _wavespeed: 0.1
     m_Colors:
-    - _BaseColor: {r: 0.448309, g: 0.6471255, b: 0.9245283, a: 1}
-    - _RippleColor: {r: 0.734083, g: 0.98685926, b: 1.4849771, a: 0}
+    - _BaseColor: {r: 0.23474543, g: 0.46788546, b: 0.7924528, a: 1}
+    - _Color: {r: 0.448309, g: 0.6471255, b: 0.9245283, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RippleColor: {r: 0.107547104, g: 0.84158576, b: 1, a: 0}
+    - _foamColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3530106936917924555
 MonoBehaviour:
