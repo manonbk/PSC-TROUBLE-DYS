@@ -1619,6 +1619,7 @@ GameObject:
   - component: {fileID: 1576256480}
   - component: {fileID: 1576256481}
   - component: {fileID: 1576256482}
+  - component: {fileID: 1576256483}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1659,8 +1660,8 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 1000
-  field of view: 60
-  orthographic: 1
+  field of view: 30
+  orthographic: 0
   orthographic size: 70
   m_Depth: -1
   m_CullingMask:
@@ -1684,14 +1685,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576256476}
-  m_LocalRotation: {x: 0.58571386, y: -0, z: -0, w: 0.8105179}
-  m_LocalPosition: {x: 0, y: 166, z: -430}
+  m_LocalRotation: {x: 0.66725695, y: -0, z: -0, w: 0.7448277}
+  m_LocalPosition: {x: 0, y: 275, z: -415}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 71.707, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 83.711, y: 0, z: 0}
 --- !u!114 &1576256480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1732,9 +1733,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpoints:
-  - {x: 0, y: 100, z: -430}
-  - {x: 170, y: 100, z: -306}
-  - {x: 50, y: 100, z: -400}
+  - {x: 0, y: 275, z: -415}
+  - {x: 170, y: 275, z: -306}
+  - {x: 50, y: 275, z: -400}
+--- !u!114 &1576256483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576256476}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8cd9adc87c94c498713774e0817b8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1592083037
 GameObject:
   m_ObjectHideFlags: 0
