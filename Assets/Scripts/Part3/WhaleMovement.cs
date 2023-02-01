@@ -23,7 +23,6 @@ public class WhaleMovement : MonoBehaviour
     public void GoToCheckpoint(int index, float duration, float delay)
     {
         StartCoroutine(GoTo(checkpoints[index].position, duration,delay,bezierPoints[index-1].position));
-        print(bezierPoints[index-1].position);
     }
 
     private IEnumerator GoTo(Vector3 targetPos, float duration, float delay, Vector3 bezierPos)
