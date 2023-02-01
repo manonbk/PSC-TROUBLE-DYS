@@ -76,7 +76,7 @@ Material:
     - _ZWrite: 1
     - _baseAmplitude: 0.5
     - _density: 200
-    - _depthColorEffect: 11.9
+    - _depthColorEffect: 9.2
     - _edgevis: 0.6
     - _foamAmount: 31.3
     - _foamCutoff: 4
