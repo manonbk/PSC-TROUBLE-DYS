@@ -78,9 +78,9 @@ Material:
     - _density: 200
     - _depthColorEffect: 9.2
     - _edgevis: 0.6
-    - _foamAmount: 31.3
-    - _foamCutoff: 4
-    - _foamScale: 400
+    - _foamAmount: 31.8
+    - _foamCutoff: 5.7
+    - _foamScale: 526.1
     - _foamSpeed: 0.001
     - _mainIntensity: 0.5
     - _noiseAmplitude: 0.2

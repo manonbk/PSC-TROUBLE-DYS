@@ -46,7 +46,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public ShowValue scoreText;
     private GameObject hand;
 
-    public Toggle transparencyMode;
+    public bool transparencyMode;
 
     public Material baseLineMat;
     Image imageComp;
@@ -245,7 +245,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         double score = System.Math.Pow(1-System.Math.Tanh(exigence*sum),alpha);
         
         scoreText.setValue(score.ToString("P"));
-        if (shape != null && transparencyMode.isOn)
+        if (shape != null && transparencyMode)
         {
             Color linecol = baseLineMat.color;
             linecol.a = Mathf.Lerp(1, 0, distanceDrawn / (2 * shape.length));
