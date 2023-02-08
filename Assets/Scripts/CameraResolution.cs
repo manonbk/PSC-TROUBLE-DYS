@@ -15,8 +15,7 @@ public class CameraResolution : MonoBehaviour
 
     #region rescale camera
     private void RescaleCamera()
-    {
-
+       {
         if (Screen.width == ScreenSizeX && Screen.height == ScreenSizeY) return;
 
         float targetaspect = 1920f / 1200f;
