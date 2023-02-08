@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="280"
+   height="280"
+   viewBox="0 0 74.083333 74.083333"
+   version="1.1"
+   id="svg620"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="coque.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview622"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.1893044"
+     inkscape:cx="186.24332"
+     inkscape:cy="15.555311"
+     inkscape:window-width="1206"
+     inkscape:window-height="1001"
+     inkscape:window-x="705"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs617">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath2869">
+      <g
+         id="g2883">
+        <g
+           id="g2881">
+          <g
+             id="g2879">
+            <g
+               id="g2877">
+              <g
+                 id="g2875">
+                <g
+                   id="g2873">
+                  <path
+                     d="M 673.91466,682.92727 H 834.16447 V 811.48926 H 673.91466 Z"
+                     clip-rule="evenodd"
+                     id="path2871"
+                     style="stroke-width:1.20715" />
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </clipPath>
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="font-variation-settings:normal;vector-effect:none;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
+       d="M 5.7669666,24.953508 H 23.910922 v 0 0 c 0.542563,8.537689 7.217249,9.590556 12.689533,8.985465 5.472298,-0.605092 10.307876,-1.26568 10.053162,-11.790119 l 21.721708,0.254434 -2.810959,11.728468 h -5.11093 C 56.545726,45.28982 48.786185,52.529756 35.12535,51.898773 21.4645,51.267789 16.854768,49.112303 5.7669666,24.953508 Z"
+       id="path3388" />
+  </g>
+</svg>

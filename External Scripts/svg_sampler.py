@@ -27,6 +27,7 @@ def points_from_doc(doc, nsamples=10, scale=1, offset=0, looped=[]):
     pathpoints = []
     isLoop = []
     total_length = 0
+    print("Nbre de chemins ",len(doc.getElementsByTagName("path")))
     i = 0
     for element in doc.getElementsByTagName("path"):
         for path in parse_path(element.getAttribute("d")):

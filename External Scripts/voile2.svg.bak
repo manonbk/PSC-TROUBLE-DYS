@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="280"
+   height="280"
+   viewBox="0 0 74.083333 74.083333"
+   version="1.1"
+   id="svg620"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="voile2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview622"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.1893044"
+     inkscape:cx="186.24332"
+     inkscape:cy="15.555311"
+     inkscape:window-width="1206"
+     inkscape:window-height="1001"
+     inkscape:window-x="705"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs617">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath2869">
+      <g
+         id="g2883">
+        <g
+           id="g2881">
+          <g
+             id="g2879">
+            <g
+               id="g2877">
+              <g
+                 id="g2875">
+                <g
+                   id="g2873">
+                  <path
+                     d="M 673.91466,682.92727 H 834.16447 V 811.48926 H 673.91466 Z"
+                     clip-rule="evenodd"
+                     id="path2871"
+                     style="stroke-width:1.20715" />
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </clipPath>
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="font-variation-settings:normal;vector-effect:none;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
+       d="m 22.470761,21.032408 35.575896,-0.131895 c -8.078338,9.287248 -9.194986,23.274882 0.172984,32.09122 L 22.998374,53.184032 C 11.976751,43.166248 14.401604,28.631098 22.470761,21.032408 Z"
+       id="path3386" />
+  </g>
+</svg>
