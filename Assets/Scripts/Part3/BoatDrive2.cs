@@ -10,7 +10,7 @@ public class BoatDrive2 : MonoBehaviour
     public float maxRotationSpeed = 1.0f;
 
     public Transform[] checkpoints;
-    public float distanceThreshold = 1.0f;
+    public float distanceThreshold = 4.0f;
     private bool reached = false;
 
     private Rigidbody rb;
@@ -56,10 +56,10 @@ public class BoatDrive2 : MonoBehaviour
         float distance = Vector3.Distance(transform.position, checkpoints[levelManager.GetCurrentLevel()+1].position);
         if (distance <= distanceThreshold && !reached)
         {
-            reached = true;
-            // Normalement inutile désormais, remplacé par le compteur currentLevel
+            // reached = true;
+            // Normalement inutile dï¿½sormais, remplacï¿½ par le compteur currentLevel
 
-            //felicitations
+            // felicitations
             Debug.Log("Bravoo!");
 
             // On envoie le message au LevelManager
