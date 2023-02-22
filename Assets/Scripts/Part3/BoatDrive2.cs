@@ -14,6 +14,7 @@ public class BoatDrive2 : MonoBehaviour
     private bool reached = false;
 
     private Rigidbody rb;
+    private bool hasCollided = false;
 
     public GameObject cameraObject;
     //public float maxAngleDeg;
@@ -82,4 +83,14 @@ public class BoatDrive2 : MonoBehaviour
         rb.isKinematic = false;
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        ContactPoint contact = collision.contacts[0];
+        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        Vector3 position = contact.point;
+        if(collision.gameObject.CompareTag("Terrain")){
+            
+        }
+
+    }
 }

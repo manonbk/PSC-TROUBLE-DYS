@@ -473,7 +473,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 492715236}
     m_Modifications:
     - target: {fileID: 188773325780559220, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalPosition.x
@@ -909,11 +909,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalScale.x
+<<<<<<< Updated upstream
       value: 0.3
+=======
+      value: 0.39999998
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalScale.y
@@ -925,19 +929,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -90.7
+      value: -4.9333344
       objectReference: {fileID: 0}
     - target: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9
+      value: 17.1
       objectReference: {fileID: 0}
     - target: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -427
+      value: -0.9420166
       objectReference: {fileID: 0}
     - target: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalRotation.x
@@ -945,7 +949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalRotation.z
@@ -957,7 +961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1079,6 +1083,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8026378559764645240, guid: 77e9832602c664eaca095b094ed24909, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8130225311671470296, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.1
@@ -1107,10 +1115,13 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
     - target: {fileID: 8367355240525534603, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+=======
+>>>>>>> Stashed changes
     - target: {fileID: 8442640570774042201, guid: 77e9832602c664eaca095b094ed24909, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1
@@ -1355,6 +1366,157 @@ Skybox:
   m_GameObject: {fileID: 330121466}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 0}
+<<<<<<< Updated upstream
+=======
+--- !u!1 &492715234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 492715236}
+  - component: {fileID: 492715235}
+  - component: {fileID: 492715237}
+  m_Layer: 0
+  m_Name: BoatContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &492715235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492715234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c29d7d47ffe40c18f76acb43b471ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1000
+  rotationSpeed: 500
+  maxRotationSpeed: 1
+  checkpoints:
+  - {fileID: 74128286}
+  - {fileID: 1592083038}
+  - {fileID: 818622011}
+  - {fileID: 897910479}
+  - {fileID: 1441446964}
+  distanceThreshold: 10
+  cameraObject: {fileID: 0}
+  levelManager: {fileID: 1932813622}
+--- !u!4 &492715236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492715234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -85.76666, y: -11.777199, z: -426.05798}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1320266999}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &492715237
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492715234}
+  serializedVersion: 2
+  m_Mass: 100
+  m_Drag: 0.3
+  m_AngularDrag: 2
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
+--- !u!1 &537254436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 537254437}
+  m_Layer: 0
+  m_Name: CheckPointWhale
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &537254437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537254436}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 61.137733, y: -157.29904, z: -292.1439}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 74128286}
+  - {fileID: 775820685}
+  - {fileID: 1592083038}
+  - {fileID: 1698322314}
+  - {fileID: 818622011}
+  - {fileID: 73014865}
+  - {fileID: 897910479}
+  - {fileID: 981712471}
+  - {fileID: 31388265}
+  - {fileID: 1441446964}
+  - {fileID: 820668502}
+  - {fileID: 1433355862}
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &700312103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 700312104}
+  m_Layer: 0
+  m_Name: Checkpoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &700312104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700312103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.8939972, y: -33.938507, z: -316.62976}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes
 --- !u!1 &704727228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,46 +2041,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6692904756778783322, guid: 77e9832602c664eaca095b094ed24909, type: 3}
   m_PrefabInstance: {fileID: 270108668}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1320266995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1320266994}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7dbc3b9ff6b364faa52020dd673ad3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovingDistances: {x: 0.002, y: 0.001, z: 0}
-  speed: 1
-  WaveRotations: {x: 0, y: 0, z: 0}
-  WaveRotationsSpeed: 0.3
-  AxisOffsetSpeed: {x: 0, y: 0, z: 0}
-  fspeed: 0
-  turnSpeed: 0
---- !u!54 &1320266998
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1320266994}
-  serializedVersion: 2
-  m_Mass: 100
-  m_Drag: 0.3
-  m_AngularDrag: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 84
-  m_CollisionDetection: 0
 --- !u!4 &1320266999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6316907361846036704, guid: 77e9832602c664eaca095b094ed24909, type: 3}
   m_PrefabInstance: {fileID: 270108668}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!114 &1320267000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1957,6 +2085,8 @@ MonoBehaviour:
   distanceThreshold: 10
   cameraObject: {fileID: 0}
   levelManager: {fileID: 1932813622}
+=======
+>>>>>>> Stashed changes
 --- !u!136 &1320267003
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1964,12 +2094,13 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320266994}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0b329438e72742242aacbaf3287c9273, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 10
-  m_Height: 56.784973
+  m_Height: 52.85544
   m_Direction: 2
+<<<<<<< Updated upstream
   m_Center: {x: 1.1570604e-13, y: 0, z: 17.896181}
 --- !u!1 &1321989977
 GameObject:
@@ -2002,6 +2133,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  m_Center: {x: 0, y: 0, z: 15.931412}
+>>>>>>> Stashed changes
 --- !u!1 &1352084110 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5034079966447255573, guid: 969d84f7db8a44c0b9aa8a3eaa7341d1, type: 3}
@@ -2299,7 +2433,7 @@ Transform:
   - {fileID: 1081009261}
   - {fileID: 232896813}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &1576256480
 MonoBehaviour:
@@ -2790,7 +2924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraMovement: {fileID: 1576256482}
   whaleMovement: {fileID: 1352084111}
-  boatDrive: {fileID: 1320267002}
+  boatDrive: {fileID: 0}
 --- !u!4 &1932813623
 Transform:
   m_ObjectHideFlags: 0
