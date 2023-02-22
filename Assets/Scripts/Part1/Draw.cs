@@ -269,15 +269,31 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (shape == null) return;
         Sprite image = Resources.Load<Sprite>("Shapes/"+shape.name);
         if (image == null) return;
-        
-        imageComp.color = new Color(1,1,1,1);
+
         imageComp.sprite = image;
+        StartCoroutine(FadeInImage());
+        
+        
+
+        
+    }
+
+    IEnumerator FadeInImage()
+    {
+        Color lineColor = baseLineMat.color;
+        float duration = .6f;
+        for (float i = 0; i <= duration; i += Time.deltaTime)
+        {
+            imageComp.color = new Color(1, 1, 1, i/duration);
+            lineColor.a = 1-i/duration;
+            baseLineMat.color = lineColor;
+            yield return null;
+        }
 
         EraseDrawnLines();
 
-        Color color = baseLineMat.color;
-        color.a = 0;
-        baseLineMat.color = color;
+
+        
     }
 
     IEnumerator DrawLine()
