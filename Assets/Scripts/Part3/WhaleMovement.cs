@@ -29,10 +29,8 @@ public class WhaleMovement : MonoBehaviour
     private IEnumerator GoTo(Vector3 targetPos, float duration, float delay, Vector3 bezierPos, Vector3 secondaryBezierPos)
     {
         yield return new WaitForSeconds(delay);
-
         float progress = 0;
         Vector3 startingPos = transform.position;
-
         while (progress <= 1)
         {
             float t = Mathf.SmoothStep(0, 1, progress);
