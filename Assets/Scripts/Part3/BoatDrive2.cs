@@ -10,7 +10,7 @@ public class BoatDrive2 : MonoBehaviour
     public float maxRotationSpeed = 1.0f;
 
     public Transform[] checkpoints;
-    public float distanceThreshold = 4.0f;
+    public float distanceThreshold = 6.0f;
     private bool reached = false;
 
     private Rigidbody rb;
