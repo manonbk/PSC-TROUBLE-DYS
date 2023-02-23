@@ -88,7 +88,7 @@ Material:
     - _noiseVisibility: 0.3
     - _slimness: 8.6
     - _stepLevel: 0.8
-    - _waveHeight: 0.01
+    - _waveHeight: 0.001
     - _wavespeed: 0.1
     m_Colors:
     - Color_A271762B: {r: 0, g: 0.04231142, b: 0.1682695, a: 1}

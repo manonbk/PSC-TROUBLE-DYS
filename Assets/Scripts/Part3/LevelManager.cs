@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
     {
         currentLevel++;
 
+        boatDrive.TeleportToCheckpoint(currentLevel);
         // On lance EN MEME TEMPS les actions suivantes (en parall�le) :
 
         cameraMovement.GoToCheckpoint(currentLevel,2);// D�placement de la cam�ra sur 2 sec

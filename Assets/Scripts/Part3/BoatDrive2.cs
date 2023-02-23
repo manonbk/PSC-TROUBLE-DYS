@@ -11,7 +11,6 @@ public class BoatDrive2 : MonoBehaviour
 
     public Transform[] checkpoints;
     public float distanceThreshold = 6.0f;
-    private bool reached = false;
 
     private Rigidbody rb;
 
@@ -54,10 +53,8 @@ public class BoatDrive2 : MonoBehaviour
 
         // Check distance to arrival point
         float distance = Vector3.Distance(transform.position, checkpoints[levelManager.GetCurrentLevel()+1].position);
-        if (distance <= distanceThreshold && !reached)
+        if (distance <= distanceThreshold)
         {
-            // reached = true;
-            // Normalement inutile d�sormais, remplac� par le compteur currentLevel
 
             // felicitations
             Debug.Log("Bravoo!");
@@ -74,6 +71,12 @@ public class BoatDrive2 : MonoBehaviour
         rb.isKinematic = true;
         StartCoroutine(WaitForSeconds(t));
 
+    }
+
+    public void TeleportToCheckpoint(int i)
+    {
+        GetComponent<Transform>().position = checkpoints[i].position;
+        GetComponent<Transform>().rotation = checkpoints[i].rotation;
     }
 
     IEnumerator WaitForSeconds(float t)
