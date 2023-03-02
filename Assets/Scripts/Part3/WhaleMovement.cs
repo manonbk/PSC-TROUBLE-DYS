@@ -4,6 +4,7 @@ using UnityEngine;
 public class WhaleMovement : MonoBehaviour
 {
     public Transform[] checkpoints;
+    public Transform additionnalPoint;
     public Transform[] bezierPoints;
     public Transform[] secondaryBezierPoints;
     public float amplitude = 0.8f;
@@ -24,6 +25,12 @@ public class WhaleMovement : MonoBehaviour
     public void GoToCheckpoint(int index, float duration, float delay)
     {
         StartCoroutine(GoTo(checkpoints[index].position, duration,delay,bezierPoints[index-1].position, secondaryBezierPoints[index - 1].position));
+    }
+
+    public void goToAdditionnalPoint(float duration,float delay)
+    {
+        Vector3 target = additionnalPoint.position;
+        StartCoroutine(GoTo(target, duration, delay, target, target));
     }
 
     private IEnumerator GoTo(Vector3 targetPos, float duration, float delay, Vector3 bezierPos, Vector3 secondaryBezierPos)
