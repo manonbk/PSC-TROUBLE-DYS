@@ -5,6 +5,11 @@ public class SmoothMove : MonoBehaviour
 {
     public Vector3[] checkpoints;
     private int lastCheckPoint = 0;
+
+    private void Start()
+    {
+        transform.position = checkpoints[0];
+    }
     public void MoveToPosition(Vector3 targetPosition, float duration)
     {
         StartCoroutine(SmoothMovement(targetPosition,duration));
