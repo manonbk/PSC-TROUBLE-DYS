@@ -5,12 +5,12 @@ using Newtonsoft.Json;// Pour le JSON "complexe"
 
 public class DrawTemplate : MonoBehaviour
 {
-    private GameObject[] clones;//Necessaires pour créer plusieurs lignes
+    private GameObject[] clones = new GameObject[0];//Necessaires pour créer plusieurs lignes
 
     // Start is called before the first frame update
     void Start()
     {
-        clones = new GameObject[0];
+
     }
 
     // Update is called once per frame

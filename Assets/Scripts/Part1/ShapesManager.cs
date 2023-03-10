@@ -11,9 +11,26 @@ public class ShapesManager : MonoBehaviour
     public Draw draw;
 
     // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        
+        Invoke("DelayedStart", .5f);
+    }
+    void DelayedStart()
+    {
+        string shapeName = shapeNames[0];
+        drawTemplate.SetShape(shapeName);
+        draw.SetShape(shapeName);
+    }
+ 
+
+    public void StartGame()
+    {
+        draw.hasStarted = true;
+        if (currentShapeIndex == -1)
+        {
+            NextShape();
+        }
     }
 
     // Update is called once per frame

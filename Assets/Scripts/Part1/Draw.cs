@@ -15,9 +15,12 @@ public class Shape
 
 public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public SaveData sd;
+
     private Coroutine drawing;
     private bool mouseOver = false;
     private bool isDrawing = false;
+    public bool hasStarted = false;
 
     private int totalBasePoints;
     private Vector3[] concat_points; // Points de la forme (coordonnées WorldGUI relatives à l'élément de GUI) : les différents traits sont ici concaténés
@@ -78,6 +81,8 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             DrawBaseShape(this.shape.points,this.shape.isLoop);
             imageComp.color = new Color(0, 0, 0, 0);
             ResetTimer();
+
+            
         }
         else
         {
@@ -266,6 +271,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void ConvertToImage()
     {
+        Debug.Log(shape.name);
         if (shape == null) return;
         Sprite image = Resources.Load<Sprite>("Shapes/"+shape.name);
         if (image == null) return;
