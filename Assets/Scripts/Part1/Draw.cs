@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 using Newtonsoft.Json;// Pour le JSON "complexe"
 
 public class Shape
@@ -36,6 +37,9 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private float ecart_sumsqrdist = 0;
     private float ecart_avgsqrdist = float.MaxValue;
+
+    public bool isDrawingFinished = false;
+    public TMPro.TextMeshProUGUI mainButton;
 
     // Lien avec les donnéezs
     public Shape shape;
@@ -81,6 +85,8 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             DrawBaseShape(this.shape.points,this.shape.isLoop);
             imageComp.color = new Color(0, 0, 0, 0);
             ResetTimer();
+            isDrawingFinished = false;
+            mainButton.text = "J'ai fini !";
 
             
         }
@@ -271,6 +277,9 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void ConvertToImage()
     {
+        isDrawingFinished = true;
+        mainButton.text = "Continuer";
+
         Debug.Log(shape.name);
         if (shape == null) return;
         Sprite image = Resources.Load<Sprite>("Shapes/"+shape.name);
@@ -278,6 +287,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         
         imageComp.color = new Color(1,1,1,1);
         imageComp.sprite = image;
+        
 
         EraseDrawnLines();
 

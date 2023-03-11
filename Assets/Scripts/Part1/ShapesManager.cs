@@ -9,6 +9,8 @@ public class ShapesManager : MonoBehaviour
     int currentShapeIndex = -1;
     public DrawTemplate drawTemplate;
     public Draw draw;
+    public GameObject startButton;
+    public GameObject endPanel;
 
     // Start is called before the first frame update
 
@@ -27,6 +29,7 @@ public class ShapesManager : MonoBehaviour
     public void StartGame()
     {
         draw.hasStarted = true;
+        startButton.SetActive(false);
         if (currentShapeIndex == -1)
         {
             NextShape();
@@ -49,7 +52,12 @@ public class ShapesManager : MonoBehaviour
 
     public void NextShape()
     {
-        SetShapeIndex((currentShapeIndex+1)%shapeNames.Length);
+        if (currentShapeIndex == shapeNames.Length - 1)
+        {
+            endPanel.SetActive(true);
+        }
+        else
+        SetShapeIndex(currentShapeIndex+1);
     }
 
     public void ResetShapeIndex()
@@ -59,4 +67,15 @@ public class ShapesManager : MonoBehaviour
         draw.EraseAll();
     }
 
+    public void OnMainButtonPressed()
+    {
+        if (draw.isDrawingFinished)
+        {
+            NextShape();
+        }
+        else
+        {
+            draw.ConvertToImage();
+        }
+    }
 }

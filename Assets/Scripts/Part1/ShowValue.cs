@@ -10,7 +10,7 @@ public class ShowValue : MonoBehaviour
     private TextMesh TextMesh;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         TextMesh = GetComponent<TextMesh>();
     }
@@ -23,6 +23,7 @@ public class ShowValue : MonoBehaviour
 
     public void setValue(string value)
     {
+        if (TextMesh != null)
         TextMesh.text = preText + value + postText;
     }
 }

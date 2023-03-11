@@ -6,8 +6,7 @@ using System.IO;
 public class BoatDrive2 : MonoBehaviour
 {
     public float speed = 10.0f;
-    public float rotationSpeed = 500.0f;
-    public float maxRotationSpeed = 1.0f;
+    public float rotationSpeed = 1.0f;
 
     public Transform[] checkpoints;
     public float distanceThreshold = 6.0f;
@@ -44,9 +43,11 @@ public class BoatDrive2 : MonoBehaviour
         Vector3 forceDirection = new Vector3(x, 0, z);
         if (rb.velocity != Vector3.zero)
         {
+            
             Quaternion targetRotation = Quaternion.LookRotation(rb.velocity);
-            Quaternion newRotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * Mathf.Min(rotationSpeed, maxRotationSpeed));
-            transform.rotation = newRotation;
+            rb.AddTorque(-rotationSpeed*Vector3.Cross(forceDirection, transform.forward));
+            //Quaternion newRotation = Quaternion.Lerp(transform.rotation, targetRotation, rb.velocity.magnitude*Time.deltaTime * rotationSpeed);
+            //transform.rotation = newRotation;
         }
         //transform.position += moveDirection * speed * Time.deltaTime;
         rb.AddForce(speed* forceDirection);
