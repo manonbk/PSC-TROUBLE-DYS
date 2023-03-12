@@ -7,34 +7,21 @@ using System;
 
 public class SaveData : MonoBehaviour
 {
-    public Button button;
-    public InputField entrée;
-    public string codeJ;
-    string[] types = new string[] { "%DIST%", "%COORD%", "%EVENT%" };
+    private string data = "";
+    private StreamWriter file;
 
-    // Start is called before the first frame update
-    void Start()
+    public void add(string donnee)
     {
-        button.onClick.AddListener(TaskOnClick);
-    }
-    void TaskOnClick()
-    {
-        codeJ = entrée.text;
-        StreamWriter file = new(Application.dataPath + "/data.txt", append: true);
-        Debug.Log("Fichier créé");
-        file.WriteLineAsync(codeJ);
-        file.Close();
+        data += Time.time.ToString() +","+ donnee + "\n";
+        Debug.Log("Sauvegarde donnees dans data effectuee");
     }
 
-    public void save(string donnee, int type)
+    void OnDestroy()
     {
-
-        string time = Time.time.ToString();
-        StreamWriter file = new(Application.dataPath + "/data.txt", append: true);
-        file.WriteLineAsync(time + types[type] + donnee);
+        file = new(Application.persistentDataPath + "/data.txt", append: true);
+        file.Write(data);
         file.Close();
-        Debug.Log("Sauvegarde effectuée");
-
+        Debug.Log("Sauvegarde fichier effectuee");
     }
 
 }

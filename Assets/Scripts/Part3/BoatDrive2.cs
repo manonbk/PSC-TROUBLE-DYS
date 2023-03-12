@@ -14,7 +14,7 @@ public class BoatDrive2 : MonoBehaviour
 
     private Rigidbody rb;
 
-    public GameObject cameraObject;
+    //public GameObject cameraObject;
     //public float maxAngleDeg;
     //float maxAngle;
 
@@ -22,18 +22,32 @@ public class BoatDrive2 : MonoBehaviour
 
     Gyroscope gyro;
 
+    //pour enregistrer les données
+    public SaveData sd ;
+    private bool savePosition = true; // 1 on sauvegarde la position, 0 on ne sauvegarde pas
+    private string posx;
+    private string posy;
+    private string posz;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         gyro = Input.gyro;
         gyro.enabled = true;
         //maxAngle = Mathf.PI / 180 * maxAngleDeg;
+
     }
 
     void FixedUpdate()
     {
         Move();
-        //print(rb.velocity);
+        if( savePosition){
+            posx = transform.position.x.ToString("0.000");
+            posy = transform.position.y.ToString("0.000");
+            posz = transform.position.z.ToString("0.000");
+            sd.add("positionBateau,"+ posx+ "," + posy + "," + posz);
+        }
+        savePosition = !savePosition;
     }
     
     void Move()
@@ -59,6 +73,10 @@ public class BoatDrive2 : MonoBehaviour
             // felicitations
             Debug.Log("Bravoo!");
 
+            // On ajoute les données du niveau dans le fichier
+            savePosition = false;
+            sd.add("finNiveau," + levelManager.GetCurrentLevel().ToString());
+
             // On envoie le message au LevelManager
             levelManager.FinishLevel();
             
@@ -83,6 +101,9 @@ public class BoatDrive2 : MonoBehaviour
     {
         yield return new WaitForSeconds(t);
         rb.isKinematic = false;
+
+        // debut du niveau suivant
+        savePosition = true;
     }
 
 }
