@@ -21,6 +21,10 @@ public class BoatDrive2 : MonoBehaviour
 
     Gyroscope gyro;
 
+    public SaveData sd;
+
+    bool savePosition = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -33,6 +37,21 @@ public class BoatDrive2 : MonoBehaviour
     {
         Move();
         //print(rb.velocity);
+
+        if (savePosition)
+        {
+            string posx = transform.position.x.ToString("0.000");
+            string posy = transform.position.y.ToString("0.000");
+            string posz = transform.position.z.ToString("0.000");
+            sd.add("positionBateau;" + posx + ";" + posy + ";" + posz);
+
+            string acc_x = Input.acceleration.x.ToString("0.000");
+            string acc_y = Input.acceleration.y.ToString("0.000");
+            string acc_z = Input.acceleration.z.ToString("0.000");
+            sd.add(string.Format("accelerometre;{0};{1};{2}", acc_x, acc_y, acc_z));
+
+        }
+        savePosition = !savePosition;
     }
     
     void Move()
@@ -56,13 +75,12 @@ public class BoatDrive2 : MonoBehaviour
         float distance = Vector3.Distance(transform.position, checkpoints[levelManager.GetCurrentLevel()+1].position);
         if (distance <= distanceThreshold)
         {
-
-            // felicitations
-            Debug.Log("Bravoo!");
-
             // On envoie le message au LevelManager
             levelManager.FinishLevel();
-            
+
+            savePosition = false;
+            sd.add("finNiveau;" + levelManager.GetCurrentLevel().ToString());
+
         }
     }
 
@@ -84,6 +102,9 @@ public class BoatDrive2 : MonoBehaviour
     {
         yield return new WaitForSeconds(t);
         rb.isKinematic = false;
+
+        savePosition = true;
+        sd.add("debutNiveau" + levelManager.GetCurrentLevel().ToString());
     }
 
 }

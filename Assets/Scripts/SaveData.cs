@@ -11,8 +11,13 @@ public class SaveData : MonoBehaviour
     public InputField entree;
     private string codeJ;
     public Text showPlayerCode;
+    private string data = "";
+    private StreamWriter file;
+    public string sceneName = "";
 
     string[] types = new string[] { "%DIST%", "%COORD%", "%EVENT%" };
+
+    DateTime startTime;
 
     // Start is called before the first frame update
     void Start()
@@ -20,23 +25,36 @@ public class SaveData : MonoBehaviour
         codeJ = PlayerPrefs.GetString("code");
         PlayerPrefs.SetString("code", codeJ);
         showPlayerCode.text = codeJ;
+
+        startTime = DateTime.Now; 
     }
     public void TaskOnClick()
     {
         codeJ = entree.text;
         PlayerPrefs.SetString("code", codeJ);
         showPlayerCode.text = codeJ;
-
-        StreamWriter file = new(Application.persistentDataPath + "/data-"+codeJ+".txt", append: true);
-        Debug.Log("Fichier créé");
-        file.WriteLineAsync(codeJ);
-        file.Close();
     }
 
-    public void save(string donnee, int type)
+    public void add(string donnee)
     {
-        Debug.Log("Sauvegarde effectuée");
+        TimeSpan deltaTime = (DateTime.Now - startTime);
+        data +=deltaTime.ToString() +";"+ donnee + "\n";
+    }
 
+    void OnDestroy()
+    {
+        if (sceneName != "")
+        {
+            save();
+        }
+    }
+
+    void save()
+    {
+        file = new(Application.persistentDataPath + "/"+codeJ+ "-ACTI"+sceneName+"-"+ DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss") + ".txt", append: true);
+        file.Write(data);
+        file.Close();
+        Debug.Log("Sauvegarde fichier effectuee : "+ Application.persistentDataPath+sceneName);
     }
 
 }
