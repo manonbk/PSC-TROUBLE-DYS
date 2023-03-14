@@ -24,6 +24,7 @@ public class BoatDrive2 : MonoBehaviour
     public SaveData sd;
 
     bool savePosition = true;
+    bool masterSavePosition = true;
 
     void Start()
     {
@@ -38,7 +39,7 @@ public class BoatDrive2 : MonoBehaviour
         Move();
         //print(rb.velocity);
 
-        if (savePosition)
+        if (savePosition && masterSavePosition)
         {
             string posx = transform.position.x.ToString("0.00");
             string posz = transform.position.z.ToString("0.00");
@@ -73,11 +74,12 @@ public class BoatDrive2 : MonoBehaviour
         float distance = Vector3.Distance(transform.position, checkpoints[levelManager.GetCurrentLevel()+1].position);
         if (distance <= distanceThreshold)
         {
+            sd.add("finNiveau;" + levelManager.GetCurrentLevel().ToString());
             // On envoie le message au LevelManager
             levelManager.FinishLevel();
 
-            savePosition = false;
-            sd.add("finNiveau;" + levelManager.GetCurrentLevel().ToString());
+            masterSavePosition = false;
+           
 
         }
     }
@@ -86,6 +88,7 @@ public class BoatDrive2 : MonoBehaviour
     {
         // Freezes for t seconds
         rb.isKinematic = true;
+        savePosition = false;
         StartCoroutine(WaitForSeconds(t));
 
     }
@@ -101,8 +104,8 @@ public class BoatDrive2 : MonoBehaviour
         yield return new WaitForSeconds(t);
         rb.isKinematic = false;
 
-        savePosition = true;
-        sd.add("debutNiveau" + levelManager.GetCurrentLevel().ToString());
+        masterSavePosition = true;
+        sd.add("debutNiveau;" + levelManager.GetCurrentLevel().ToString());
     }
 
     private void OnCollisionEnter(Collision collision)
