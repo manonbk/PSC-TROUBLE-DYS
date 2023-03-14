@@ -40,15 +40,13 @@ public class BoatDrive2 : MonoBehaviour
 
         if (savePosition)
         {
-            string posx = transform.position.x.ToString("0.000");
-            string posy = transform.position.y.ToString("0.000");
-            string posz = transform.position.z.ToString("0.000");
-            sd.add("positionBateau;" + posx + ";" + posy + ";" + posz);
+            string posx = transform.position.x.ToString("0.00");
+            string posz = transform.position.z.ToString("0.00");
 
             string acc_x = Input.acceleration.x.ToString("0.000");
             string acc_y = Input.acceleration.y.ToString("0.000");
             string acc_z = Input.acceleration.z.ToString("0.000");
-            sd.add(string.Format("accelerometre;{0};{1};{2}", acc_x, acc_y, acc_z));
+            sd.add(string.Format("posBateauEtAccel;{0};{1};{2};{3};{4}", posx,posz, acc_x, acc_y, acc_z));
 
         }
         savePosition = !savePosition;
@@ -105,6 +103,14 @@ public class BoatDrive2 : MonoBehaviour
 
         savePosition = true;
         sd.add("debutNiveau" + levelManager.GetCurrentLevel().ToString());
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Terrain"))
+        {
+            sd.add("collision");
+        }
     }
 
 }

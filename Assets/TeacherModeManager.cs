@@ -7,7 +7,7 @@ public class TeacherModeManager : MonoBehaviour
 {
     private int nextIndex = 0;
 
-    private int[] sequence = { 0, 2, 3, 1, 3, 1, 0, 2 };
+    private int[] sequence = { 0, 2, 3, 1};
 
     private float activationTime;
 

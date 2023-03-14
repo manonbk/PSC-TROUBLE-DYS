@@ -57,6 +57,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public Material baseLineMat;
     Image imageComp;
+
     
 
 
@@ -87,6 +88,8 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             ResetTimer();
             isDrawingFinished = false;
             mainButton.text = "J'ai fini !";
+
+            sd.add("nouvelleForme;"+this.shape.name);
 
             
         }
@@ -161,6 +164,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         float ymax = rect.max.y;
 
         scale = Mathf.Min(xmax - xmin, ymax - ymin)/2;
+        sd.add("scale;" + scale.ToString());
 
         EraseDrawnLines();
 
@@ -201,11 +205,13 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
+       
         mouseOver = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        
         mouseOver = false;
         FinishLine();
     }
@@ -228,6 +234,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (drawing != null) StopCoroutine(drawing);
         if (concat_points != null)
         {
+            sd.add("debutLigne");
             timestamps.Add(Time.time - startingTime);
             drawing = StartCoroutine(DrawLine());
             isDrawing = true;
@@ -242,6 +249,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             StopCoroutine(drawing);
             isDrawing = false;
             timestamps.Add(Time.time - startingTime);
+            sd.add("finLigne");
         }
         hand.GetComponent<ParticleSystem>().Stop();
     }
@@ -277,6 +285,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void ConvertToImage()
     {
+        sd.add("finDessin");
         isDrawingFinished = true;
         mainButton.text = "Continuer";
 
@@ -343,6 +352,10 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                     rappr_avgsqrdist = sum / totalBasePoints;
                     SetVisualsFromVariables();
                 }
+
+                Vector3 normalizedPosition = clones[0].GetComponent<LineRenderer>().transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(mousePos))/scale;
+
+                sd.add(string.Format("nouveauPoint;{0};{1};{2};{3}", normalizedPosition.x.ToString("0.000"), normalizedPosition.y.ToString("0.000"), rappr_avgsqrdist.ToString("0.00000"), ecart_avgsqrdist.ToString("0.00000")));
                 
                 lastPos = mousePos;
             }

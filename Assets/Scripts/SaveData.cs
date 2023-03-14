@@ -51,7 +51,7 @@ public class SaveData : MonoBehaviour
 
     void save()
     {
-        file = new(Application.persistentDataPath + "/"+codeJ+ "-ACTI"+sceneName+"-"+ DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss") + ".txt", append: true);
+        file = new(Application.persistentDataPath + "/"+codeJ+ "-V1-ACTI"+sceneName+"-"+ DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss") + ".txt", append: true);
         file.Write(data);
         file.Close();
         Debug.Log("Sauvegarde fichier effectuee : "+ Application.persistentDataPath+sceneName);

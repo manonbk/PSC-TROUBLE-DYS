@@ -17,7 +17,8 @@ public class SmoothMove : MonoBehaviour
 
     public void GoToCheckpoint(int i, float duration)
     {
-        MoveToPosition(checkpoints[i% checkpoints.Length],duration);
+        if (i < checkpoints.Length)
+        MoveToPosition(checkpoints[i],duration);
         lastCheckPoint = i;
     }
 
