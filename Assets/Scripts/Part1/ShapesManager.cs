@@ -60,6 +60,12 @@ public class ShapesManager : MonoBehaviour
         SetShapeIndex(currentShapeIndex+1);
     }
 
+    public void PreviousShape()
+    {
+        if (currentShapeIndex > 0)
+        SetShapeIndex(currentShapeIndex-1);
+    }
+
     public void ResetShapeIndex()
     {
         currentShapeIndex = -1;
