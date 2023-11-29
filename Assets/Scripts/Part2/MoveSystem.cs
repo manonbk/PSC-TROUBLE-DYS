@@ -6,6 +6,7 @@ public class MoveSystem : MonoBehaviour
 //ce script permet de bouger l'objet et de le bloquer sur la bonne forme
 {
     public GameObject correctForm; //cible
+    public float distance;
     private bool moving;
     private bool finish; //est-ce vraiment la bonne forme ?
     private float startPosX;
@@ -17,18 +18,18 @@ public class MoveSystem : MonoBehaviour
     void Start()
     {
         resetPosition = this.transform.localPosition;
-        finish = false;
     }
 
     void Update()
     {
-        if (finish == false) { //on ne peut plus bouger l'objet s'il est sur la bonne forme
+        if (!finish) { //on ne peut plus bouger l'objet s'il est sur la bonne forme
             if (moving) {
                 Vector3 mousePos;
                 mousePos = Input.mousePosition;
                 mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+                mousePos.z = 0;
 
-                transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, transform.localPosition.z);
+                transform.position = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, transform.position.z);
             }
         }
     }
@@ -38,6 +39,7 @@ public class MoveSystem : MonoBehaviour
             Vector3 mousePos;
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            mousePos.z =0;
 
             startPosX = mousePos.x - transform.localPosition.x;
             startPosY = mousePos.y - transform.localPosition.y;
@@ -49,8 +51,9 @@ public class MoveSystem : MonoBehaviour
     private void OnMouseUp() {
         moving = false;
 
-        if (Mathf.Abs(transform.localPosition.x - correctForm.transform.localPosition.x) <= 0.1f &&  //distance 0,5 a redefinir = precision qu'on attend pour lacher
-            Mathf.Abs(transform.localPosition.y - correctForm.transform.localPosition.y) <= 0.1f) {
+
+        if (Mathf.Abs(transform.position.x - correctForm.transform.position.x) <= distance &&  //distance 0,5 a redefinir = precision qu'on attend pour lacher
+            Mathf.Abs(transform.position.y - correctForm.transform.position.y) <= distance) {
                 this.transform.position = new Vector3(correctForm.transform.position.x,correctForm.transform.position.y,correctForm.transform.position.z);
                 finish = true;
             }
