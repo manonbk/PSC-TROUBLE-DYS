@@ -43,3 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Contours
+    uniqueID: 4238975827
+    locked: 0
+  - name: Formes
+    uniqueID: 2436261835
+    locked: 0
