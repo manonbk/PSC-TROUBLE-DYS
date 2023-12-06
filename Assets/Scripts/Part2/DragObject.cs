@@ -23,7 +23,7 @@ public class DragObject : MonoBehaviour
     void OnMouseDrag()
     {
         //On veut changer la position de l'object à la position de la souris, mais il faut prendre en compte le décalage initial
-        transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) + mOffset;
+        transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - mOffset;
 
     }
 
