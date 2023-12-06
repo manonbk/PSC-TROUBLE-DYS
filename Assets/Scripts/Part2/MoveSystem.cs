@@ -6,23 +6,24 @@ public class MoveSystem : MonoBehaviour
 //ce script permet de bouger l'objet et de le bloquer sur la bonne forme
 {
     public GameObject correctForm; //cible
-    public float distance;
+    public float distance; //distance d'erreur autorisee
+    public float taille; //taille d'erreur autorisee
     private bool moving;
     private bool finish; //est-ce vraiment la bonne forme ?
     private float startPosX;
     private float startPosY;
 
-    private Vector3 resetPosition; //position de depart si erreur 
+    //private Vector3 resetPosition; UTILISER SI on veut revenir au point de depart quand on lache
 
 
     void Start()
     {
-        resetPosition = this.transform.localPosition;
+        //resetPosition = this.transform.localPosition; UTILISER SI on veut revenir au point de depart quand on lache
     }
 
     void Update()
     {
-        if (!finish) { //on ne peut plus bouger l'objet s'il est sur la bonne forme
+        if (finish==false) { //on ne peut plus bouger l'objet s'il est sur la bonne forme UTILISER SI on veut revenir au point de depart quand on lache
             if (moving) {
                 Vector3 mousePos;
                 mousePos = Input.mousePosition;
@@ -54,12 +55,13 @@ public class MoveSystem : MonoBehaviour
 
         if (Mathf.Abs(transform.position.x - correctForm.transform.position.x) <= distance &&  //distance 0,5 a redefinir = precision qu'on attend pour lacher
             Mathf.Abs(transform.position.y - correctForm.transform.position.y) <= distance) {
-                this.transform.position = new Vector3(correctForm.transform.position.x,correctForm.transform.position.y,correctForm.transform.position.z);
-                finish = true;
-            }
-        else {
-            this.transform.localPosition = new Vector3(resetPosition.x,resetPosition.y, resetPosition.z);
-        }
+                    if (Mathf.Abs(transform.localScale.magnitude - correctForm.transform.localScale.magnitude) <= taille) {
+                        this.transform.position = new Vector3(correctForm.transform.position.x,correctForm.transform.position.y,correctForm.transform.position.z);
+                        finish = true;
+            }}
+        //else { UTILISER SI on veut revenir au point de depart quand on lache
+            //this.transform.localPosition = new Vector3(resetPosition.x,resetPosition.y, resetPosition.z);
+        //}
     }
 
 }
