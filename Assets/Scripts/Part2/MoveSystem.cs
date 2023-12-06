@@ -8,6 +8,8 @@ public class MoveSystem : MonoBehaviour
     public GameObject correctForm; //cible
     public float distance; //distance d'erreur autorisee
     public float taille; //taille d'erreur autorisee
+    public float rotation; 
+
     private bool moving;
     private bool finish; //est-ce vraiment la bonne forme ?
     private float startPosX;
@@ -53,12 +55,15 @@ public class MoveSystem : MonoBehaviour
         moving = false;
 
 
-        if (Mathf.Abs(transform.position.x - correctForm.transform.position.x) <= distance &&  //distance 0,5 a redefinir = precision qu'on attend pour lacher
+        if (Mathf.Abs(transform.position.x - correctForm.transform.position.x) <= distance &&  //distance a redefinir = precision qu'on attend pour lacher
             Mathf.Abs(transform.position.y - correctForm.transform.position.y) <= distance) {
-                    if (Mathf.Abs(transform.localScale.magnitude - correctForm.transform.localScale.magnitude) <= taille) {
-                        this.transform.position = new Vector3(correctForm.transform.position.x,correctForm.transform.position.y,correctForm.transform.position.z);
-                        finish = true;
-            }}
+                    if (Mathf.Abs(transform.localScale.magnitude - correctForm.transform.localScale.magnitude) <= taille) {  //check de la taille
+                        if(Mathf.Abs(transform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z) <= rotation) {
+                            this.transform.position = new Vector3(correctForm.transform.position.x,correctForm.transform.position.y,correctForm.transform.position.z);
+                            //this.transform.localScale.magnitude = correctForm.transform.localScale.magnitude;
+                            //this.transform.localRotation.eulerAngles.z = correctForm.transform.localRotation.eulerAngles.z;
+                            finish = true;
+            }}}
         //else { UTILISER SI on veut revenir au point de depart quand on lache
             //this.transform.localPosition = new Vector3(resetPosition.x,resetPosition.y, resetPosition.z);
         //}
