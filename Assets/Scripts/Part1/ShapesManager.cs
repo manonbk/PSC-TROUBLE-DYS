@@ -5,9 +5,11 @@ using UnityEngine;
 public class ShapesManager : MonoBehaviour
 {
 
+    // Script qui gère les images : fonctions pour dessiner, 
+
     public string[] shapeNames;
     int currentShapeIndex = -1;
-    public DrawTemplate drawTemplate;
+    public DrawTemplate drawTemplate; // C'est un script
     public Draw draw;
     public GameObject startButton;
     public GameObject endPanel;
@@ -16,12 +18,13 @@ public class ShapesManager : MonoBehaviour
 
     private void Start()
     {
-        Invoke("DelayedStart", .5f);
+        Invoke("DelayedStart", .5f); // Executes the specified delegate on the thread that owns the control's underlying window handle. ?? je sais pas trop
     }
+
     void DelayedStart()
     {
         string shapeName = shapeNames[0];
-        drawTemplate.SetShape(shapeName);
+        drawTemplate.SetShape(shapeName); // appelle la fonction qui dessine la forme demandée (va chercher dans le script drawTemplate la fonction SetShape)
         draw.SetShape(shapeName);
     }
  

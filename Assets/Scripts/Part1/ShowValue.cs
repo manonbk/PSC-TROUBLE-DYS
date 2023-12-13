@@ -7,7 +7,7 @@ public class ShowValue : MonoBehaviour
     public string preText;
     public string postText;
     private string value;
-    private TextMesh TextMesh;
+    private TextMesh TextMesh;  // The Text Mesh component generates 3D geometry that displays text strings.
 
     // Start is called before the first frame update
     void Awake()

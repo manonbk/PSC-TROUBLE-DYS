@@ -24,15 +24,15 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public bool hasStarted = false;
 
     private int totalBasePoints;
-    private Vector3[] concat_points; // Points de la forme (coordonnées WorldGUI relatives à l'élément de GUI) : les différents traits sont ici concaténés
-    private Vector2[] concat_screenpoints; // Idem (coordonnées absolues; Vector2 suffit ici)
+    private Vector3[] concat_points; // Points de la forme (coordonnï¿½es WorldGUI relatives ï¿½ l'ï¿½lï¿½ment de GUI) : les diffï¿½rents traits sont ici concatï¿½nï¿½s
+    private Vector2[] concat_screenpoints; // Idem (coordonnï¿½es absolues; Vector2 suffit ici)
 
     private float scale;
 
     private float distanceDrawn = 0;
     private int pointsDrawn = 0;
 
-    private float[] rappr_minsqrdist; // Distances au carré minimales entre le dessin et le point de la forme
+    private float[] rappr_minsqrdist; // Distances au carrï¿½ minimales entre le dessin et le point de la forme
     private float rappr_avgsqrdist = float.MaxValue; // Moyenne de minsqrdist
 
     private float ecart_sumsqrdist = 0;
@@ -41,12 +41,12 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public bool isDrawingFinished = false;
     public TMPro.TextMeshProUGUI mainButton;
 
-    // Lien avec les donnéezs
+    // Lien avec les donnï¿½ezs
     public Shape shape;
     List<float> timestamps;
     float startingTime;
 
-    private GameObject[] clones;//Necessaires pour créer plusieurs lignes
+    private GameObject[] clones;//Necessaires pour crï¿½er plusieurs lignes
     
     public ShowValue rapprText;
     public ShowValue ecartText;
@@ -72,7 +72,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void SetShape(string shapeName)
     {
         EraseAll();
-        // On récupère les données du fichier JSON correspondant au shapeName
+        // On rï¿½cupï¿½re les donnï¿½es du fichier JSON correspondant au shapeName
         var textFile = Resources.Load<TextAsset>("Shapes/" + shapeName);
         if (textFile != null)
         {
@@ -132,7 +132,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void DrawBaseShape(float[][] shapePointsArrays, bool[] isLoop)
     {
-        // On supprime les clones précédents
+        // On supprime les clones prï¿½cï¿½dents
         foreach (GameObject clone in clones) {
             Object.Destroy(clone);
         }
@@ -143,12 +143,12 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         for (int i = 0; i < shapePointsArrays.Length; i++)
         {
             clones[i] = Instantiate(Resources.Load("baseLine") as GameObject, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-            if (isLoop[i]) // Le path doit être dessiné comme une boucle
+            if (isLoop[i]) // Le path doit ï¿½tre dessinï¿½ comme une boucle
             {
                 clones[i].GetComponent<LineRenderer>().loop = true;
             }
             float[] pathPoints = shapePointsArrays[i];
-            totalBasePoints += pathPoints.Length / 2;// Attention à ne pas compter les deux coordonnées (x et y), d'ou le /2
+            totalBasePoints += pathPoints.Length / 2;// Attention ï¿½ ne pas compter les deux coordonnï¿½es (x et y), d'ou le /2
         }
 
         concat_points = new Vector3[totalBasePoints];
@@ -168,7 +168,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         EraseDrawnLines();
 
-        int nPointsSeen = 0;// Nombre de points déjà ajoutés grâce aux paths précédents
+        int nPointsSeen = 0;// Nombre de points dï¿½jï¿½ ajoutï¿½s grï¿½ce aux paths prï¿½cï¿½dents
 
         for (int ipath = 0; ipath < shapePointsArrays.Length; ipath++)
         {
@@ -183,7 +183,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 rappr_minsqrdist[nPointsSeen + i] = float.MaxValue;
 
                 concat_points[nPointsSeen + i] = points[i];
-                // On doit pourvoir trouver plus simple, mais au moins ça marche (on obtient les points en coordonnées de l'écran en passant par les coordonnées World)
+                // On doit pourvoir trouver plus simple, mais au moins ï¿½a marche (on obtient les points en coordonnï¿½es de l'ï¿½cran en passant par les coordonnï¿½es World)
                 concat_screenpoints[nPointsSeen + i] = Camera.main.WorldToScreenPoint(baseLine.transform.TransformPoint(points[i]));
 
             }
@@ -254,7 +254,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         hand.GetComponent<ParticleSystem>().Stop();
     }
 
-    void SetVisualsFromVariables()
+    void SetVisualsFromVariables() // Calcule le score du dessin et met Ã  jour les textes
     {
 
         // Calcul du score
@@ -272,7 +272,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
         
 
-        // Mise à jour des textes
+        // Mise ï¿½ jour des textes
         if (rapprText != null)
         {
             rapprText.setValue(rappr_avgsqrdist.ToString());
@@ -310,16 +310,16 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         LineRenderer newLine = Instantiate(Resources.Load("Line") as GameObject, new Vector3(0,0,0), Quaternion.identity).GetComponent<LineRenderer>();
         newLine.positionCount = 0;
         Vector2 mousePos;
-        Vector2 lastPos = Vector2.zero;// Si non initialisée, engendre une erreur de compilation (mais cette valeur n'est jamais utilisée)
+        Vector2 lastPos = Vector2.zero;// Si non initialisï¿½e, engendre une erreur de compilation (mais cette valeur n'est jamais utilisï¿½e)
 
         while (true)
         {
             if (mouseOver){
-                mousePos = Input.mousePosition; // En coordonnées de l'écran
-                Vector3 CameraMousePos = Camera.main.ScreenToWorldPoint(mousePos); // En coordonnées World (pour la ligne)
+                mousePos = Input.mousePosition; // En coordonnï¿½es de l'ï¿½cran
+                Vector3 CameraMousePos = Camera.main.ScreenToWorldPoint(mousePos); // En coordonnï¿½es World (pour la ligne)
                 CameraMousePos.z = 0;
 
-                // Ajout d'un nouveau point dessiné
+                // Ajout d'un nouveau point dessinï¿½
                 pointsDrawn++;
                 newLine.positionCount++;
                 newLine.SetPosition(newLine.positionCount - 1, CameraMousePos);
@@ -327,13 +327,13 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 hand.transform.position = CameraMousePos;
                 
                 
-                // Au moins le deuxième point de la ligne dessinée
+                // Au moins le deuxiï¿½me point de la ligne dessinï¿½e
                 if (newLine.positionCount > 1)
                 {
                     float distToPreviousPoint = (mousePos - lastPos).magnitude / scale;
-                    distanceDrawn += distToPreviousPoint;// Distance à l'échelle de la forme
+                    distanceDrawn += distToPreviousPoint;// Distance ï¿½ l'ï¿½chelle de la forme
 
-                    // Mise à jour du calcul du rapprochement et d'écartement (on a une pondération par la distance entre deux points, dont on ne peut pas inclure le premier point)
+                    // Mise ï¿½ jour du calcul du rapprochement et d'ï¿½cartement (on a une pondï¿½ration par la distance entre deux points, dont on ne peut pas inclure le premier point)
                     float ecart_minsqrdist = float.MaxValue;
                     for (int i = 0; i < totalBasePoints; i++)
                     {
