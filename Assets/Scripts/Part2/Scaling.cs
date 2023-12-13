@@ -7,6 +7,7 @@ public class Scaling : MonoBehaviour
 {
     private float initialDistance;
     private float newDistance;
+    public float sensibility;
 
     // Start is called before the first frame update
     void Start()
@@ -17,13 +18,14 @@ public class Scaling : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // si deux touches et une bouge 
         if (Input.touchCount ==2 && (Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(1).phase == TouchPhase.Moved)) {
             Vector2 touch1 = Input.GetTouch(0).position;
             Vector2 touch2 = Input.GetTouch(1).position;
 
             newDistance = (touch1 - touch2).sqrMagnitude;
             float changeInDistance = newDistance - initialDistance;
-            float percentageChange = changeInDistance / initialDistance;
+            float percentageChange = (changeInDistance / initialDistance) * sensibility; //c'est tres sensible
 
             Vector3 newScale = transform.localScale;
             newScale += percentageChange * transform.localScale;
