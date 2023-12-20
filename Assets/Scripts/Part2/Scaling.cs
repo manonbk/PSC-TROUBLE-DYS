@@ -7,6 +7,7 @@ public class Scaling : MonoBehaviour
 {
     private float initialDistance;
     private float newDistance;
+    
     public float sensibility;
 
     // Start is called before the first frame update
