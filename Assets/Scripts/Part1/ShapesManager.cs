@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShapesManager : MonoBehaviour
 {
@@ -54,7 +55,7 @@ public class ShapesManager : MonoBehaviour
     {
         if (currentShapeIndex == shapeNames.Length - 1)
         {
-            endPanel.SetActive(true);
+            SceneManager.LoadScene(0);
         }
         else
         SetShapeIndex(currentShapeIndex+1);
