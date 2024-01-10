@@ -988,12 +988,14 @@ MonoBehaviour:
   - fenetre1
   - fenetre2
   - gouvernail
-  shapeLevel: 
+  shapeLevel: 0100000002000000030000000100000002000000030000000100000002000000
   shapeAchieved: 0000000000000000
   drawTemplate: {fileID: 2010991469}
   draw: {fileID: 2007793525}
   startButton: {fileID: 1799645260}
   endPanel: {fileID: 660549282}
+  seuilMontant: 0.98
+  seuilDescendant: 0.5
 --- !u!4 &530757900
 Transform:
   m_ObjectHideFlags: 0
@@ -7970,6 +7972,7 @@ MonoBehaviour:
   scoreText: {fileID: 1402329444}
   transparencyMode: 1
   baseLineMat: {fileID: 2100000, guid: 301cf839017ceb0458a33b9ecdf3dce2, type: 2}
+  scoreFormeEnCours: 0
 --- !u!120 &2007793526
 LineRenderer:
   m_ObjectHideFlags: 0

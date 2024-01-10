@@ -17,6 +17,11 @@ public class ShapesManager : MonoBehaviour
     public GameObject startButton;
     public GameObject endPanel;
 
+    public double seuilMontant;
+    public double seuilDescendant;
+    private int niveau = 1;
+
+
     // Start is called before the first frame update
 
     private void Start()
@@ -59,7 +64,7 @@ public class ShapesManager : MonoBehaviour
         {
             potentialIndex= ((potentialIndex+1) % shapeNames.Length);
             if (potentialIndex==currentShapeIndex) {fini=true;} // on a fait le tour
-            if (!shapeAchieved[potentialIndex]) {found=true;}
+            if (!shapeAchieved[potentialIndex] && shapeLevel[potentialIndex]==niveau) {found=true;}
 
         }
         if (fini) {SceneManager.LoadScene(0);} else {SetShapeIndex(potentialIndex);}
@@ -89,6 +94,9 @@ public class ShapesManager : MonoBehaviour
         {
             double score = draw.CalculeScore();
             Debug.Log(score.ToString());
+            if (score > seuilMontant && niveau!=3) {niveau++;}
+            if (score < seuilDescendant && niveau!=1) {niveau--;}
+            Debug.Log(niveau.ToString());
             draw.ConvertToImage();
         }
     }
