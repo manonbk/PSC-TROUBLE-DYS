@@ -87,6 +87,8 @@ public class ShapesManager : MonoBehaviour
         }
         else
         {
+            double score = draw.CalculeScore();
+            Debug.Log(score.ToString());
             draw.ConvertToImage();
         }
     }

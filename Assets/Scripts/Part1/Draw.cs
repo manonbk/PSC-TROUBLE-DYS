@@ -58,6 +58,8 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Material baseLineMat;
     Image imageComp;
 
+    public double scoreFormeEnCours;
+
     
 
 
@@ -127,7 +129,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         ecart_sumsqrdist = 0;
         ecart_avgsqrdist = float.MaxValue;
         ResetTimer();
-        SetVisualsFromVariables();
+        DessineScore();
     }
 
     public void DrawBaseShape(float[][] shapePointsArrays, bool[] isLoop)
@@ -192,7 +194,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             nPointsSeen += nPoints;
         }
         
-        SetVisualsFromVariables();
+        DessineScore();
     }
 
     public void EraseAll()
@@ -254,7 +256,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         hand.GetComponent<ParticleSystem>().Stop();
     }
 
-    void SetVisualsFromVariables() // Calcule le score du dessin et met à jour les textes
+    public double CalculeScore() // Calcule le score du dessin et met à jour les textes
     {
 
         // Calcul du score
@@ -262,8 +264,14 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         double exigence = 50;
         float alpha = 0.3F;
         double score = System.Math.Pow(1-System.Math.Tanh(exigence*sum),alpha);
+        scoreFormeEnCours=score;
+        return score;
+    
+    }
         
-        scoreText.setValue(score.ToString("P"));
+    void DessineScore()
+    {
+        scoreText.setValue(CalculeScore().ToString("P"));
         if (shape != null && transparencyMode)
         {
             Color linecol = baseLineMat.color;
@@ -350,7 +358,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                         sum += rappr_minsqrdist[i];
                     }
                     rappr_avgsqrdist = sum / totalBasePoints;
-                    SetVisualsFromVariables();
+                    DessineScore();
                 }
 
                 Vector3 normalizedPosition = clones[0].GetComponent<LineRenderer>().transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(mousePos))/scale;
