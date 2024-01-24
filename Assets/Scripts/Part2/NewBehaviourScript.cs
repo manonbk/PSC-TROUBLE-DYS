@@ -32,9 +32,20 @@ public class NewBehaviourScript : MonoBehaviour
  
     private Vector3 lastDirection;
     private Vector3 currentDirection;
+
+    //MESURES
+    private int nbLeverDoigt; //compte le nombre de lever de doigt dans un niveau
+    private int nbLeverDeuxiemeDoigt; //compte le nombre de fois ou on passe de 2 a 1 doigt
+    private float distanceCible;
+    private float rotationCible;
+    private float tailleCible;
+    private float timeGeneral;
+    private float timeForme;
  
     private void Update() {
         HandleTouches();
+        timeGeneral += Time.deltaTime;
+        timeForme +=Time.deltaTime;
     }
  
     private void HandleTouches() {
@@ -62,6 +73,8 @@ public class NewBehaviourScript : MonoBehaviour
                     selectedObject = hitCollider.gameObject;
                     selectedTransform = hitCollider.transform;
                     firstTouchOffset = selectedTransform.position - firstTouchPosition;
+                    timeForme = 0;
+
                 }
             }
         } else {
@@ -75,7 +88,23 @@ public class NewBehaviourScript : MonoBehaviour
                     break;
                 case TouchPhase.Canceled:
                 case TouchPhase.Ended:
+                    nbLeverDoigt +=1;
                     if (correctPosition && correctRotation && correctScale){
+                        //Enregistrement des mesures pour les formes qui s'aimantent
+                        distanceCible = Mathf.Abs(selectedTransform.position.magnitude-correctForm.transform.position.magnitude);
+                        rotationCible = Mathf.Abs(Mathf.Abs(selectedTransform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z));
+                        tailleCible = Mathf.Abs(selectedTransform.localScale.magnitude - correctForm.transform.localScale.magnitude);
+                        Debug.Log(nbLeverDoigt);
+                        Debug.Log(nbLeverDeuxiemeDoigt);
+                        nbLeverDoigt=0;
+                        nbLeverDeuxiemeDoigt=0;
+                        Debug.Log(distanceCible);
+                        Debug.Log(rotationCible);
+                        Debug.Log(tailleCible);
+                        Debug.Log(timeForme);
+                        Debug.Log(timeGeneral);
+
+                        //Aimantation
                         selectedTransform.position=correctForm.transform.position;
                         Quaternion correctFormRotation = correctForm.transform.rotation;
                         selectedTransform.rotation = correctFormRotation;
@@ -146,6 +175,7 @@ public class NewBehaviourScript : MonoBehaviour
             if(secondTouch.phase == TouchPhase.Ended || secondTouch.phase == TouchPhase.Canceled) {
                 // update the first touch offset so dragging will start again from wherever the first touch is now
                 firstTouchOffset = selectedTransform.position - firstTouchPosition;
+                nbLeverDeuxiemeDoigt +=1;
             }
         }
     }
