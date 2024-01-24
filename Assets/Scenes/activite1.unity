@@ -670,7 +670,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
+  m_fontSize: 42.75
   m_fontSizeBase: 75.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -988,10 +988,14 @@ MonoBehaviour:
   - fenetre1
   - fenetre2
   - gouvernail
+  shapeLevel: 0100000002000000030000000100000002000000030000000100000002000000
+  shapeAchieved: 0000000000000000
   drawTemplate: {fileID: 2010991469}
   draw: {fileID: 2007793525}
   startButton: {fileID: 1799645260}
   endPanel: {fileID: 660549282}
+  seuilMontant: 0.98
+  seuilDescendant: 0.5
 --- !u!4 &530757900
 Transform:
   m_ObjectHideFlags: 0
@@ -1333,7 +1337,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.8
+  m_fontSize: 23.4
   m_fontSizeBase: 75.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7359,7 +7363,7 @@ RectTransform:
   m_GameObject: {fileID: 1872169791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.85858, y: 0.85858, z: 0.85858}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 660549283}
@@ -7367,7 +7371,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 478.99, y: 0}
+  m_AnchoredPosition: {x: 479, y: -15}
   m_SizeDelta: {x: -957.99, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1872169793
@@ -7968,6 +7972,7 @@ MonoBehaviour:
   scoreText: {fileID: 1402329444}
   transparencyMode: 1
   baseLineMat: {fileID: 2100000, guid: 301cf839017ceb0458a33b9ecdf3dce2, type: 2}
+  scoreFormeEnCours: 0
 --- !u!120 &2007793526
 LineRenderer:
   m_ObjectHideFlags: 0
