@@ -14,8 +14,8 @@ TagManager:
   - Water
   - UI
   - TransparentUI
-  - 
-  - 
+  - Formes
+  - Contour
   - 
   - 
   - 
@@ -42,6 +42,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Canvas
+    uniqueID: 3477393305
     locked: 0
   - name: Contours
     uniqueID: 4238975827
