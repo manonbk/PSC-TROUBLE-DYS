@@ -41,6 +41,8 @@ public class NewBehaviourScript : MonoBehaviour
     private float tailleCible;
     private float timeGeneral;
     private float timeForme;
+
+    public float cteangle;
  
     private void Update() {
         HandleTouches();
@@ -199,7 +201,7 @@ public class NewBehaviourScript : MonoBehaviour
     private void SetRotation(float angle) {
         if(selectedTransform != null) {
             correctRotation=false;
-            selectedTransform.Rotate(Vector3.forward, angle);
+            selectedTransform.Rotate(Vector3.forward, angle*cteangle);
             if(Mathf.Abs(selectedTransform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z) <= rotation){
                 correctRotation=true;
             }
