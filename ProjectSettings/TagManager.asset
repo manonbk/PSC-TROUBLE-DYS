@@ -6,6 +6,9 @@ TagManager:
   tags:
   - DrawnLine
   - Terrain
+  - Avant cible
+  - Voile cible
+  - "Arri\xE8recible"
   layers:
   - Default
   - TransparentFX

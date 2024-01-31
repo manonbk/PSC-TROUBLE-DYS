@@ -8,7 +8,7 @@ public class NewBehaviourScript : MonoBehaviour
     public float minScale = .3f; // limites pour le scaling
     public float maxScale = 3f;
 
-    public GameObject correctForm; //cible
+    private GameObject correctForm; //cible
     public float distance; //distance d'erreur autorisee
     public float taille; //taille d'erreur autorisee
     public float rotation; //rotation d'erreur autorisee
@@ -76,7 +76,7 @@ public class NewBehaviourScript : MonoBehaviour
                     selectedTransform = hitCollider.transform;
                     firstTouchOffset = selectedTransform.position - firstTouchPosition;
                     timeForme = 0;
-
+                    correctForm = GameObject.FindWithTag(selectedTransform.name+"cible");
                 }
             }
         } else {
@@ -107,6 +107,7 @@ public class NewBehaviourScript : MonoBehaviour
                         Debug.Log(timeGeneral);
 
                         //Aimantation
+                        Debug.Log(selectedObject.name);
                         selectedTransform.position=correctForm.transform.position;
                         Quaternion correctFormRotation = correctForm.transform.rotation;
                         selectedTransform.rotation = correctFormRotation;
@@ -189,6 +190,7 @@ public class NewBehaviourScript : MonoBehaviour
             Vector3 newPosition = position + firstTouchOffset;
             newPosition.z = selectedTransform.position.z;
             selectedTransform.position = newPosition;
+            Debug.Log(correctForm.name);
             if (Mathf.Abs(selectedTransform.position.x - correctForm.transform.position.x) <= distance &&  //distance a redefinir = precision qu'on attend pour lacher
             Mathf.Abs(selectedTransform.position.y - correctForm.transform.position.y) <= distance) {
                 correctPosition=true;
