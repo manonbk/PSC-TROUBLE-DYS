@@ -670,7 +670,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.75
+  m_fontSize: 47.65
   m_fontSizeBase: 75.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -980,16 +980,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shapeNames:
-  - hublot
-  - voile1
-  - voile2
-  - mat1
-  - coque
-  - fenetre1
-  - fenetre2
-  - gouvernail
-  shapeLevel: 0100000002000000030000000100000002000000030000000100000002000000
-  shapeAchieved: 0000000000000000
+  - Cabine 1
+  - "Chemin\xE9e 1"
+  - Coque 1
+  - "D\xE9rive 1"
+  - Gouvernail 1
+  - Hublot 1
+  - Turbine 1
+  - Voile 1
+  - Cabine 2
+  - "Chemin\xE9e 2"
+  - Coque 2
+  - "D\xE9rive 2"
+  - Gouvernail 2
+  - Hublot 2
+  - Turbine 2
+  - Voile 2
+  shapeLevel: 01000000010000000100000001000000010000000100000001000000010000000200000002000000020000000200000002000000020000000200000002000000
+  shapeAchieved: 00000000000000000000000000000000
   drawTemplate: {fileID: 2010991469}
   draw: {fileID: 2007793525}
   startButton: {fileID: 1799645260}

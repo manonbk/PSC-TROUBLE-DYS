@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="2048"
+   height="2048"
+   viewBox="0 0 541.86665 541.86666"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   sodipodi:docname="Truc en bas Niveau 1.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.16268622"
+     inkscape:cx="1054.1765"
+     inkscape:cy="977.34151"
+     inkscape:window-width="864"
+     inkscape:window-height="709"
+     inkscape:window-x="576"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer3" /><defs
+     id="defs1" /><g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Layer 2"
+     transform="translate(-35.563148,22.460936)"><path
+       style="fill:none;stroke:#000000;stroke-width:6.39213;stroke-dasharray:none;stroke-opacity:1"
+       id="path3"
+       sodipodi:type="arc"
+       sodipodi:cx="-257.4328"
+       sodipodi:cy="250.78069"
+       sodipodi:rx="93.667686"
+       sodipodi:ry="98.665863"
+       sodipodi:start="0"
+       sodipodi:end="3.1444228"
+       sodipodi:arc-type="slice"
+       d="m -163.76511,250.78069 a 93.667686,98.665863 0 0 1 -46.91039,85.49364 93.667686,98.665863 0 0 1 -93.74411,-0.13973 93.667686,98.665863 0 0 1 -46.6805,-85.63315 l 93.66731,0.27924 z"
+       transform="rotate(-90)" /></g></svg>
