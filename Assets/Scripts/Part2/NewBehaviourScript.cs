@@ -35,7 +35,7 @@ public class NewBehaviourScript : MonoBehaviour
     private Vector3 currentDirection;
 
     //MESURES
-    public int nbFormes;
+    
     private int nbLeverDoigt; //compte le nombre de lever de doigt dans un niveau
     List<int> LeverDoigt = new List<int>();
     List<float> distanceCible = new List<float>();
@@ -45,6 +45,7 @@ public class NewBehaviourScript : MonoBehaviour
     private float timeGeneral;
     private float timeForme;
 
+    public float cteangle;
     //Calcul du score
     public float normDistance;
     public float normRotation;
@@ -229,7 +230,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
-    private void switchScene(){
+    public void switchScene(){
         float time = timeGeneral;
         //Enregistrement des mesures pour les objets restants
         GameObject[] list;
@@ -246,6 +247,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         //Calcul du score
         double Score = getScore(formesManquantes, time);
+        Debug.Log(Score);
         
         //Changement de scene
     

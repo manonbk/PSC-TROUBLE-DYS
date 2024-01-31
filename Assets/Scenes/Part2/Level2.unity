@@ -161,6 +161,11 @@ MonoBehaviour:
   taille: 1
   rotation: 45
   cteangle: 0.8
+  normDistance: 1
+  normRotation: 1
+  normTaille: 1
+  normLeverDoigt: 1
+  normTime: 1
 --- !u!4 &31591276
 Transform:
   m_ObjectHideFlags: 0
