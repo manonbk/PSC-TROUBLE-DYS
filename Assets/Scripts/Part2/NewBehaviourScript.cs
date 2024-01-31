@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Mathematics;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -34,20 +35,26 @@ public class NewBehaviourScript : MonoBehaviour
     private Vector3 currentDirection;
 
     //MESURES
+    public int nbFormes;
     private int nbLeverDoigt; //compte le nombre de lever de doigt dans un niveau
-    private int nbLeverDeuxiemeDoigt; //compte le nombre de fois ou on passe de 2 a 1 doigt
-    private float distanceCible;
-    private float rotationCible;
-    private float tailleCible;
+    List<int> LeverDoigt = new List<int>();
+    List<float> distanceCible = new List<float>();
+    List<float> rotationCible = new List<float>();
+    List<float> tailleCible = new List<float>();
+    
     private float timeGeneral;
     private float timeForme;
 
-    public float cteangle;
+    //Calcul du score
+    public float normDistance;
+    public float normRotation;
+    public float normTaille;
+    public float normLeverDoigt;
+    public float normTime;
  
     private void Update() {
         HandleTouches();
         timeGeneral += Time.deltaTime;
-        timeForme +=Time.deltaTime;
     }
  
     private void HandleTouches() {
@@ -93,18 +100,12 @@ public class NewBehaviourScript : MonoBehaviour
                     nbLeverDoigt +=1;
                     if (correctPosition && correctRotation && correctScale){
                         //Enregistrement des mesures pour les formes qui s'aimantent
-                        distanceCible = Mathf.Abs(selectedTransform.position.magnitude-correctForm.transform.position.magnitude);
-                        rotationCible = Mathf.Abs(Mathf.Abs(selectedTransform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z));
-                        tailleCible = Mathf.Abs(selectedTransform.localScale.magnitude - correctForm.transform.localScale.magnitude);
-                        Debug.Log(nbLeverDoigt);
-                        Debug.Log(nbLeverDeuxiemeDoigt);
+                        distanceCible.Add(Mathf.Abs(selectedTransform.position.magnitude-correctForm.transform.position.magnitude));
+                        rotationCible.Add(Mathf.Abs(Mathf.Abs(selectedTransform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z)));
+                        tailleCible.Add(Mathf.Abs(selectedTransform.localScale.magnitude - correctForm.transform.localScale.magnitude));
+                        LeverDoigt.Add(nbLeverDoigt);
                         nbLeverDoigt=0;
-                        nbLeverDeuxiemeDoigt=0;
-                        Debug.Log(distanceCible);
-                        Debug.Log(rotationCible);
-                        Debug.Log(tailleCible);
-                        Debug.Log(timeForme);
-                        Debug.Log(timeGeneral);
+                        
 
                         //Aimantation
                         Debug.Log(selectedObject.name);
@@ -115,6 +116,8 @@ public class NewBehaviourScript : MonoBehaviour
                         //remove object from Layer interactableObjects
                         int layerContour = LayerMask.NameToLayer("Contour");
                         selectedObject.layer = layerContour;
+                        //change Tag
+                        selectedObject.tag = "Completed";
                     }
                     
                     // deselect the object if the touch is lifted
@@ -178,7 +181,6 @@ public class NewBehaviourScript : MonoBehaviour
             if(secondTouch.phase == TouchPhase.Ended || secondTouch.phase == TouchPhase.Canceled) {
                 // update the first touch offset so dragging will start again from wherever the first touch is now
                 firstTouchOffset = selectedTransform.position - firstTouchPosition;
-                nbLeverDeuxiemeDoigt +=1;
             }
         }
     }
@@ -225,5 +227,52 @@ public class NewBehaviourScript : MonoBehaviour
             }  //check de la taille
 
         }
+    }
+
+    private void switchScene(){
+        float time = timeGeneral;
+        //Enregistrement des mesures pour les objets restants
+        GameObject[] list;
+        bool formesManquantes = false;
+        list = GameObject.FindGameObjectsWithTag("Remaining");
+        if (list!=null){
+            formesManquantes=true;
+            foreach (GameObject go in list){
+                distanceCible.Add(Mathf.Abs(selectedTransform.position.magnitude-correctForm.transform.position.magnitude));
+                rotationCible.Add(Mathf.Abs(Mathf.Abs(selectedTransform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z)));
+                tailleCible.Add(Mathf.Abs(selectedTransform.localScale.magnitude - correctForm.transform.localScale.magnitude));          
+            }
+        }
+
+        //Calcul du score
+        double Score = getScore(formesManquantes, time);
+        
+        //Changement de scene
+    
+    }
+
+    private double getScore(bool formesManquantes, float time){
+        double score;
+        if (formesManquantes){
+            score = 0;
+        }
+
+        //chercher les trucs dans les tableaux et ecrire la formule
+        //stopper le temps et le noter
+        int length = distanceCible.Count;
+        double sommeMesure = 0;
+        double sommeFormes = 0;
+        for (int i =0; i<length; i++){
+            double distanceT = System.Math.Tanh(distanceCible[i]/normDistance);
+            double tailleT = System.Math.Tanh(tailleCible[i]/normTaille);
+            double rotationT = System.Math.Tanh(rotationCible[i]/normTaille);
+            double leverDoigtT = System.Math.Tanh(LeverDoigt[i]/normLeverDoigt);
+            sommeMesure += distanceT + tailleT + rotationT + leverDoigtT;
+        }
+        sommeFormes = sommeMesure/(length+1); //sommeMesure/nbFormes
+        sommeFormes += System.Math.Tanh(time/normTime);
+        
+        score = (5 - sommeFormes)/5;
+        return score;
     }
 }

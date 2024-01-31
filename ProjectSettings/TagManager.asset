@@ -9,6 +9,8 @@ TagManager:
   - Avant cible
   - Voile cible
   - "Arri\xE8recible"
+  - Remaining
+  - Completed
   layers:
   - Default
   - TransparentFX
