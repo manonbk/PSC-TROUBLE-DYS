@@ -11,6 +11,7 @@ public class ShapesManager : MonoBehaviour
     public string[] shapeNames;
     public int[] shapeLevel;
     public bool [] shapeAchieved;
+    public float[] shapeSizings;
     int currentShapeIndex = 0;
     public DrawTemplate drawTemplate; // C'est un script
     public Draw draw; // script aussi. Différence avec draw?
@@ -32,8 +33,9 @@ public class ShapesManager : MonoBehaviour
     void DelayedStart()
     {
         string shapeName = shapeNames[0];
+        float shapeSizing = shapeSizings[0];
         drawTemplate.SetShape(shapeName); // appelle la fonction qui dessine la forme demandée (va chercher dans le script drawTemplate la fonction SetShape)
-        draw.SetShape(shapeName);
+        draw.SetShape(shapeName, shapeSizing);
     }
  
 
@@ -51,8 +53,9 @@ public class ShapesManager : MonoBehaviour
     {
         currentShapeIndex = i;
         string shapeName = shapeNames[currentShapeIndex];
+        float shapeSizing = shapeSizings[currentShapeIndex];
         drawTemplate.SetShape(shapeName);
-        draw.SetShape(shapeName);
+        draw.SetShape(shapeName, shapeSizing);
     }
 
     public void NextShape() // on cherche la prochaine forme du niveau requis non déja faite
