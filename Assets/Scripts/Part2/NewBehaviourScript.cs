@@ -44,7 +44,6 @@ public class NewBehaviourScript : MonoBehaviour
     List<float> tailleCible = new List<float>();
     
     private float timeGeneral;
-    private float timeForme;
 
     public float cteangle;
     //Calcul du score
