@@ -71,7 +71,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         imageComp = gameObject.GetComponent<Image>();
     }
 
-    public void SetShape(string shapeName)
+    public void SetShape(string shapeName, float shapeSizing)
     {
         EraseAll();
         // On r�cup�re les donn�es du fichier JSON correspondant au shapeName
@@ -85,7 +85,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             color.a = 1;
             baseLineMat.color = color;
 
-            DrawBaseShape(this.shape.points,this.shape.isLoop);
+            DrawBaseShape(this.shape.points,this.shape.isLoop, shapeSizing);
             imageComp.color = new Color(0, 0, 0, 0);
             ResetTimer();
             isDrawingFinished = false;
@@ -132,7 +132,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         DessineScore();
     }
 
-    public void DrawBaseShape(float[][] shapePointsArrays, bool[] isLoop)
+    public void DrawBaseShape(float[][] shapePointsArrays, bool[] isLoop, float shapeSizing)
     {
         // On supprime les clones pr�c�dents
         foreach (GameObject clone in clones) {
@@ -180,8 +180,8 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             Vector3[] points = new Vector3[nPoints];
             for (int i = 0; i < nPoints; i++)
             {
-                points[i].x = scale * shapePointsArrays[ipath][2 * i]; // On passe de coord Shape en WorldGUI (relatif)
-                points[i].y = scale * shapePointsArrays[ipath][2 * i + 1];
+                points[i].x = shapeSizing * scale * shapePointsArrays[ipath][2 * i]; // On passe de coord Shape en WorldGUI (relatif)
+                points[i].y = shapeSizing * scale * shapePointsArrays[ipath][2 * i + 1];
                 rappr_minsqrdist[nPointsSeen + i] = float.MaxValue;
 
                 concat_points[nPointsSeen + i] = points[i];

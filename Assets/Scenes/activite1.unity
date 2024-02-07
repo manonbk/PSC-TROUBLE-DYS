@@ -670,7 +670,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.75
+  m_fontSize: 47.65
   m_fontSizeBase: 75.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -980,16 +980,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shapeNames:
-  - hublot
-  - voile1
-  - voile2
-  - mat1
-  - coque
-  - fenetre1
-  - fenetre2
-  - gouvernail
-  shapeLevel: 0100000002000000030000000100000002000000030000000100000002000000
-  shapeAchieved: 0000000000000000
+  - Cabine 1
+  - "Chemin\xE9e 1"
+  - Coque 1
+  - "D\xE9rive 1"
+  - Gouvernail 1
+  - Hublot 1
+  - Turbine 1
+  - Voile 1
+  - Cabine 2
+  - "Chemin\xE9e 2"
+  - Coque 2
+  - "D\xE9rive 2"
+  - Gouvernail 2
+  - Hublot 2
+  - Turbine 2
+  - Voile 2
+  - Cabine 3
+  - "Chemin\xE9e 3"
+  - Coque 3
+  - "D\xE9rive 3"
+  - Gouvernail 3
+  - Hublot 3
+  - Turbine 3
+  - Voile 3
+  shapeLevel: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  shapeAchieved: 000000000000000000000000000000000000000000000000
+  shapeSizings:
+  - 1
+  - 1
+  - 1
+  - 2
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1.5
+  - 1.3
+  - 1
+  - 2
+  - 1
+  - 1.7
+  - 1.7
+  - 1
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1.5
+  - 1
+  - 2
+  - 1.5
+  - 1
   drawTemplate: {fileID: 2010991469}
   draw: {fileID: 2007793525}
   startButton: {fileID: 1799645260}
@@ -1007,7 +1048,8 @@ Transform:
   m_LocalPosition: {x: -1.5488473, y: -6.0571127, z: -305.81317}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1637888756}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6843,23 +6885,23 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 530757900}
     m_Modifications:
     - target: {fileID: 2738221845676831281, guid: dd2d786427945ea46bb6789f93cb854c, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2738221845676831281, guid: dd2d786427945ea46bb6789f93cb854c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.8555
+      value: -20.306652
       objectReference: {fileID: 0}
     - target: {fileID: 2738221845676831281, guid: dd2d786427945ea46bb6789f93cb854c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -562.5508
+      value: -556.49365
       objectReference: {fileID: 0}
     - target: {fileID: 2738221845676831281, guid: dd2d786427945ea46bb6789f93cb854c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -171.81055
+      value: 134.00262
       objectReference: {fileID: 0}
     - target: {fileID: 2738221845676831281, guid: dd2d786427945ea46bb6789f93cb854c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6867,15 +6909,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2738221845676831281, guid: dd2d786427945ea46bb6789f93cb854c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2738221845676831281, guid: dd2d786427945ea46bb6789f93cb854c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2738221845676831281, guid: dd2d786427945ea46bb6789f93cb854c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2738221845676831281, guid: dd2d786427945ea46bb6789f93cb854c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6931,6 +6973,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd2d786427945ea46bb6789f93cb854c, type: 3}
+--- !u!4 &1637888756 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2738221845676831281, guid: dd2d786427945ea46bb6789f93cb854c, type: 3}
+  m_PrefabInstance: {fileID: 1637888755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1652246563
 GameObject:
   m_ObjectHideFlags: 0
