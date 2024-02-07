@@ -83,7 +83,6 @@ public class NewBehaviourScript : MonoBehaviour
                     selectedObject = hitCollider.gameObject;
                     selectedTransform = hitCollider.transform;
                     firstTouchOffset = selectedTransform.position - firstTouchPosition;
-                    timeForme = 0;
                     correctForm = GameObject.FindWithTag(selectedTransform.name+"cible");
                 }
             }
