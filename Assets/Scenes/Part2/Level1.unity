@@ -218,7 +218,6 @@ GameObject:
   - component: {fileID: 444426584}
   - component: {fileID: 444426583}
   - component: {fileID: 444426582}
-  - component: {fileID: 444426581}
   m_Layer: 7
   m_Name: Bateau
   m_TagString: Remaining
@@ -226,32 +225,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &444426581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444426580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 125af406bc5c045ebb7f03d1a3b801ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactableObjects:
-    serializedVersion: 2
-    m_Bits: 128
-  minScale: 0.3
-  maxScale: 3
-  distance: 0.7
-  taille: 1
-  rotation: 45
-  cteangle: 0.7
-  normDistance: 1
-  normRotation: 1
-  normTaille: 1
-  normLeverDoigt: 1
-  normTime: 1
 --- !u!61 &444426582
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -461,18 +434,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableObjects:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   minScale: 0.3
   maxScale: 3
-  distance: 0
-  taille: 0
-  rotation: 0
-  cteangle: 0
+  distance: 1
+  taille: 1.2
+  rotation: 45
+  cteangle: 0.8
   normDistance: 1
-  normRotation: 1
-  normTaille: 0
-  normLeverDoigt: 0
-  normTime: 0
+  normRotation: 2
+  normTaille: 1
+  normLeverDoigt: 15
+  normTime: 40
 --- !u!1 &468737895
 GameObject:
   m_ObjectHideFlags: 0

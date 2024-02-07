@@ -240,9 +240,10 @@ public class NewBehaviourScript : MonoBehaviour
         if (list!=null){
             formesManquantes=true;
             foreach (GameObject go in list){
-                distanceCible.Add(Mathf.Abs(selectedTransform.position.magnitude-correctForm.transform.position.magnitude));
-                rotationCible.Add(Mathf.Abs(Mathf.Abs(selectedTransform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z)));
-                tailleCible.Add(Mathf.Abs(selectedTransform.localScale.magnitude - correctForm.transform.localScale.magnitude));          
+                correctForm = GameObject.FindWithTag(go.transform.name+"cible");
+                distanceCible.Add(Mathf.Abs(go.transform.position.magnitude-correctForm.transform.position.magnitude));
+                rotationCible.Add(Mathf.Abs(Mathf.Abs(go.transform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z)));
+                tailleCible.Add(Mathf.Abs(go.transform.localScale.magnitude - correctForm.transform.localScale.magnitude));          
             }
         }
 
@@ -251,17 +252,43 @@ public class NewBehaviourScript : MonoBehaviour
         Debug.Log(Score);
         
         //Changement de scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        if (Score<0.7) {
+            //si deux niveaux un
+            if (SceneManager.GetActiveScene().buildIndex == 3) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+            }
+            if (SceneManager.GetActiveScene().buildIndex == 4 ||SceneManager.GetActiveScene().buildIndex == 5 ) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
+            }
+            if (SceneManager.GetActiveScene().buildIndex == 6) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -2);
+            }
+        }
+        else {
+            //si deux niveaux deux
+            if (SceneManager.GetActiveScene().buildIndex == 3) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +2);
+            }
+            if (SceneManager.GetActiveScene().buildIndex == 4) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+            }
+            if (SceneManager.GetActiveScene().buildIndex == 5) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+            }
+            if (SceneManager.GetActiveScene().buildIndex == 6) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
+            }
+        }
     }
 
     private double getScore(bool formesManquantes, float time){
         double score;
         if (formesManquantes){
             score = 0;
+            return score;
         }
 
         //chercher les trucs dans les tableaux et ecrire la formule
-        //stopper le temps et le noter
         int length = distanceCible.Count;
         double sommeMesure = 0;
         double sommeFormes = 0;
