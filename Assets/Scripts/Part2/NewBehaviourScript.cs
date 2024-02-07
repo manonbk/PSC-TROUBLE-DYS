@@ -225,7 +225,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
-    private void switchScene(){
+    public void switchScene(){
         float time = timeGeneral;
         //Enregistrement des mesures pour les objets restants
         GameObject[] list;
