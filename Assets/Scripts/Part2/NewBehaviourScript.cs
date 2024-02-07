@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -250,7 +251,7 @@ public class NewBehaviourScript : MonoBehaviour
         Debug.Log(Score);
         
         //Changement de scene
-    
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 
     private double getScore(bool formesManquantes, float time){

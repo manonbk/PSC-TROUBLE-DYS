@@ -456,10 +456,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 452424329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10a633be693ef4b9eb914dcd6af3f07f, type: 3}
+  m_Script: {fileID: 11500000, guid: 125af406bc5c045ebb7f03d1a3b801ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nbs: {fileID: 0}
+  interactableObjects:
+    serializedVersion: 2
+    m_Bits: 0
+  minScale: 0.3
+  maxScale: 3
+  distance: 0
+  taille: 0
+  rotation: 0
+  cteangle: 0
+  normDistance: 1
+  normRotation: 1
+  normTaille: 0
+  normLeverDoigt: 0
+  normTime: 0
 --- !u!1 &468737895
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,8 +956,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 452424334}
-        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
-        m_MethodName: nextScene
+        m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
+        m_MethodName: switchScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
