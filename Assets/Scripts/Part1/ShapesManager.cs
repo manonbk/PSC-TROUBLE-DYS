@@ -10,7 +10,7 @@ public class ShapesManager : MonoBehaviour
 
     public string[] shapeNames;
     public int[] shapeLevel;
-    public bool [] shapeAchieved;
+    public bool[] shapeAchieved;
     public float[] shapeSizings;
     int currentShapeIndex = 0;
     public DrawTemplate drawTemplate; // C'est un script
@@ -21,6 +21,7 @@ public class ShapesManager : MonoBehaviour
     public double seuilMontant;
     public double seuilDescendant;
     private int niveau = 1;
+
 
 
     // Start is called before the first frame update
@@ -52,6 +53,7 @@ public class ShapesManager : MonoBehaviour
     void SetShapeIndex(int i) // permet d'aller une forme à lautre
     {
         currentShapeIndex = i;
+        Debug.Log(currentShapeIndex);
         string shapeName = shapeNames[currentShapeIndex];
         float shapeSizing = shapeSizings[currentShapeIndex];
         drawTemplate.SetShape(shapeName);
@@ -62,15 +64,20 @@ public class ShapesManager : MonoBehaviour
     {
         int potentialIndex = currentShapeIndex;
         bool found = false ; // si on a trouvé un bon indice
-        bool fini = false; //si on a tout testé on retourne au menu
+        bool fini = true; //si on a tout testé on retourne au menu
+        for (int i = 0; i < shapeNames.Length;i++)
+        {
+            fini = fini && shapeAchieved[i];
+        }
         while (!found && !fini)
         {
-            potentialIndex= ((potentialIndex+1) % shapeNames.Length);
-            if (potentialIndex==currentShapeIndex) {fini=true;} // on a fait le tour
+            var rand = Random.Range(0,24);
+            potentialIndex = rand;
             if (!shapeAchieved[potentialIndex] && shapeLevel[potentialIndex]==niveau) {found=true;}
 
         }
-        if (fini) {SceneManager.LoadScene(0);} else {SetShapeIndex(potentialIndex);}
+        if (fini) { SceneManager.LoadScene(0); } else { SetShapeIndex(potentialIndex); }
+
     }
 
     public void PreviousShape()
@@ -97,8 +104,8 @@ public class ShapesManager : MonoBehaviour
         {
             double score = draw.CalculeScore();
             Debug.Log(score.ToString());
-            if (score > seuilMontant && niveau!=3) {niveau++;}
-            if (score < seuilDescendant && niveau!=1) {niveau--;}
+            //if (score > seuilMontant && niveau!=3) {niveau++;}
+            //if (score < seuilDescendant && niveau!=1) {niveau--;}
             Debug.Log(niveau.ToString());
             draw.ConvertToImage();
         }
