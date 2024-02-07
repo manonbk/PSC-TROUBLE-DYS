@@ -108,7 +108,6 @@ public class NewBehaviourScript : MonoBehaviour
                         
 
                         //Aimantation
-                        Debug.Log(selectedObject.name);
                         selectedTransform.position=correctForm.transform.position;
                         Quaternion correctFormRotation = correctForm.transform.rotation;
                         selectedTransform.rotation = correctFormRotation;
@@ -118,6 +117,7 @@ public class NewBehaviourScript : MonoBehaviour
                         selectedObject.layer = layerContour;
                         //change Tag
                         selectedObject.tag = "Completed";
+                        Debug.Log(selectedObject.tag);
                     }
                     
                     // deselect the object if the touch is lifted
@@ -235,7 +235,7 @@ public class NewBehaviourScript : MonoBehaviour
         GameObject[] list;
         bool formesManquantes = false;
         list = GameObject.FindGameObjectsWithTag("Remaining");
-        if (list!=null){
+        if (list.Length!=0){
             formesManquantes=true;
             foreach (GameObject go in list){
                 correctForm = GameObject.FindWithTag(go.transform.name+"cible");
@@ -250,30 +250,30 @@ public class NewBehaviourScript : MonoBehaviour
         Debug.Log(Score);
         
         //Changement de scene
-        if (Score<0.7) {
+        if (Score<0.6) {
             //si deux niveaux un
-            if (SceneManager.GetActiveScene().buildIndex == 3) {
+            if (SceneManager.GetActiveScene().buildIndex == 0) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
             }
-            if (SceneManager.GetActiveScene().buildIndex == 4 ||SceneManager.GetActiveScene().buildIndex == 5 ) {
+            else if (SceneManager.GetActiveScene().buildIndex == 1 ||SceneManager.GetActiveScene().buildIndex == 2 ) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
             }
-            if (SceneManager.GetActiveScene().buildIndex == 6) {
+            else if (SceneManager.GetActiveScene().buildIndex == 3) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -2);
             }
         }
         else {
             //si deux niveaux deux
-            if (SceneManager.GetActiveScene().buildIndex == 3) {
+            if (SceneManager.GetActiveScene().buildIndex == 0) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +2);
             }
-            if (SceneManager.GetActiveScene().buildIndex == 4) {
+            else if (SceneManager.GetActiveScene().buildIndex == 1) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
             }
-            if (SceneManager.GetActiveScene().buildIndex == 5) {
+            else if (SceneManager.GetActiveScene().buildIndex == 2) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
             }
-            if (SceneManager.GetActiveScene().buildIndex == 6) {
+            else if (SceneManager.GetActiveScene().buildIndex == 3) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
             }
         }
