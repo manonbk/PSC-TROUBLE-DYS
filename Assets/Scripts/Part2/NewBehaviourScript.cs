@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -43,7 +44,6 @@ public class NewBehaviourScript : MonoBehaviour
     List<float> tailleCible = new List<float>();
     
     private float timeGeneral;
-    private float timeForme;
 
     //Calcul du score
     public float normDistance;
@@ -82,8 +82,6 @@ public class NewBehaviourScript : MonoBehaviour
                     selectedObject = hitCollider.gameObject;
                     selectedTransform = hitCollider.transform;
                     firstTouchOffset = selectedTransform.position - firstTouchPosition;
-                    timeForme = 0;
-
                 }
             }
         } else {
@@ -244,9 +242,10 @@ public class NewBehaviourScript : MonoBehaviour
 
         //Calcul du score
         double Score = getScore(formesManquantes, time);
-        
+        Debug.Log(Score);
+
         //Changement de scene
-    
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 
     private double getScore(bool formesManquantes, float time){
