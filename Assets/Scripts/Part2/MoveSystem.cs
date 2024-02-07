@@ -60,8 +60,9 @@ public class MoveSystem : MonoBehaviour
                     if (Mathf.Abs(transform.localScale.magnitude - correctForm.transform.localScale.magnitude) <= taille) {  //check de la taille
                         if(Mathf.Abs(transform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z) <= rotation) {
                             this.transform.position = new Vector3(correctForm.transform.position.x,correctForm.transform.position.y,correctForm.transform.position.z);
-                            //this.transform.localScale.magnitude = correctForm.transform.localScale.magnitude;
-                            //this.transform.localRotation.eulerAngles.z = correctForm.transform.localRotation.eulerAngles.z;
+                            this.transform.localScale = new Vector3(correctForm.transform.localScale.x, correctForm.transform.localScale.y, correctForm.transform.localScale.z);
+                            Quaternion correctFormRotation = correctForm.transform.rotation;
+                            this.transform.rotation = correctFormRotation;
                             finish = true;
             }}}
         //else { UTILISER SI on veut revenir au point de depart quand on lache

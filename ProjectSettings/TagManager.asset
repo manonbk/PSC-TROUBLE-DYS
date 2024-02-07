@@ -6,6 +6,12 @@ TagManager:
   tags:
   - DrawnLine
   - Terrain
+  - Avant cible
+  - Voile cible
+  - "Arri\xE8recible"
+  - Remaining
+  - Completed
+  - Bateaucible
   layers:
   - Default
   - TransparentFX
@@ -14,8 +20,8 @@ TagManager:
   - Water
   - UI
   - TransparentUI
-  - 
-  - 
+  - Formes
+  - Contour
   - 
   - 
   - 
@@ -42,6 +48,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Canvas
+    uniqueID: 3477393305
     locked: 0
   - name: Contours
     uniqueID: 4238975827
