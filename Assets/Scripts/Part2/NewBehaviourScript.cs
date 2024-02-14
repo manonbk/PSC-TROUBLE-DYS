@@ -94,6 +94,8 @@ public class NewBehaviourScript : MonoBehaviour
                     // if the touch moved, have the object follow if there are no other touches
                     if(Input.touchCount == 1) {
                         SetPosition(firstTouchPosition);
+                        CheckRotation();
+                        CheckScale();
                     }
                     break;
                 case TouchPhase.Canceled:
@@ -176,6 +178,7 @@ public class NewBehaviourScript : MonoBehaviour
                 float difference = currentDistance / initialDistance;
                 // scale by that percentage
                 SetScale(difference);
+                CheckPosition();
             }
  
             // if the second touch ended
@@ -193,13 +196,17 @@ public class NewBehaviourScript : MonoBehaviour
             Vector3 newPosition = position + firstTouchOffset;
             newPosition.z = selectedTransform.position.z;
             selectedTransform.position = newPosition;
-            Debug.Log(correctForm.name);
-            if (Mathf.Abs(selectedTransform.position.x - correctForm.transform.position.x) <= distance &&  //distance a redefinir = precision qu'on attend pour lacher
-            Mathf.Abs(selectedTransform.position.y - correctForm.transform.position.y) <= distance) {
-                correctPosition=true;
-            }
+            CheckPosition();
         }
+    }
 
+    private void CheckPosition(){
+        float ecartd = Mathf.Pow(Mathf.Abs(selectedTransform.position.x - correctForm.transform.position.x),2)+Mathf.Pow(Mathf.Abs(selectedTransform.position.y - correctForm.transform.position.y),2);
+        Debug.Log("distance"+ecartd);
+        if (ecartd <= distance) {
+                correctPosition=true;
+                Debug.Log("bonneposition");
+            }
     }
  
     // rotate the object by the angle about the Z axis
@@ -207,10 +214,17 @@ public class NewBehaviourScript : MonoBehaviour
         if(selectedTransform != null) {
             correctRotation=false;
             selectedTransform.Rotate(Vector3.forward, angle*cteangle);
-            if(Mathf.Abs(selectedTransform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z) <= rotation){
-                correctRotation=true;
-            }
+            CheckRotation();
         }
+    }
+
+    private void CheckRotation(){
+        float ecart= Mathf.Abs(selectedTransform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z);
+        Debug.Log("angle"+ecart);
+        if(ecart<= rotation || ecart>= (360.0-rotation)){
+                correctRotation=true;
+                Debug.Log("bonnerotation");
+            }
     }
  
     // scale the object by the percentage difference
@@ -223,11 +237,17 @@ public class NewBehaviourScript : MonoBehaviour
                 newScale.z = 1f;
                 selectedTransform.localScale = newScale;
             }
-            if (Mathf.Abs(selectedTransform.localScale.magnitude - correctForm.transform.localScale.magnitude) <= taille) {
-                correctScale=true;
-            }  //check de la taille
-
+            CheckScale();
         }
+    }
+
+    private void CheckScale(){
+        float ecartt = Mathf.Abs(selectedTransform.localScale.magnitude - correctForm.transform.localScale.magnitude);
+        Debug.Log("Echelle"+ecartt);
+        if (ecartt <= taille) {
+                correctScale=true;
+                Debug.Log("bonnetaille");
+            }  //check de la taille
     }
 
     public void switchScene(){
@@ -246,8 +266,6 @@ public class NewBehaviourScript : MonoBehaviour
             }
         }
 
-        //sauveragrde
-        sd.add("abdjibzigzuihuizhudh");
 
         //Calcul du score
         double Score = getScore(formesManquantes, time);
