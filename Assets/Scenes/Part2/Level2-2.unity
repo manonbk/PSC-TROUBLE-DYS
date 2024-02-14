@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 204540485}
   m_Layer: 7
   m_Name: 'Voile '
-  m_TagString: Untagged
+  m_TagString: Remaining
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 225750493}
   m_Layer: 7
   m_Name: 'Avant '
-  m_TagString: Untagged
+  m_TagString: Remaining
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -570,7 +570,7 @@ GameObject:
   - component: {fileID: 430166777}
   m_Layer: 7
   m_Name: "Arri\xE8re"
-  m_TagString: Untagged
+  m_TagString: Remaining
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
