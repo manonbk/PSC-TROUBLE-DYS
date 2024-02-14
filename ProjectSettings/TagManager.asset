@@ -12,6 +12,8 @@ TagManager:
   - Remaining
   - Completed
   - Bateaucible
+  - Milieu cible
+  - Avant cible 2
   layers:
   - Default
   - TransparentFX
