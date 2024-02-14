@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    public SaveData sd;
     public LayerMask interactableObjects; // seuls les objects dans cette layer peuvent etre bouges
     public float minScale = .3f; // limites pour le scaling
     public float maxScale = 3f;
@@ -244,6 +245,9 @@ public class NewBehaviourScript : MonoBehaviour
                 tailleCible.Add(Mathf.Abs(go.transform.localScale.magnitude - correctForm.transform.localScale.magnitude));          
             }
         }
+
+        //sauveragrde
+        sd.add("abdjibzigzuihuizhudh");
 
         //Calcul du score
         double Score = getScore(formesManquantes, time);
