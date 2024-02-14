@@ -591,7 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 125af406bc5c045ebb7f03d1a3b801ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sd: {fileID: 0}
+  sd: {fileID: 452424335}
   interactableObjects:
     serializedVersion: 2
     m_Bits: 128
@@ -618,7 +618,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfdf5177687ed9c46a4d71ff8b2a83d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 0}
   entree: {fileID: 0}
   showPlayerCode: {fileID: 182226104}
   sceneName: 2niv1

@@ -242,12 +242,16 @@ public class NewBehaviourScript : MonoBehaviour
                 correctForm = GameObject.FindWithTag(go.transform.name+"cible");
                 distanceCible.Add(Mathf.Abs(go.transform.position.magnitude-correctForm.transform.position.magnitude));
                 rotationCible.Add(Mathf.Abs(Mathf.Abs(go.transform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z)));
-                tailleCible.Add(Mathf.Abs(go.transform.localScale.magnitude - correctForm.transform.localScale.magnitude));          
+                tailleCible.Add(Mathf.Abs(go.transform.localScale.magnitude - correctForm.transform.localScale.magnitude));
+                LeverDoigt.Add(0);         
             }
         }
 
-        //sauveragrde
-        sd.add("abdjibzigzuihuizhudh");
+        //Sauvegarde
+        int length = distanceCible.Count;
+        for (int i =0; i<length; i++){
+            sd.add(string.Format("nouvelleForme;{0:N3};{1:N3};{2:N3};{3}",distanceCible[i], tailleCible[i], rotationCible[i], LeverDoigt[i]));
+        }
 
         //Calcul du score
         double Score = getScore(formesManquantes, time);
