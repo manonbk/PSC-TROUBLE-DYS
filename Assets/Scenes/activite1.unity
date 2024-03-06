@@ -1043,8 +1043,8 @@ MonoBehaviour:
   draw: {fileID: 2007793525}
   startButton: {fileID: 1799645260}
   endPanel: {fileID: 660549282}
-  seuilMontant: 0.9
-  seuilDescendant: 0.5
+  seuilMontant: 0.98
+  seuilDescendant: 0.96
 --- !u!1 &576525316
 GameObject:
   m_ObjectHideFlags: 0
