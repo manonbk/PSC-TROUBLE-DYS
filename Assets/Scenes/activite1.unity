@@ -207,7 +207,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 530757899}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShapesManager, Assembly-CSharp
         m_MethodName: PreviousShape
         m_Mode: 1
@@ -670,7 +670,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47.65
+  m_fontSize: 100
   m_fontSizeBase: 75.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -959,7 +959,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 530757900}
-  - component: {fileID: 530757899}
+  - component: {fileID: 530757901}
   m_Layer: 0
   m_Name: ShapesManager
   m_TagString: Untagged
@@ -967,7 +967,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &530757899
+--- !u!4 &530757900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530757898}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5488473, y: -6.0571127, z: -305.81317}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1637888756}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &530757901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -980,32 +996,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shapeNames:
-  - Cabine 1
   - "Chemin\xE9e 1"
+  - Cabine 1
   - Coque 1
-  - "D\xE9rive 1"
   - Gouvernail 1
-  - Hublot 1
   - Turbine 1
+  - Hublot 1
   - Voile 1
-  - Cabine 2
   - "Chemin\xE9e 2"
+  - Cabine 2
   - Coque 2
-  - "D\xE9rive 2"
   - Gouvernail 2
-  - Hublot 2
   - Turbine 2
+  - Hublot 2
   - Voile 2
-  - Cabine 3
   - "Chemin\xE9e 3"
+  - Cabine 3
   - Coque 3
-  - "D\xE9rive 3"
   - Gouvernail 3
-  - Hublot 3
   - Turbine 3
+  - Hublot 3
   - Voile 3
-  shapeLevel: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-  shapeAchieved: 000000000000000000000000000000000000000000000000
   shapeSizings:
   - 1
   - 1
@@ -1028,31 +1039,12 @@ MonoBehaviour:
   - 1.5
   - 1.5
   - 1
-  - 2
-  - 1.5
-  - 1
   drawTemplate: {fileID: 2010991469}
   draw: {fileID: 2007793525}
   startButton: {fileID: 1799645260}
   endPanel: {fileID: 660549282}
-  seuilMontant: 0.98
+  seuilMontant: 0.9
   seuilDescendant: 0.5
---- !u!4 &530757900
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 530757898}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5488473, y: -6.0571127, z: -305.81317}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1637888756}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &576525316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,7 +1129,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 530757899}
+      - m_Target: {fileID: 530757901}
         m_TargetAssemblyTypeName: ShapesManager, Assembly-CSharp
         m_MethodName: OnMainButtonPressed
         m_Mode: 1
@@ -1379,7 +1371,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.4
+  m_fontSize: 54.6
   m_fontSizeBase: 75.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1549,7 +1541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfdf5177687ed9c46a4d71ff8b2a83d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 0}
   entree: {fileID: 0}
   showPlayerCode: {fileID: 3938888032663571978}
   sceneName: 1
@@ -7062,7 +7053,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 530757899}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShapesManager, Assembly-CSharp
         m_MethodName: NextShape
         m_Mode: 1
@@ -7333,7 +7324,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 530757899}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShapesManager, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
