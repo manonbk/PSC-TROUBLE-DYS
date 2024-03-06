@@ -491,9 +491,9 @@ MonoBehaviour:
     m_Bits: 128
   minScale: 0.3
   maxScale: 3
-  distance: 1
-  taille: 1.2
-  rotation: 45
+  distance: 0.015
+  taille: 0.37
+  rotation: 5
   cteangle: 0.8
   normDistance: 1
   normRotation: 2
@@ -723,11 +723,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 81494195830125414, guid: 1bca191b9130a294f9667b2f5a41f8d0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -5.770172
+      value: -5.7701416
       objectReference: {fileID: 0}
     - target: {fileID: 81494195830125414, guid: 1bca191b9130a294f9667b2f5a41f8d0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -4.860321
+      value: -4.8603516
       objectReference: {fileID: 0}
     - target: {fileID: 81494195830125433, guid: 1bca191b9130a294f9667b2f5a41f8d0, type: 3}
       propertyPath: m_RaycastTarget
