@@ -266,16 +266,16 @@ public class NewBehaviourScript : MonoBehaviour
                 LeverDoigt.Add(0);         
             }
         }
+        //Calcul du score
+                double Score = getScore(formesManquantes, time);
 
         //Sauvegarde
         int length = distanceCible.Count;
         for (int i =0; i<length; i++){
             sd.add(string.Format("nouvelleForme;{0:N3};{1:N3};{2:N3};{3}",distanceCible[i], tailleCible[i], rotationCible[i], LeverDoigt[i]));
         }
-
-        //Calcul du score
-        double Score = getScore(formesManquantes, time);
-        Debug.Log(Score);
+        sd.add(string.Format("Score;{0}",Score));
+        
         
         double SeuilBas = 0.4;
         double SeuilHaut = 0.6;
