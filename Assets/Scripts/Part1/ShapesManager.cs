@@ -60,7 +60,7 @@ public class ShapesManager : MonoBehaviour
     public void NextShape() // on cherche la prochaine forme du niveau requis non déja faite
     {
         forme+=1;
-        if (forme == 8) {SceneManager.LoadScene(0);}
+        if (forme == 7) {SceneManager.LoadScene(0);}
         else {
             currentShapeIndex = forme + 8*niveau;
             SetShapeIndex(currentShapeIndex);
