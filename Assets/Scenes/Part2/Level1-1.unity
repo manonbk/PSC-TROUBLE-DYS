@@ -200,8 +200,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53209281}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.16, y: -0.63, z: 5}
-  m_LocalScale: {x: 0.47843724, y: 0.5, z: 0.5337319}
+  m_LocalPosition: {x: 3.0342, y: 0.1158, z: 5}
+  m_LocalScale: {x: 0.5952948, y: 0.631215, z: 0.5337319}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -489,6 +489,7 @@ GameObject:
   - component: {fileID: 452424330}
   - component: {fileID: 452424335}
   - component: {fileID: 452424336}
+  - component: {fileID: 452424334}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
