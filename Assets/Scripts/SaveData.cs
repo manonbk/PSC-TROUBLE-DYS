@@ -8,33 +8,53 @@ using System;
 public class SaveData : MonoBehaviour
 {
     public Button button;
-    public InputField entrée;
-    public string codeJ;
+    public InputField entree;
+    private string codeJ;
+    public Text showPlayerCode;
+    private string data = "";
+    private StreamWriter file;
+    public string sceneName = "";
+
     string[] types = new string[] { "%DIST%", "%COORD%", "%EVENT%" };
+
+    DateTime startTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        button.onClick.AddListener(TaskOnClick);
+        codeJ = PlayerPrefs.GetString("code");
+        PlayerPrefs.SetString("code", codeJ);
+        showPlayerCode.text = codeJ;
+
+        startTime = DateTime.Now; 
     }
-    void TaskOnClick()
+    public void TaskOnClick()
     {
-        codeJ = entrée.text;
-        StreamWriter file = new(Application.dataPath + "/data.txt", append: true);
-        Debug.Log("Fichier créé");
-        file.WriteLineAsync(codeJ);
-        file.Close();
+        codeJ = entree.text;
+        PlayerPrefs.SetString("code", codeJ);
+        showPlayerCode.text = codeJ;
     }
 
-    public void save(string donnee, int type)
+    public void add(string donnee)
     {
+        TimeSpan deltaTime = (DateTime.Now - startTime);
+        data +=deltaTime.ToString() +";"+ donnee + "\n";
+    }
 
-        string time = Time.time.ToString();
-        StreamWriter file = new(Application.dataPath + "/data.txt", append: true);
-        file.WriteLineAsync(time + types[type] + donnee);
+    void OnDestroy()
+    {
+        if (sceneName != "")
+        {
+            save();
+        }
+    }
+
+    void save()
+    {
+        file = new(Application.persistentDataPath + "/"+codeJ+ "-V2-ACTI"+sceneName+"-"+ DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss") + ".txt", append: true);
+        file.Write(data);
         file.Close();
-        Debug.Log("Sauvegarde effectuée");
-
+        Debug.Log("Sauvegarde fichier effectuee : "+ Application.persistentDataPath+sceneName);
     }
 
 }

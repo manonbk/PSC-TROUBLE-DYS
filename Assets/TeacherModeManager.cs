@@ -7,7 +7,7 @@ public class TeacherModeManager : MonoBehaviour
 {
     private int nextIndex = 0;
 
-    private int[] sequence = { 0, 2, 3, 1, 3, 1, 0, 2 };
+    private int[] sequence = { 0, 2, 3, 1};
 
     private float activationTime;
 
@@ -15,6 +15,8 @@ public class TeacherModeManager : MonoBehaviour
 
     public GameObject[] normalMode;
     public GameObject[] teacherMode;
+
+    public SaveData sd;
     
 
     // Start is called before the first frame update
@@ -76,6 +78,7 @@ public class TeacherModeManager : MonoBehaviour
         {
             teacherMode[i].SetActive(true);
         }
+        sd.add("activationTeacherMode");
     }
     public void Deactivate()
     {
@@ -88,5 +91,6 @@ public class TeacherModeManager : MonoBehaviour
         {
             teacherMode[i].SetActive(false);
         }
+        sd.add("desactivationTeacherMode");
     }
 }

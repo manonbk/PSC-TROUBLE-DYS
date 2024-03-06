@@ -6,8 +6,7 @@ using System.IO;
 public class BoatDrive2 : MonoBehaviour
 {
     public float speed = 10.0f;
-    public float rotationSpeed = 500.0f;
-    public float maxRotationSpeed = 1.0f;
+    public float rotationSpeed = 1.0f;
 
     public Transform[] checkpoints;
     public float distanceThreshold = 6.0f;
@@ -22,6 +21,11 @@ public class BoatDrive2 : MonoBehaviour
 
     Gyroscope gyro;
 
+    public SaveData sd;
+
+    bool savePosition = true;
+    bool masterSavePosition = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -34,6 +38,19 @@ public class BoatDrive2 : MonoBehaviour
     {
         Move();
         //print(rb.velocity);
+
+        if (savePosition && masterSavePosition)
+        {
+            string posx = transform.position.x.ToString("0.00");
+            string posz = transform.position.z.ToString("0.00");
+
+            string acc_x = Input.acceleration.x.ToString("0.000");
+            string acc_y = Input.acceleration.y.ToString("0.000");
+            string acc_z = Input.acceleration.z.ToString("0.000");
+            sd.add(string.Format("posBateauEtAccel;{0};{1};{2};{3};{4}", posx,posz, acc_x, acc_y, acc_z));
+
+        }
+        savePosition = !savePosition;
     }
     
     void Move()
@@ -44,9 +61,11 @@ public class BoatDrive2 : MonoBehaviour
         Vector3 forceDirection = new Vector3(x, 0, z);
         if (rb.velocity != Vector3.zero)
         {
+            
             Quaternion targetRotation = Quaternion.LookRotation(rb.velocity);
-            Quaternion newRotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * Mathf.Min(rotationSpeed, maxRotationSpeed));
-            transform.rotation = newRotation;
+            rb.AddTorque(-rotationSpeed*Vector3.Cross(forceDirection, transform.forward));
+            //Quaternion newRotation = Quaternion.Lerp(transform.rotation, targetRotation, rb.velocity.magnitude*Time.deltaTime * rotationSpeed);
+            //transform.rotation = newRotation;
         }
         //transform.position += moveDirection * speed * Time.deltaTime;
         rb.AddForce(speed* forceDirection);
@@ -55,13 +74,13 @@ public class BoatDrive2 : MonoBehaviour
         float distance = Vector3.Distance(transform.position, checkpoints[levelManager.GetCurrentLevel()+1].position);
         if (distance <= distanceThreshold)
         {
-
-            // felicitations
-            Debug.Log("Bravoo!");
-
+            sd.add("finNiveau;" + levelManager.GetCurrentLevel().ToString());
             // On envoie le message au LevelManager
             levelManager.FinishLevel();
-            
+
+            masterSavePosition = false;
+           
+
         }
     }
 
@@ -69,6 +88,7 @@ public class BoatDrive2 : MonoBehaviour
     {
         // Freezes for t seconds
         rb.isKinematic = true;
+        savePosition = false;
         StartCoroutine(WaitForSeconds(t));
 
     }
@@ -83,6 +103,17 @@ public class BoatDrive2 : MonoBehaviour
     {
         yield return new WaitForSeconds(t);
         rb.isKinematic = false;
+
+        masterSavePosition = true;
+        sd.add("debutNiveau;" + levelManager.GetCurrentLevel().ToString());
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Terrain"))
+        {
+            sd.add("collision");
+        }
     }
 
 }

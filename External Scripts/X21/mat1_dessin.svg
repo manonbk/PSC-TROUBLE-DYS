@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="280"
+   height="280"
+   viewBox="0 0 74.083333 74.083333"
+   version="1.1"
+   id="svg620"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="mat1_dessin.svg"
+   inkscape:export-filename="mat1.png"
+   inkscape:export-xdpi="109.71429"
+   inkscape:export-ydpi="109.71429"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview622"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.95357143"
+     inkscape:cx="140"
+     inkscape:cy="122.17228"
+     inkscape:window-width="958"
+     inkscape:window-height="991"
+     inkscape:window-x="952"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs617">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath2869">
+      <g
+         id="g2883">
+        <g
+           id="g2881">
+          <g
+             id="g2879">
+            <g
+               id="g2877">
+              <g
+                 id="g2875">
+                <g
+                   id="g2873" />
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </clipPath>
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="font-variation-settings:normal;vector-effect:none;fill:#a44917;fill-opacity:1;stroke:none;stroke-width:0.4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
+       d="m 35.854583,63.270007 h 2.325449 L 38.42239,10.84494 35.660775,10.81548 Z"
+       id="path1701" />
+    <path
+       style="font-variation-settings:normal;vector-effect:none;fill:#a44917;fill-opacity:1;stroke:none;stroke-width:0.4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
+       d="m 35.854583,63.270007 h 2.325449 L 38.42239,10.84494 35.660775,10.81548 Z"
+       id="path1693" />
+    <path
+       id="path1321"
+       style="color:#000000;fill:#3a1a08;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none"
+       d="M 38.022485 10.840682 A 0.40000001 0.40000001 0 0 0 38.021452 10.843783 L 37.781156 62.869031 L 35.855693 62.869031 A 0.40000001 0.40000001 0 0 0 35.853109 62.869548 L 35.854659 63.27004 L 38.180098 63.27004 L 38.422461 10.844816 L 38.022485 10.840682 z " />
+    <path
+       id="path1599"
+       style="color:#000000;fill:#c4581a;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none"
+       d="M 35.660872 10.815361 L 35.854659 63.27004 L 36.254118 63.27004 A 0.40000001 0.40000001 0 0 0 36.254118 63.267456 L 36.062398 11.218953 L 38.41781 11.244275 A 0.40000001 0.40000001 0 0 0 38.420394 11.243758 L 38.422461 10.844816 L 35.660872 10.815361 z " />
+    <path
+       style="font-variation-settings:normal;opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
+       d="m 35.660872,10.815361 2.761588,0.02946 -0.242363,52.425223 h -2.325439 z"
+       id="path1711" />
+  </g>
+</svg>

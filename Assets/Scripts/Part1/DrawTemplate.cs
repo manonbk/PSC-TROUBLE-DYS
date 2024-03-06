@@ -5,12 +5,15 @@ using Newtonsoft.Json;// Pour le JSON "complexe"
 
 public class DrawTemplate : MonoBehaviour
 {
-    private GameObject[] clones;//Necessaires pour créer plusieurs lignes
+
+    //Dessine les images
+
+    private GameObject[] clones = new GameObject[0];//Necessaires pour crï¿½er plusieurs lignes
 
     // Start is called before the first frame update
     void Start()
     {
-        clones = new GameObject[0];
+
     }
 
     // Update is called once per frame
@@ -19,9 +22,9 @@ public class DrawTemplate : MonoBehaviour
         
     }
 
-    public void SetShape(string shapeName)
+    public void SetShape(string shapeName) // dÃ©fini la forme qu'on va dessiner : associe Ã  un string (ex: voile) le fichier JSON de l'image, puis la dessine en appelant DrawBaseShape
     {
-        // On récupère les données du fichier JSON correspondant au shapeName
+        // On rï¿½cupï¿½re les donnï¿½es du fichier JSON correspondant au shapeName
         var textFile = Resources.Load<TextAsset>("Shapes/" + shapeName);
         Shape shape = new();
         if (textFile != null)
@@ -37,7 +40,7 @@ public class DrawTemplate : MonoBehaviour
 
     }
 
-    public void DrawBaseShape(float[][] shapePointsArrays, bool[] isLoop)
+    public void DrawBaseShape(float[][] shapePointsArrays, bool[] isLoop) //La fonction qui dessine
     {
         foreach (GameObject clone in clones)
         {
@@ -50,12 +53,12 @@ public class DrawTemplate : MonoBehaviour
         for (int i = 0; i < shapePointsArrays.Length; i++)
         {
             clones[i] = Instantiate(Resources.Load("templateLine") as GameObject, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-            if (isLoop[i]) // Le path doit être dessiné comme une boucle
+            if (isLoop[i]) // Le path doit ï¿½tre dessinï¿½ comme une boucle
             {
                 clones[i].GetComponent<LineRenderer>().loop = true;
             }
             float[] pathPoints = shapePointsArrays[i];
-            totalBasePoints += pathPoints.Length / 2;// Attention à ne pas compter les deux coordonnées (x et y), d'ou le /2
+            totalBasePoints += pathPoints.Length / 2;// Attention ï¿½ ne pas compter les deux coordonnï¿½es (x et y), d'ou le /2
         }
 
         Rect rect = GetComponent<RectTransform>().rect; // En WorldGUI
@@ -67,7 +70,7 @@ public class DrawTemplate : MonoBehaviour
 
         float scale = Mathf.Min(xmax - xmin, ymax - ymin) / 2;
 
-        int nPointsSeen = 0;// Nombre de points déjà ajoutés grâce aux paths précédents
+        int nPointsSeen = 0;// Nombre de points dï¿½jï¿½ ajoutï¿½s grï¿½ce aux paths prï¿½cï¿½dents
 
         for (int ipath = 0; ipath < shapePointsArrays.Length; ipath++)
         {
