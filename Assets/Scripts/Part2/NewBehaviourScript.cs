@@ -257,34 +257,39 @@ public class NewBehaviourScript : MonoBehaviour
         double Score = getScore(formesManquantes, time);
         Debug.Log(Score);
         
+        double SeuilBas = 0.4;
+        double SeuilHaut = 0.6;
+
         //Changement de scene
-        if (Score<0.6) {
+        if (Score<SeuilHaut) 
             //si deux niveaux un
-            if (SceneManager.GetActiveScene().buildIndex == 0) {
+        if (SceneManager.GetActiveScene().buildIndex == 4 ||SceneManager.GetActiveScene().buildIndex == 6 ||SceneManager.GetActiveScene().buildIndex == 7) {
+                SceneManager.LoadScene(0); //Retour au menu
+            }
+        else if (SceneManager.GetActiveScene().buildIndex == 2) {
+            if (Score<SeuilHaut){
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
             }
-            else if (SceneManager.GetActiveScene().buildIndex == 1 ||SceneManager.GetActiveScene().buildIndex == 2 ) {
+            else {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +3);
+            }
+
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 3) {
+                if (Score<SeuilHaut) {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+                }
+                else {SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);}
+            }
+        else if (SceneManager.GetActiveScene().buildIndex == 5) {
+            if (SeuilBas<Score && Score<=SeuilHaut) {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+                }
+            else if (Score<SeuilBas) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
             }
-            else if (SceneManager.GetActiveScene().buildIndex == 3) {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -2);
+            else {SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +2);}   
             }
-        }
-        else {
-            //si deux niveaux deux
-            if (SceneManager.GetActiveScene().buildIndex == 0) {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +2);
-            }
-            else if (SceneManager.GetActiveScene().buildIndex == 1) {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
-            }
-            else if (SceneManager.GetActiveScene().buildIndex == 2) {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
-            }
-            else if (SceneManager.GetActiveScene().buildIndex == 3) {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
-            }
-        }
     }
 
     private double getScore(bool formesManquantes, float time){
