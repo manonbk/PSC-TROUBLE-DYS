@@ -129,7 +129,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         ecart_sumsqrdist = 0;
         ecart_avgsqrdist = float.MaxValue;
         ResetTimer();
-        DessineScore();
+        //DessineScore();
     }
 
     public void DrawBaseShape(float[][] shapePointsArrays, bool[] isLoop, float shapeSizing)
@@ -194,7 +194,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             nPointsSeen += nPoints;
         }
         
-        DessineScore();
+        //DessineScore();
     }
 
     public void EraseAll()
@@ -264,32 +264,33 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         double exigence = 50;
         float alpha = 0.3F;
         double score = System.Math.Pow(1-System.Math.Tanh(exigence*sum),alpha);
+        sd.add("score : "+score.ToString());
         scoreFormeEnCours=score;
         return score;
     
     }
         
-    void DessineScore()
-    {
-        scoreText.setValue(CalculeScore().ToString("P"));
-        if (shape != null && transparencyMode)
-        {
-            Color linecol = baseLineMat.color;
-            linecol.a = Mathf.Lerp(1, 0, distanceDrawn / (2 * shape.length));
-            baseLineMat.color = linecol;
-        }
+    ///void DessineScore()
+    //{
+    //    scoreText.setValue(CalculeScore().ToString("P"));
+    //    if (shape != null && transparencyMode)
+    //  {
+    //        Color linecol = baseLineMat.color;
+    //        linecol.a = Mathf.Lerp(1, 0, distanceDrawn / (2 * shape.length));
+    //        baseLineMat.color = linecol;
+    //    }
         
 
-        // Mise � jour des textes
-        if (rapprText != null)
-        {
-            rapprText.setValue(rappr_avgsqrdist.ToString());
-        }
-        if (ecartText != null)
-        {
-            ecartText.setValue(ecart_avgsqrdist.ToString());
-        }
-    }
+    //    // Mise � jour des textes
+    //    if (rapprText != null)
+    //    {
+    //        rapprText.setValue(rappr_avgsqrdist.ToString());
+    //    }
+    //    if (ecartText != null)
+    //    {
+    //        ecartText.setValue(ecart_avgsqrdist.ToString());
+    //    }
+    //}
 
     public void ConvertToImage()
     {
@@ -358,7 +359,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                         sum += rappr_minsqrdist[i];
                     }
                     rappr_avgsqrdist = sum / totalBasePoints;
-                    DessineScore();
+                    //DessineScore();
                 }
 
                 Vector3 normalizedPosition = clones[0].GetComponent<LineRenderer>().transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(mousePos))/scale;
