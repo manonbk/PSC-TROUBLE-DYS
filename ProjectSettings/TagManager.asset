@@ -4,18 +4,26 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - bande
-  - border
+  - DrawnLine
+  - Terrain
+  - Avant cible
+  - Voile cible
+  - "Arri\xE8recible"
+  - Remaining
+  - Completed
+  - Bateaucible
+  - Milieu cible
+  - Avant cible 2
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PlayerBloc
   - Water
   - UI
-  - 
-  - 
-  - coups
+  - TransparentUI
+  - Formes
+  - Contour
   - 
   - 
   - 
@@ -42,4 +50,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Canvas
+    uniqueID: 3477393305
+    locked: 0
+  - name: Contours
+    uniqueID: 4238975827
+    locked: 0
+  - name: Formes
+    uniqueID: 2436261835
     locked: 0

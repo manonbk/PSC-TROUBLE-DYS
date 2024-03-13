@@ -7,7 +7,6 @@ using System;
 
 public class SaveData : MonoBehaviour
 {
-    public Button button;
     public InputField entree;
     private string codeJ;
     public Text showPlayerCode;

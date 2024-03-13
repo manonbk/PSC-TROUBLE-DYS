@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    public SaveData sd;
     public LayerMask interactableObjects; // seuls les objects dans cette layer peuvent etre bouges
     public float minScale = .3f; // limites pour le scaling
     public float maxScale = 3f;
@@ -43,7 +45,6 @@ public class NewBehaviourScript : MonoBehaviour
     List<float> tailleCible = new List<float>();
     
     private float timeGeneral;
-    private float timeForme;
 
     public float cteangle;
     //Calcul du score
@@ -83,7 +84,6 @@ public class NewBehaviourScript : MonoBehaviour
                     selectedObject = hitCollider.gameObject;
                     selectedTransform = hitCollider.transform;
                     firstTouchOffset = selectedTransform.position - firstTouchPosition;
-                    timeForme = 0;
                     correctForm = GameObject.FindWithTag(selectedTransform.name+"cible");
                 }
             }
@@ -94,6 +94,8 @@ public class NewBehaviourScript : MonoBehaviour
                     // if the touch moved, have the object follow if there are no other touches
                     if(Input.touchCount == 1) {
                         SetPosition(firstTouchPosition);
+                        CheckRotation();
+                        CheckScale();
                     }
                     break;
                 case TouchPhase.Canceled:
@@ -109,7 +111,6 @@ public class NewBehaviourScript : MonoBehaviour
                         
 
                         //Aimantation
-                        Debug.Log(selectedObject.name);
                         selectedTransform.position=correctForm.transform.position;
                         Quaternion correctFormRotation = correctForm.transform.rotation;
                         selectedTransform.rotation = correctFormRotation;
@@ -119,6 +120,7 @@ public class NewBehaviourScript : MonoBehaviour
                         selectedObject.layer = layerContour;
                         //change Tag
                         selectedObject.tag = "Completed";
+                        Debug.Log(selectedObject.tag);
                     }
                     
                     // deselect the object if the touch is lifted
@@ -176,6 +178,7 @@ public class NewBehaviourScript : MonoBehaviour
                 float difference = currentDistance / initialDistance;
                 // scale by that percentage
                 SetScale(difference);
+                CheckPosition();
             }
  
             // if the second touch ended
@@ -193,13 +196,17 @@ public class NewBehaviourScript : MonoBehaviour
             Vector3 newPosition = position + firstTouchOffset;
             newPosition.z = selectedTransform.position.z;
             selectedTransform.position = newPosition;
-            Debug.Log(correctForm.name);
-            if (Mathf.Abs(selectedTransform.position.x - correctForm.transform.position.x) <= distance &&  //distance a redefinir = precision qu'on attend pour lacher
-            Mathf.Abs(selectedTransform.position.y - correctForm.transform.position.y) <= distance) {
-                correctPosition=true;
-            }
+            CheckPosition();
         }
+    }
 
+    private void CheckPosition(){
+        float ecartd = Mathf.Pow(Mathf.Abs(selectedTransform.position.x - correctForm.transform.position.x),2)+Mathf.Pow(Mathf.Abs(selectedTransform.position.y - correctForm.transform.position.y),2);
+        Debug.Log("distance"+ecartd);
+        if (ecartd <= distance) {
+                correctPosition=true;
+                Debug.Log("bonneposition");
+            }
     }
  
     // rotate the object by the angle about the Z axis
@@ -207,10 +214,17 @@ public class NewBehaviourScript : MonoBehaviour
         if(selectedTransform != null) {
             correctRotation=false;
             selectedTransform.Rotate(Vector3.forward, angle*cteangle);
-            if(Mathf.Abs(selectedTransform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z) <= rotation){
-                correctRotation=true;
-            }
+            CheckRotation();
         }
+    }
+
+    private void CheckRotation(){
+        float ecart= Mathf.Abs(selectedTransform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z);
+        Debug.Log("angle"+ecart);
+        if(ecart<= rotation || ecart>= (360.0-rotation)){
+                correctRotation=true;
+                Debug.Log("bonnerotation");
+            }
     }
  
     // scale the object by the percentage difference
@@ -223,11 +237,17 @@ public class NewBehaviourScript : MonoBehaviour
                 newScale.z = 1f;
                 selectedTransform.localScale = newScale;
             }
-            if (Mathf.Abs(selectedTransform.localScale.magnitude - correctForm.transform.localScale.magnitude) <= taille) {
-                correctScale=true;
-            }  //check de la taille
-
+            CheckScale();
         }
+    }
+
+    private void CheckScale(){
+        float ecartt = Mathf.Abs(selectedTransform.localScale.magnitude - correctForm.transform.localScale.magnitude);
+        Debug.Log("Echelle"+ecartt);
+        if (ecartt <= taille) {
+                correctScale=true;
+                Debug.Log("bonnetaille");
+            }  //check de la taille
     }
 
     public void switchScene(){
@@ -236,31 +256,70 @@ public class NewBehaviourScript : MonoBehaviour
         GameObject[] list;
         bool formesManquantes = false;
         list = GameObject.FindGameObjectsWithTag("Remaining");
-        if (list!=null){
+        if (list.Length!=0){
             formesManquantes=true;
             foreach (GameObject go in list){
-                distanceCible.Add(Mathf.Abs(selectedTransform.position.magnitude-correctForm.transform.position.magnitude));
-                rotationCible.Add(Mathf.Abs(Mathf.Abs(selectedTransform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z)));
-                tailleCible.Add(Mathf.Abs(selectedTransform.localScale.magnitude - correctForm.transform.localScale.magnitude));          
+                correctForm = GameObject.FindWithTag(go.transform.name+"cible");
+                distanceCible.Add(Mathf.Abs(go.transform.position.magnitude-correctForm.transform.position.magnitude));
+                rotationCible.Add(Mathf.Abs(Mathf.Abs(go.transform.localRotation.eulerAngles.z - correctForm.transform.localRotation.eulerAngles.z)));
+                tailleCible.Add(Mathf.Abs(go.transform.localScale.magnitude - correctForm.transform.localScale.magnitude));
+                LeverDoigt.Add(0);         
             }
         }
-
         //Calcul du score
-        double Score = getScore(formesManquantes, time);
-        Debug.Log(Score);
+                double Score = getScore(formesManquantes, time);
+
+        //Sauvegarde
+        int length = distanceCible.Count;
+        for (int i =0; i<length; i++){
+            sd.add(string.Format("nouvelleForme;{0:N3};{1:N3};{2:N3};{3}",distanceCible[i], tailleCible[i], rotationCible[i], LeverDoigt[i]));
+        }
+        sd.add(string.Format("Score;{0}",Score));
         
+        
+        double SeuilBas = 0.4;
+        double SeuilHaut = 0.6;
+
         //Changement de scene
-    
+        if (Score<SeuilHaut) 
+            //si deux niveaux un
+        if (SceneManager.GetActiveScene().buildIndex == 4 ||SceneManager.GetActiveScene().buildIndex == 6 ||SceneManager.GetActiveScene().buildIndex == 7) {
+                SceneManager.LoadScene(0); //Retour au menu
+            }
+        else if (SceneManager.GetActiveScene().buildIndex == 2) {
+            if (Score<SeuilHaut){
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+            }
+            else {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +3);
+            }
+
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 3) {
+                if (Score<SeuilHaut) {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+                }
+                else {SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);}
+            }
+        else if (SceneManager.GetActiveScene().buildIndex == 5) {
+            if (SeuilBas<Score && Score<=SeuilHaut) {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+                }
+            else if (Score<SeuilBas) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
+            }
+            else {SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +2);}   
+            }
     }
 
     private double getScore(bool formesManquantes, float time){
         double score;
         if (formesManquantes){
             score = 0;
+            return score;
         }
 
         //chercher les trucs dans les tableaux et ecrire la formule
-        //stopper le temps et le noter
         int length = distanceCible.Count;
         double sommeMesure = 0;
         double sommeFormes = 0;
