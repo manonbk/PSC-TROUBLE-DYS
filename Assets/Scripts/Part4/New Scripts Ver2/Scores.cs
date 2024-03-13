@@ -15,9 +15,13 @@ public class Scores : MonoBehaviour
     public static float beta = 15;
     public static float gamma = 1;
 
-    public static List<float> timeref =new List<float>();
+    public static List<float> timeref = new List<float>();
     public static List<float> timeplayer = new List<float>();
     public static List<float> failtime = new List<float>();
+
+    public static List<string> writetext = new List<string>();
+
+
 
     void Update(){
         //Debug.Log("FailCount TRYING");

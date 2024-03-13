@@ -20,6 +20,8 @@ public class CoupAction : MonoBehaviour
     public AudioClip refsound;
     public AudioClip failsound;
 
+    public SaveData sd;
+
     
     float refpos;
     float refscale;
@@ -61,7 +63,8 @@ public class CoupAction : MonoBehaviour
                         Scores.timeplayer[value - 1] = Time.time - SpawnerAction.startingTime;
                         color.color = Color.yellow;
                         isClicked = true;
-                        SpawnerAction.sd.add("SUCCESS" + value + "on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + "and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + "on time :" + Scores.timeplayer[value - 1]);
+                        
+                        Scores.writetext.Add(" SUCCESS " + value + " on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + " and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + " on time :" + Scores.timeplayer[value - 1]);
 
                         Scores.failCount--; //ne pas compter comme un fail
                         //Debug.Log(value + "eme coup player realtime: " + Scores.timeplayer[value - 1]);
@@ -72,7 +75,9 @@ public class CoupAction : MonoBehaviour
                     AudioSource.PlayClipAtPoint(failsound, transform.position);
                     float failtime =  Time.time - SpawnerAction.startingTime;
                     Scores.failtime.Add(failtime);
-                    SpawnerAction.sd.add("ERROR on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + "and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + "on time :" + failtime);
+                    
+                    Scores.writetext.Add(" ERROR on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + " and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + " on time :" + failtime);
+                    
                     //Debug.Log("not in bande: " + EventSystem.current.IsPointerOverGameObject());
                 }
             }
@@ -102,7 +107,8 @@ public class CoupAction : MonoBehaviour
 
             float addref = Time.time - SpawnerAction.startingTime + (DrawGates.dbesoin + refscale/2 + simscale/2) / MvtRectiligne.speed;
             Scores.timeref.Add(addref);
-            SpawnerAction.sd.add("REF Temp ref pour coup" + value + " : " + addref);
+            
+            Scores.writetext.Add(" REF Temp ref pour coup" + value + " : " + addref);
 
             Scores.timeplayer.Add(Scores.timeref[Scores.timeref.Count -1] + 2* (simscale/2 + 0.75f) * value / MvtRectiligne.speed);  //ajout d'un tempo de valeur aleatoire de l'ordre de 2* (simscale/2 + 0.75f) [pour que lorsqu'on fait rien il y a une grand ecart de 2* (simscale/2 + 0.75f) entre deux coups succcessives loupes]
 

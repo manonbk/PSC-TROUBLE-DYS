@@ -27,7 +27,7 @@ public class SpawnerAction : MonoBehaviour
     //Variable global
     public static int niveau = 0;
     
-    public static SaveData sd;
+    public SaveData sd;
 
 
     // Start is called before the first frame update
@@ -77,11 +77,7 @@ public class SpawnerAction : MonoBehaviour
             //Debug.Log("ValB: " + Scores.decalagetempo());
             //Debug.Log("FailCount: " + Scores.failCount);
             //Debug.Log("Score: " + Scores.ScoreCalculator());
-            sd.add("ValA: " + Scores.decalagetemps());
-            sd.add("ValB: " + Scores.decalagetempo());
-            sd.add("FailCount: " + Scores.failCount);
-            sd.add("Score: " + Scores.ScoreCalculator());
-            sd.add("Fin d'essai");
+            save();
 
             if (niveau <=5){
                 if (Scores.passedtest()){
@@ -125,7 +121,7 @@ public class SpawnerAction : MonoBehaviour
 
     void spawnseq(int niveau){
         //Debug.Log("test du niveau: " + niveau);
-        sd.add("Niveau" + niveau + ", essai" + testnb + ", sequence" + sequences[niveau]);
+        sd.add(" Niveau " + niveau + ", essai " + testnb + ", sequence " + sequences[niveau]);
         Transform position = freeposition();
         if (position != null){ //une position sans coup
             ResetTimer();
@@ -188,5 +184,16 @@ public class SpawnerAction : MonoBehaviour
         startingTime = Time.time;
         //Debug.Log(startingTime);
         
+    }
+
+    void save(){
+        for(int k =0; k< Scores.writetext.Count; k++){
+            sd.add(Scores.writetext[k]);
+        }
+        sd.add(" ValA: " + Scores.decalagetemps());
+        sd.add(" ValB: " + Scores.decalagetempo());
+        sd.add(" FailCount: " + Scores.failCount);
+        sd.add(" Score: " + Scores.ScoreCalculator());
+        sd.add(string.Format(" Fin d'essai" + "\n"));
     }
 }
