@@ -280,9 +280,7 @@ public class NewBehaviourScript : MonoBehaviour
         double SeuilBas = 0.4;
         double SeuilHaut = 0.6;
 
-        //Changement de scene
-        if (Score<SeuilHaut) 
-            //si deux niveaux un
+        //Changement de scene 
         if (SceneManager.GetActiveScene().buildIndex == 4 ||SceneManager.GetActiveScene().buildIndex == 6 ||SceneManager.GetActiveScene().buildIndex == 7) {
                 SceneManager.LoadScene(0); //Retour au menu
             }
