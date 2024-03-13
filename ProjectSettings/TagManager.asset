@@ -12,6 +12,7 @@ TagManager:
   - Avant cible
   - Bateaucible
   - Terrain
+  - DrawnLine
   layers:
   - Default
   - TransparentFX
