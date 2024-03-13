@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MvtRectiligne : MonoBehaviour
 {
-    private float speed = 3f;
+    public static float speed = 2.8f; //1.5f / spawnereaction.tempo
 
     void Start(){
     }

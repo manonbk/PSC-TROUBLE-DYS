@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 8e5c9074ba3d65643bf0a1292141440a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - color: {fileID: 3055167074901961923, guid: a58d2dc48281d8e469eeb94e6fe70a2b, type: 3}
+  - touchsound: {fileID: 8300000, guid: e62088a818e66d845a724d09240a5bc8, type: 3}
+  - refsound: {fileID: 8300000, guid: e62088a818e66d845a724d09240a5bc8, type: 3}
+  - failsound: {fileID: 8300000, guid: aa4a47fa2ab0e9f4a9233e9b2b3ce4d7, type: 3}
+  - banderef: {fileID: 8921848333188013575, guid: 945149da8b507134d8ba8f8f5306a870, type: 3}
+  - bandesim: {fileID: 6514821532824224376, guid: 8b1ad1d7126893c4782db96dcda026f2, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

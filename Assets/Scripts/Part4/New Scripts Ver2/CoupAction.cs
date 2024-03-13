@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 
 //avoir un action sur l'objet
-public class coupaction : MonoBehaviour
+public class CoupAction : MonoBehaviour
 {
     
     //each object has a SpriteRenderer attached to it that change its color
@@ -18,16 +18,18 @@ public class coupaction : MonoBehaviour
     public int scorevalue = 1;
     public AudioClip touchsound;
     public AudioClip refsound;
-
     public AudioClip failsound;
+
     
-    // position a detecter pour lancer son de reference
-    public float detectionX = -8.75f;
-
+    float refpos;
+    float refscale;
+    float simpos;
+    float simscale;
+    
     // si l'objt a passe la position de ref
-    public bool hasPassedref = false;
+    bool hasPassedref = false;
 
-    public bool isClicked = false;
+    bool isClicked = false;
 
     private int value;
 
@@ -35,6 +37,10 @@ public class coupaction : MonoBehaviour
     void Start()
     {
         value = getnumber();
+        refpos = DrawGates.refpos;
+        refscale = DrawGates.refscale;
+        simpos = DrawGates.simpos;
+        simscale = DrawGates.simscale;
     }
 
     // Update is called once per frame
@@ -48,22 +54,25 @@ public class coupaction : MonoBehaviour
     void OnMouseDown(){
         if (hasPassedref){
             if (Input.GetMouseButtonDown(0) && !isClicked){
-                if (7 <= transform.position.x && transform.position.x <= 10.5f){
+                //Debug.Log("bandeinf: " + (simpos - simscale/2 - 0.75f));
+                //Debug.Log("bandesup: " + (simpos + simscale/2 + 0.75f));
+                if (simpos - simscale/2 - 0.75f  <= transform.position.x && transform.position.x <= simpos + simscale/2 + 0.75f){
                         AudioSource.PlayClipAtPoint(touchsound, transform.position);// sound played on the same position
-                        ScoreManager.timeplayer[value - 1] = Time.time - spawnereaction.startingTime;
+                        Scores.timeplayer[value - 1] = Time.time - SpawnerAction.startingTime;
                         color.color = Color.yellow;
                         isClicked = true;
+                        SpawnerAction.sd.add("SUCCESS" + value + "on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + "and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + "on time :" + Scores.timeplayer[value - 1]);
 
-                        ScoreManager.failCount--; //ne pas compter comme un fail
-                        //Debug.Log(value + "eme coup player realtime: " + ScoreManager.timeplayer[value - 1]);
+                        Scores.failCount--; //ne pas compter comme un fail
+                        //Debug.Log(value + "eme coup player realtime: " + Scores.timeplayer[value - 1]);
                         //Debug.Log("in bande: " + EventSystem.current.IsPointerOverGameObject());
 
                     }
                 else{
                     AudioSource.PlayClipAtPoint(failsound, transform.position);
-                    ScoreManager.failtime.Add(Time.time - spawnereaction.startingTime);
-                    //ScoreManager.failCount++;
-                    //ScoreManager.failCount++;
+                    float failtime =  Time.time - SpawnerAction.startingTime;
+                    Scores.failtime.Add(failtime);
+                    SpawnerAction.sd.add("ERROR on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + "and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + "on time :" + failtime);
                     //Debug.Log("not in bande: " + EventSystem.current.IsPointerOverGameObject());
                 }
             }
@@ -83,18 +92,22 @@ public class coupaction : MonoBehaviour
     }
 
     void generateref(){
-        if(transform.position.x >= detectionX){
+        if(transform.position.x >= refpos ){
+            //Debug.Log("detectionX" + refpos);
             hasPassedref = true;
             AudioSource.PlayClipAtPoint(refsound, transform.position);
             
             //Debug.Log("ref sound played: " + transform.position.x + " " + Time.time);
             // sound played on the same position
 
-            ScoreManager.timeref.Add(Time.time - spawnereaction.startingTime + (8.75f + 8.75f) / MvtRectiligne.speed);
-            ScoreManager.timeplayer.Add(ScoreManager.timeref[ScoreManager.timeref.Count -1] + 2* (10.5f - 8.75f) / MvtRectiligne.speed);
+            float addref = Time.time - SpawnerAction.startingTime + (DrawGates.dbesoin + refscale/2 + simscale/2) / MvtRectiligne.speed;
+            Scores.timeref.Add(addref);
+            SpawnerAction.sd.add("REF Temp ref pour coup" + value + " : " + addref);
 
-            //Debug.Log("timerefadd: " + ScoreManager.timeref[ScoreManager.timeref.Count - 1]);
-            //Debug.Log("timeplayeradd: " + ScoreManager.timeplayer[ScoreManager.timeplayer.Count - 1]);
+            Scores.timeplayer.Add(Scores.timeref[Scores.timeref.Count -1] + 2* (simscale/2 + 0.75f) * value / MvtRectiligne.speed);  //ajout d'un tempo de valeur aleatoire de l'ordre de 2* (simscale/2 + 0.75f) [pour que lorsqu'on fait rien il y a une grand ecart de 2* (simscale/2 + 0.75f) entre deux coups succcessives loupes]
+
+            //Debug.Log("timerefadd: " + Scores.timeref[Scores.timeref.Count - 1]);
+            //Debug.Log("timeplayeradd: " + Scores.timeplayer[Scores.timeplayer.Count - 1]);
 
         }
     }
