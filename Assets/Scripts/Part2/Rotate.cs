@@ -10,7 +10,7 @@ void OnMouseDrag(){
     float rotX = Input.GetAxis("Mouse X") * rotSpeed * Mathf.Deg2Rad;
     float rotY = Input.GetAxis("Mouse Y") * rotSpeed * Mathf.Deg2Rad;
 
-    transform.RotateAround(Vector2.up, -rotX);
-    transform.RotateAround(Vector2.right, rotY);
+    transform.Rotate(Vector2.up, -rotX);
+    transform.Rotate(Vector2.right, rotY);
     }
 }

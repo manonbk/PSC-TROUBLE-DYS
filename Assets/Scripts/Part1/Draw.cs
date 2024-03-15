@@ -231,7 +231,7 @@ public class Draw : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
-    void StartLine()
+    IEnumerator StartLine()
     {
         if (drawing != null) StopCoroutine(drawing);
         if (concat_points != null)
