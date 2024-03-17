@@ -16,6 +16,7 @@ public class spawnereaction : MonoBehaviour
 
     //les coups delivrer
     public GameObject Generatecoup;
+
     public float tempo;
 
     public static float startingTime;
@@ -27,7 +28,6 @@ public class spawnereaction : MonoBehaviour
     public static int niveau = 0;
        
     public SaveData sd;
-
 
     // Start is called before the first frame update
     void Start()
@@ -56,7 +56,8 @@ public class spawnereaction : MonoBehaviour
         sequences.Add("1110101101");
         //sequences.Add("10110111011");
         //sequences.Add("101101101011");
-
+        
+        sd.add("speed:" + MvtRectiligne.speed + " tempo:" + tempo);
         spawnseq(niveau);
     }
 
@@ -81,11 +82,13 @@ public class spawnereaction : MonoBehaviour
             if (niveau <=5){
                 if (ScoreManager.passedtest()){
                     ScoreManager.Reset();
+                    DrawRefBande.Reset();
                     niveau++;
                     spawnseq(niveau);
                 }
                 else{
                     ScoreManager.Reset();
+                    DrawRefBande.Reset();
                     spawnseq(niveau);
                 }
             }
@@ -96,6 +99,7 @@ public class spawnereaction : MonoBehaviour
                 if (ScoreManager.passedtest()){
                     testnb = 0;
                     ScoreManager.Reset();
+                    DrawRefBande.Reset();
                     niveau++;
                     spawnseq(niveau);
                     }
@@ -103,6 +107,7 @@ public class spawnereaction : MonoBehaviour
                     if (testnb < 2){
                         testnb++;
                         ScoreManager.Reset();
+                        DrawRefBande.Reset();
                         spawnseq(niveau);
                     }
                     else{
@@ -115,14 +120,14 @@ public class spawnereaction : MonoBehaviour
     }
 
     void spawnseq(int niveau){
-        //Debug.Log("test du niveau: " + niveau);
-        ////sd.add(" Niveau " + niveau + ", essai " + testnb + ", sequence " + sequences[niveau]);
+        sd.add(" Niveau " + niveau + ", essai " + testnb + ", sequence " + sequences[niveau]);
         Transform position = freeposition();
         if (position != null){ //une position sans coup
             ResetTimer();
             string seq = sequences[niveau];
             int nbones = 1;
             Vector3 pos = position.transform.position;
+            //Vector3 pos = transform.position;
 
             //Debug.Log(MvtRectiligne.speed * tempo);
             for (int k = 0; k < seq.Length; k++){
@@ -183,12 +188,14 @@ public class spawnereaction : MonoBehaviour
 
     void save(){
         for(int k =0; k< ScoreManager.writetext.Count; k++){
-            //sd.add(ScoreManager.writetext[k]);
+            sd.add(ScoreManager.writetext[k]);
         }
-        //sd.add(" ValA: " + ScoreManager.decalagetemps());
-        //sd.add(" ValB: " + ScoreManager.decalagetempo());
-        //sd.add(" FailCount: " + ScoreManager.failCount);
-        //sd.add(" Score: " + ScoreManager.ScoreCalculator());
-        //sd.add(string.Format(" Fin d'essai" + "\n"));
+        sd.add(" Ref Bande position.x: " + DrawRefBande.banderef + " +- " + DrawRefBande.simscale);
+        sd.add(" dbesoin: " + DrawRefBande.dbesoin);
+        sd.add(" ValA: " + ScoreManager.decalagetemps());
+        sd.add(" ValB: " + ScoreManager.decalagetempo());
+        sd.add(" FailCount: " + ScoreManager.failCount);
+        sd.add(" Score: " + ScoreManager.ScoreCalculator());
+        sd.add(string.Format(" Fin d'essai" + "\n"));
     }
 }

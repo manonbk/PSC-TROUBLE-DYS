@@ -19,9 +19,6 @@ public class coupaction : MonoBehaviour
     public AudioClip refsound;
 
     public AudioClip failsound;
-    
-    // position a detecter pour lancer son de reference
-    public float detectionX = -8.75f;
 
     // si l'objt a passe la position de ref
     bool hasPassedref = false;
@@ -33,6 +30,7 @@ public class coupaction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        color.enabled = false;
         value = getnumber();
     }
 
@@ -47,13 +45,14 @@ public class coupaction : MonoBehaviour
     void OnMouseDown(){
         if (hasPassedref){
             if (Input.GetMouseButtonDown(0) && !isClicked){
-                if (7 <= transform.position.x && transform.position.x <= 10.5f){
+                if (DrawRefBande.simpos - DrawRefBande.simscale/2 - 0.75f  <= transform.position.x && transform.position.x <= DrawRefBande.simpos + DrawRefBande.simscale/2 + 0.75f){
                         AudioSource.PlayClipAtPoint(touchsound, transform.position);// sound played on the same position
                         ScoreManager.timeplayer[value - 1] = Time.time - spawnereaction.startingTime;
                         color.color = Color.yellow;
                         isClicked = true;
 
-                        //ScoreManager.writetext.Add(" SUCCESS " + value + " on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + " and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + " on time :" + Scores.timeplayer[value - 1]);
+                        //Debug.Log("value:" + value);
+                        ScoreManager.writetext.Add(" SUCCESS " + value + " on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + " and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + " on time :" + ScoreManager.timeplayer[value - 1]);
 
                         ScoreManager.failCount--; //ne pas compter comme un fail
                         //Debug.Log(value + "eme coup player realtime: " + ScoreManager.timeplayer[value - 1]);
@@ -64,7 +63,7 @@ public class coupaction : MonoBehaviour
                     float failtime =  Time.time - spawnereaction.startingTime;
                     ScoreManager.failtime.Add(failtime);
 
-                    //ScoreManager.writetext.Add(" ERROR on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + " and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + " on time :" + failtime);
+                    ScoreManager.writetext.Add(" ERROR on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + " and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + " on time :" + failtime);
 
                     //Debug.Log("not in bande: " + EventSystem.current.IsPointerOverGameObject());
                 }
@@ -85,19 +84,20 @@ public class coupaction : MonoBehaviour
     }
 
     void generateref(){
-        if(transform.position.x >= detectionX){
+        if(transform.position.x >= DrawRefBande.banderef){
+            color.enabled = true;
             hasPassedref = true;
             AudioSource.PlayClipAtPoint(refsound, transform.position);
             
             //Debug.Log("ref sound played: " + transform.position.x + " " + Time.time);
-            // sound played on the same position
 
-            float addref = Time.time - spawnereaction.startingTime + (8.75f + 8.75f) / MvtRectiligne.speed;
+            //sound played on the same position
+            float addref = Time.time - spawnereaction.startingTime + (DrawRefBande.dbesoin + DrawRefBande.simscale) / MvtRectiligne.speed;
             ScoreManager.timeref.Add(addref);
 
-            //ScoreManager.writetext.Add(" REF Temp ref pour coup" + value + " : " + addref);
+            ScoreManager.writetext.Add(" REF temps ref pour coup" + value + " : " + addref);
 
-            ScoreManager.timeplayer.Add(ScoreManager.timeref[ScoreManager.timeref.Count -1] + 2* (10.5f - 8.75f) / MvtRectiligne.speed);
+            ScoreManager.timeplayer.Add(ScoreManager.timeref[ScoreManager.timeref.Count -1] + 2* (DrawRefBande.simscale/2 + 0.75f) * value / MvtRectiligne.speed);
 
             //Debug.Log("timerefadd: " + ScoreManager.timeref[ScoreManager.timeref.Count - 1]);
             //Debug.Log("timeplayeradd: " + ScoreManager.timeplayer[ScoreManager.timeplayer.Count - 1]);
