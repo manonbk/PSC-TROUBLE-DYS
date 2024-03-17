@@ -24,9 +24,9 @@ public class coupaction : MonoBehaviour
     public float detectionX = -8.75f;
 
     // si l'objt a passe la position de ref
-    public bool hasPassedref = false;
+    bool hasPassedref = false;
 
-    public bool isClicked = false;
+    bool isClicked = false;
 
     private int value;
 
@@ -53,16 +53,19 @@ public class coupaction : MonoBehaviour
                         color.color = Color.yellow;
                         isClicked = true;
 
+                        //ScoreManager.writetext.Add(" SUCCESS " + value + " on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + " and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + " on time :" + Scores.timeplayer[value - 1]);
+
                         ScoreManager.failCount--; //ne pas compter comme un fail
                         //Debug.Log(value + "eme coup player realtime: " + ScoreManager.timeplayer[value - 1]);
                         //Debug.Log("in bande: " + EventSystem.current.IsPointerOverGameObject());
-
                     }
                 else{
                     AudioSource.PlayClipAtPoint(failsound, transform.position);
-                    ScoreManager.failtime.Add(Time.time - spawnereaction.startingTime);
-                    //ScoreManager.failCount++;
-                    //ScoreManager.failCount++;
+                    float failtime =  Time.time - spawnereaction.startingTime;
+                    ScoreManager.failtime.Add(failtime);
+
+                    //ScoreManager.writetext.Add(" ERROR on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + " and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + " on time :" + failtime);
+
                     //Debug.Log("not in bande: " + EventSystem.current.IsPointerOverGameObject());
                 }
             }
@@ -89,7 +92,11 @@ public class coupaction : MonoBehaviour
             //Debug.Log("ref sound played: " + transform.position.x + " " + Time.time);
             // sound played on the same position
 
-            ScoreManager.timeref.Add(Time.time - spawnereaction.startingTime + (8.75f + 8.75f) / MvtRectiligne.speed);
+            float addref = Time.time - spawnereaction.startingTime + (8.75f + 8.75f) / MvtRectiligne.speed;
+            ScoreManager.timeref.Add(addref);
+
+            //ScoreManager.writetext.Add(" REF Temp ref pour coup" + value + " : " + addref);
+
             ScoreManager.timeplayer.Add(ScoreManager.timeref[ScoreManager.timeref.Count -1] + 2* (10.5f - 8.75f) / MvtRectiligne.speed);
 
             //Debug.Log("timerefadd: " + ScoreManager.timeref[ScoreManager.timeref.Count - 1]);

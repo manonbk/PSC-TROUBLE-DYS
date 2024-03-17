@@ -17,10 +17,8 @@ public class CoupAction : MonoBehaviour
     public int scorevalue = 1;
     public AudioClip touchsound;
     public AudioClip refsound;
+
     public AudioClip failsound;
-
-    public SaveData sd;
-
     
     float refpos;
     float refscale;

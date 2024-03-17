@@ -6,7 +6,7 @@ using System.Buffers;
 using Mono.Cecil.Cil;
 using UnityEngine.UIElements.Experimental;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
+//using UnityEngine.SocialPlatforms.Impl;
 
 public class SpawnerAction : MonoBehaviour
 {

@@ -1376,7 +1376,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &1571879516
 Canvas:
   m_ObjectHideFlags: 0
@@ -1683,7 +1683,6 @@ MonoBehaviour:
   touchsound: {fileID: 8300000, guid: e62088a818e66d845a724d09240a5bc8, type: 3}
   refsound: {fileID: 8300000, guid: e62088a818e66d845a724d09240a5bc8, type: 3}
   failsound: {fileID: 8300000, guid: aa4a47fa2ab0e9f4a9233e9b2b3ce4d7, type: 3}
-  sd: {fileID: 0}
 --- !u!50 &1851228405
 Rigidbody2D:
   serializedVersion: 4

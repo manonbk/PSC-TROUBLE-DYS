@@ -2,33 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
-//using System.Collections.Generic;
 using System.Buffers;
 using Mono.Cecil.Cil;
 using UnityEngine.UIElements.Experimental;
 using UnityEngine.SceneManagement;
 
+
 public class spawnereaction : MonoBehaviour
 {
-    int testnb = 0;
-    // Start is called before the first frame update
-    public float width = 2f; 
-    public float height = 2f;
+    int testnb = 0; // nb e fois le test present soit teste
+    public float width; 
+    public float height;
+
     //les coups delivrer
     public GameObject Generatecoup;
-       
-    //next fonction be delayed in somme sort of value
-    public float delay;
-
     public float tempo;
 
     public static float startingTime;
 
     //Declaring an array of integers
-    List<string> sequences = new List<string>();
+    public static List<string> sequences = new List<string>();
     
     //Variable global
-    public int niveau = 0;
+    public static int niveau = 0;
+       
+    public SaveData sd;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,23 +35,23 @@ public class spawnereaction : MonoBehaviour
         //Add elements in list
         sequences.Add("11");
         sequences.Add("101");
-        sequences.Add("111");
+        //sequences.Add("111");
         sequences.Add("11011");
-        sequences.Add("1011");
-        sequences.Add("10101");
+        //sequences.Add("1011");
+        //sequences.Add("10101");
         sequences.Add("1111");
-        sequences.Add("10111");
-        sequences.Add("110101");
+        //sequences.Add("10111");
+        //sequences.Add("110101");
         sequences.Add("11011011");
-        sequences.Add("110111");
-        sequences.Add("1010101");
+        //sequences.Add("110111");
+        //sequences.Add("1010101");
         sequences.Add("101111");
         sequences.Add("11111");
         sequences.Add("1101011");
-        sequences.Add("1111011");
-        sequences.Add("10101011");
+        //sequences.Add("1111011");
+        //sequences.Add("10101011");
         sequences.Add("11011101");
-        sequences.Add("101111011");
+        //sequences.Add("101111011");
         sequences.Add("110101011");
         sequences.Add("1110101101");
         //sequences.Add("10110111011");
@@ -77,24 +76,9 @@ public class spawnereaction : MonoBehaviour
             Debug.Log("ValB: " + ScoreManager.decalagetempo());
             Debug.Log("FailCount: " + ScoreManager.failCount);
             Debug.Log("Score: " + ScoreManager.ScoreCalculator());
+            save();
 
-            /*for (int i = 0; i< ScoreManager.timeref.Count; i++)
-            {
-                Debug.Log("timeref " + i + " " + ScoreManager.timeref[i]);
-            }
-
-            for (int i = 0; i< ScoreManager.timeplayer.Count; i++)
-            {
-                Debug.Log("timeplayer " + i + " " + ScoreManager.timeplayer[i]);
-            }
-
-            for (int i = 0; i< ScoreManager.failtime.Count; i++)
-            {
-                Debug.Log("failtime " + i + " " + ScoreManager.failtime[i]);
-            }
-            Debug.Log("failcount" + ScoreManager.failCount);*/
-
-            if (niveau <=13){
+            if (niveau <=5){
                 if (ScoreManager.passedtest()){
                     ScoreManager.Reset();
                     niveau++;
@@ -105,7 +89,7 @@ public class spawnereaction : MonoBehaviour
                     spawnseq(niveau);
                 }
             }
-            else if (niveau >=20){
+            else if (niveau >= sequences.Count){
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else{
@@ -116,7 +100,7 @@ public class spawnereaction : MonoBehaviour
                     spawnseq(niveau);
                     }
                 else{
-                    if (testnb <=2){
+                    if (testnb < 2){
                         testnb++;
                         ScoreManager.Reset();
                         spawnseq(niveau);
@@ -131,7 +115,8 @@ public class spawnereaction : MonoBehaviour
     }
 
     void spawnseq(int niveau){
-        Debug.Log("test du niveau: " + niveau);
+        //Debug.Log("test du niveau: " + niveau);
+        ////sd.add(" Niveau " + niveau + ", essai " + testnb + ", sequence " + sequences[niveau]);
         Transform position = freeposition();
         if (position != null){ //une position sans coup
             ResetTimer();
@@ -194,5 +179,16 @@ public class spawnereaction : MonoBehaviour
         startingTime = Time.time;
         //Debug.Log(startingTime);
         
+    }
+
+    void save(){
+        for(int k =0; k< ScoreManager.writetext.Count; k++){
+            //sd.add(ScoreManager.writetext[k]);
+        }
+        //sd.add(" ValA: " + ScoreManager.decalagetemps());
+        //sd.add(" ValB: " + ScoreManager.decalagetempo());
+        //sd.add(" FailCount: " + ScoreManager.failCount);
+        //sd.add(" Score: " + ScoreManager.ScoreCalculator());
+        //sd.add(string.Format(" Fin d'essai" + "\n"));
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+//using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,9 +14,13 @@ public class ScoreManager : MonoBehaviour
     public static float beta = 15;
     public static float gamma = 1;
 
-    public static List<float> timeref =new List<float>();
+    public static List<float> timeref = new List<float>();
     public static List<float> timeplayer = new List<float>();
     public static List<float> failtime = new List<float>();
+    
+    public static List<string> writetext = new List<string>();
+
+
 
     void Update(){
         //Debug.Log("FailCount TRYING");
