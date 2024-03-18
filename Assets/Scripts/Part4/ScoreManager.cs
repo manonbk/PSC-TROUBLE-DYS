@@ -44,6 +44,7 @@ public class ScoreManager : MonoBehaviour
         timeref.Clear();
         timeplayer.Clear();
         failtime.Clear();
+        writetext.Clear();
         failCount = 0;
     }
     //save data : tempo, speed, distance

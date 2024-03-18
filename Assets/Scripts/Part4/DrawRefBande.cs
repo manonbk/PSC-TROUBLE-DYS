@@ -10,7 +10,7 @@ public class DrawRefBande : MonoBehaviour
 {
     List<int> seqlength = new List<int>();
     //public float width = 2f;
-    public float length = 10f; 
+    public float length = 15f; 
 
     public GameObject bandesim;
     public static float banderef;

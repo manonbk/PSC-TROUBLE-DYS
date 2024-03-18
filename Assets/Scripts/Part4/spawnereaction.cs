@@ -81,15 +81,26 @@ public class spawnereaction : MonoBehaviour
 
             if (niveau <=5){
                 if (ScoreManager.passedtest()){
+                    testnb = 0;
                     ScoreManager.Reset();
                     DrawRefBande.Reset();
                     niveau++;
                     spawnseq(niveau);
                 }
                 else{
-                    ScoreManager.Reset();
-                    DrawRefBande.Reset();
-                    spawnseq(niveau);
+                    if (testnb < 2){
+                        testnb ++;
+                        ScoreManager.Reset();
+                        DrawRefBande.Reset();
+                        spawnseq(niveau);
+                    }
+                    else{
+                        testnb = 0;
+                        niveau++;
+                        ScoreManager.Reset();
+                        DrawRefBande.Reset();
+                        spawnseq(niveau);
+                    }
                 }
             }
             else if (niveau >= sequences.Count){

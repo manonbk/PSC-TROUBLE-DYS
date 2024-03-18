@@ -13,6 +13,10 @@ public class coupaction : MonoBehaviour
     
     //each object has a SpriteRenderer attached to it that change its color
     public SpriteRenderer color;
+    private float prochainChangementCouleur;
+    private float disparition = 10000000;
+    private Vector3 scaleChange = new Vector3(-0.1f, -0.1f, -0.1f);
+
     //score gagner a chaque fois on touche un coup
     public int scorevalue = 1;
     public AudioClip touchsound;
@@ -40,6 +44,18 @@ public class coupaction : MonoBehaviour
         if (!hasPassedref){
             generateref();
         }
+
+        if (transform.position.x > prochainChangementCouleur){
+            color.color = Color.white;
+        }
+
+        if (transform.position.x > disparition){
+            transform.localScale += scaleChange;
+            if (transform.localScale.x < 0) {
+                Destroy(gameObject);
+                disparition = 100000000;}
+            else {disparition = disparition + 0.05f;}
+        }
     }
 
     void OnMouseDown(){
@@ -48,7 +64,10 @@ public class coupaction : MonoBehaviour
                 if (DrawRefBande.simpos - DrawRefBande.simscale/2 - 0.75f  <= transform.position.x && transform.position.x <= DrawRefBande.simpos + DrawRefBande.simscale/2 + 0.75f){
                         AudioSource.PlayClipAtPoint(touchsound, transform.position);// sound played on the same position
                         ScoreManager.timeplayer[value - 1] = Time.time - spawnereaction.startingTime;
-                        color.color = Color.yellow;
+                        prochainChangementCouleur = 1000000;
+                        disparition = transform.position.x+ 0.05f;
+
+
                         isClicked = true;
 
                         //Debug.Log("value:" + value);
@@ -59,12 +78,18 @@ public class coupaction : MonoBehaviour
                         //Debug.Log("in bande: " + EventSystem.current.IsPointerOverGameObject());
                     }
                 else{
+                    Debug.Log("fail");
                     AudioSource.PlayClipAtPoint(failsound, transform.position);
+                    color.color = Color.red;
+                    
+
+
                     float failtime =  Time.time - spawnereaction.startingTime;
                     ScoreManager.failtime.Add(failtime);
 
                     ScoreManager.writetext.Add(" ERROR on position x :" + Camera.main.ScreenToWorldPoint(Input.mousePosition).x + " and position y :"+ Camera.main.ScreenToWorldPoint(Input.mousePosition).y + " on time :" + failtime);
 
+                    prochainChangementCouleur = transform.position.x + 0.3f;
                     //Debug.Log("not in bande: " + EventSystem.current.IsPointerOverGameObject());
                 }
             }
@@ -114,4 +139,8 @@ public class coupaction : MonoBehaviour
         return int.Parse(objectName.Split(' ')[1]);
         
     }
-}
+
+   
+    
+    }
+

@@ -120,7 +120,7 @@ public class NewBehaviourScript : MonoBehaviour
                         selectedObject.layer = layerContour;
                         //change Tag
                         selectedObject.tag = "Completed";
-                        Debug.Log(selectedObject.tag);
+                        Debug.Log("changetment tag"+selectedObject.tag);
                     }
                     
                     // deselect the object if the touch is lifted
@@ -257,6 +257,7 @@ public class NewBehaviourScript : MonoBehaviour
         bool formesManquantes = false;
         list = GameObject.FindGameObjectsWithTag("Remaining");
         if (list.Length!=0){
+            Debug.Log("list length" + list.Length);
             formesManquantes=true;
             foreach (GameObject go in list){
                 correctForm = GameObject.FindWithTag(go.transform.name+"cible");
@@ -275,6 +276,8 @@ public class NewBehaviourScript : MonoBehaviour
             sd.add(string.Format("nouvelleForme;{0:N3};{1:N3};{2:N3};{3}",distanceCible[i], tailleCible[i], rotationCible[i], LeverDoigt[i]));
         }
         sd.add(string.Format("Score;{0}",Score));
+        
+        Debug.Log("score : "+Score);
         
         
         double SeuilBas = 0.4;
@@ -313,6 +316,7 @@ public class NewBehaviourScript : MonoBehaviour
     private double getScore(bool formesManquantes, float time){
         double score;
         if (formesManquantes){
+            Debug.Log("formes"+formesManquantes);
             score = 0;
             return score;
         }

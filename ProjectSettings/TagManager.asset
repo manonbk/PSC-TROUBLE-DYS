@@ -13,6 +13,7 @@ TagManager:
   - Bateaucible
   - Terrain
   - DrawnLine
+  - Completed
   layers:
   - Default
   - TransparentFX
