@@ -104,6 +104,9 @@ public class spawnereaction : MonoBehaviour
                 }
             }
             else if (niveau >= sequences.Count){
+                niveau = 0;
+                //ScoreManager.Reset();
+                //DrawRefBande.Reset();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else{
@@ -123,6 +126,9 @@ public class spawnereaction : MonoBehaviour
                     }
                     else{
                         Debug.Log("game has end");
+                        niveau = 0;
+                        ScoreManager.Reset();
+                        DrawRefBande.Reset();
                         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                     }
                 }
